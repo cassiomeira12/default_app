@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../app/utils/strings/strings.dart';
 import 'modules/routes.dart';
+import 'shared/repositories/parse_init.dart';
 import 'style/themes/dark_theme.dart';
 import 'style/themes/light_theme.dart';
 
@@ -12,6 +13,12 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
+  @override
+  void initState() {
+    super.initState();
+    ParseInit.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

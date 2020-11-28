@@ -1,4 +1,4 @@
-class SettingsController {
+class CompanyController {
   //var repository = SettingsRepository();
 
 }

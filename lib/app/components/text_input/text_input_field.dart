@@ -17,12 +17,10 @@ class TextInputField extends StatefulWidget {
   TextInputField({
     @required this.labelText,
     this.hintText,
-
     this.keyboardType = TextInputType.text,
-    this.textAlign = TextAlign.center,
+    this.textAlign = TextAlign.left,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
-
     this.controller,
     this.validator,
     this.onSaved,
@@ -39,7 +37,7 @@ class _TextInputFieldState extends State<TextInputField> {
     return TextFormField(
       keyboardType: widget.keyboardType,
       style: Theme.of(context).textTheme.body2,
-      textAlign: TextAlign.center,
+      textAlign: widget.textAlign,
       obscureText: widget.obscureText,
       textCapitalization: widget.textCapitalization,
       textInputAction: TextInputAction.next,
@@ -66,7 +64,10 @@ class _TextInputFieldState extends State<TextInputField> {
         ),
       ),
       controller: widget.controller,
-      validator: widget.validator == null ? (value) => value.isEmpty ? "${widget.labelText} não pode ser vazio" : null : widget.validator,
+      validator: widget.validator == null
+          ? (value) =>
+              value.isEmpty ? "${widget.labelText} não pode ser vazio" : null
+          : widget.validator,
       onSaved: widget.onSaved,
       onChanged: widget.onChanged,
     );

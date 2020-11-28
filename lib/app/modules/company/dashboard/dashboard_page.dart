@@ -1,11 +1,19 @@
 import 'package:default_app/app/components/drawer/drawer_widget.dart';
+import 'package:default_app/app/components/responsive/responsive.dart';
+import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/strings/strings.dart';
-import 'submodules/history/history_page.dart';
+import 'dashboard_controller.dart';
+import 'submodules/company/company_page.dart';
+import 'submodules/company/financial_page.dart';
+import 'submodules/company/plan_page.dart';
+import 'submodules/menus/menus_page.dart';
 import 'submodules/notifications/notifications_page.dart';
 import 'submodules/orders/orders_page.dart';
+import 'submodules/report/report_page.dart';
+import 'submodules/settings/opening_hour_page.dart';
+import 'submodules/settings/payment_types_page.dart';
 import 'submodules/settings/settings_page.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -19,39 +27,46 @@ class _DashboardPageState extends State<DashboardPage> {
   List<dynamic> drawerItems;
   List<dynamic> pages = List();
 
-  String userName;
+  String userName, avatarURL;
+
+  var controller = DashBoardController();
 
   @override
   void initState() {
     super.initState();
     drawerItems = [
       {
-        'value': 'Pedidos',
+        'value': 'Meu estabelecimento',
         'icon': Icons.dashboard,
-        'page': OrdersPage(),
+        'page': CompanyPage(),
         'menus': [
           {
-            'value': 'Pedidos 2',
-            'page': SettingsPage(),
+            'value': 'Financeiro',
+            'page': FinancialPage(),
+          },
+          {
+            'value': 'Meu plano',
+            'page': PlanPage(),
           },
         ],
       },
       {
+        'value': 'Pedidos',
+        'icon': Icons.dashboard,
+        'page': OrdersPage(),
+      },
+      {
         'value': 'Relatórios',
         'icon': Icons.pages,
-        'page': HistoryPage(),
+        'page': ReportPage(),
         'menus': [
           {
-            'value': 'Relatório 2',
-            'page': NotificationsPage(),
-          },
-          {
-            'value': 'Relatório semanal asdfas dfasd fasdfasdf asdfa',
-            'page': NotificationsPage(),
+            'value': 'Relatório semanal',
+            'page': ReportPage(),
           },
           {
             'value': 'Relatório mensal',
-            'page': NotificationsPage(),
+            'page': ReportPage(),
           },
         ],
       },
@@ -59,20 +74,48 @@ class _DashboardPageState extends State<DashboardPage> {
         'value': 'Notificações',
         'icon': Icons.notifications,
         'page': NotificationsPage(),
+        'menus': [
+          {
+            'value': 'Todas notificações',
+            'page': NotificationsPage(),
+          }
+        ],
       },
       {
         'value': 'Cardápio',
         'icon': Icons.shopping_cart,
-        'page': NotificationsPage(),
+        'page': MenusPage(),
       },
       {
         'value': 'Configurações',
         'icon': Icons.settings,
         'page': SettingsPage(),
+        'menus': [
+          {
+            'value': 'Horários de funcionamento',
+            'page': OpeningHourPage(),
+          },
+          {
+            'value': 'Endereço do estabelecimento',
+            'page': NotificationsPage(),
+          },
+          {
+            'value': 'Telefone de contato',
+            'page': PaymentTypesPage(),
+          },
+          {
+            'value': 'Formas de delivery',
+            'page': NotificationsPage(),
+          },
+          {
+            'value': 'Formas de pagamento',
+            'page': PaymentTypesPage(),
+          },
+        ],
       },
     ];
     generatePageList(drawerItems);
-    teste();
+    //teste();
   }
 
   generatePageList(List<dynamic> drawerItems) async {
@@ -86,12 +129,17 @@ class _DashboardPageState extends State<DashboardPage> {
           menu['index'] = index++;
         }
       }
+      print(item);
     }
   }
 
   teste() async {
-    await Future.delayed(Duration(seconds: 3));
-    setState(() => userName = 'cassio');
+    var user = await controller.currentUser();
+    print(user['avatarURL']);
+    setState(() {
+      userName = user['name'];
+      avatarURL = user['avatarURL'];
+    });
   }
 
   @override
@@ -99,17 +147,17 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       body: Row(
         children: [
-          MediaQuery.of(context).size.width > 990 ? drawer() : Container(),
+          Responsive(child: Container(), other: drawer()),
           Expanded(
             child: Scaffold(
               appBar: AppBar(
                 centerTitle: false,
+                leading: MediaQuery.of(context).size.width < 990
+                    ? null
+                    : Container(),
                 title: Text(
                   "${drawerItems[categoryIndex]['menus'] == null || menuIndex == 0 ? drawerItems[categoryIndex]['value'] : List.from(drawerItems[categoryIndex]['menus'])[menuIndex - 1]['value']}",
                 ),
-                leading: MediaQuery.of(context).size.width > 990
-                    ? Container()
-                    : null,
                 actions: [
                   MaterialButton(
                     child: Text(
@@ -124,8 +172,12 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                 ],
               ),
-              drawer: MediaQuery.of(context).size.width < 990 ? drawer() : null,
-              body: pages[selectedPage],
+              drawer: Responsive(child: drawer()),
+              body: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: pages[selectedPage],
+              ),
             ),
           ),
         ],
@@ -141,6 +193,7 @@ class _DashboardPageState extends State<DashboardPage> {
       hasHeader: true,
       drawerItems: drawerItems,
       avatarName: userName,
+      avatarURL: avatarURL,
       onChanged: (data) {
         setState(() {
           selectedPage = data['page'];

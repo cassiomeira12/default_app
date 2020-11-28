@@ -5,6 +5,7 @@ import 'package:default_app/app/components/shapes/background_card.dart';
 import 'package:default_app/app/components/shapes/shape_round.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
 import 'package:default_app/app/modules/company/dashboard/dashboard_page.dart';
+import 'package:default_app/app/modules/company/login/login_controller.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,10 +25,12 @@ class _LoginPageState extends State<LoginPage> {
   //LoginContractPresenter loginPresenter;
   //UserContractPresenter userPresenter;
 
+  var controller = LoginController();
+
   String _email;
   String _password;
 
-  var controller = TextEditingController();
+  var textController = TextEditingController();
 
   @override
   void initState() {
@@ -326,9 +329,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void validateAndSubmit() {
-    if (validateAndSave()) {
-      //loginPresenter.signIn(_email, _password);
+    _email = "cassiomeirasilva12@gmail.com";
+    _password = "123456";
+    if (!validateAndSave()) {
+      parseLogin(_email, _password);
     }
-    Get.to(DashboardPage());
+  }
+
+  void parseLogin(email, password) async {
+    try {
+      setState(() => _loading = true);
+      var result = await controller.signIn(email, password);
+      print(result);
+      Get.to(DashboardPage());
+    } catch (error) {
+      print(error);
+    } finally {
+      setState(() => _loading = false);
+    }
   }
 }

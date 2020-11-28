@@ -1,4 +1,6 @@
 import 'package:default_app/app/components/drawer/drawer_widget.dart';
+import 'package:default_app/app/components/responsive/responsive.dart';
+import 'package:default_app/app/modules/home/home_controller.dart';
 import 'package:default_app/app/modules/home/subroutes/contact/contact_page.dart';
 import 'package:default_app/app/modules/home/subroutes/initial/initial_page.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
@@ -16,9 +18,12 @@ class _HomePageState extends State<HomePage> {
   List<dynamic> menuItems;
   List<dynamic> pages = List();
 
+  var controller = HomeController();
+
   @override
   void initState() {
     super.initState();
+    //controller.teste();
     menuItems = [
       {
         'value': 'Home',
@@ -70,6 +75,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: MediaQuery.of(context).size.width < 990 ? null : Container(),
         title: MediaQuery.of(context).size.width < 990
             ? GestureDetector(
                 child: Text(APP_NAME),
@@ -89,9 +95,7 @@ class _HomePageState extends State<HomePage> {
                       width: 300,
                       alignment: Alignment.center,
                       child: GestureDetector(
-                        child: Text(
-                          APP_NAME,
-                        ),
+                        child: Text(APP_NAME),
                         onTap: () {
                           MediaQuery.of(context).size.width < 990
                               ? Navigator.pop(context)
@@ -134,25 +138,17 @@ class _HomePageState extends State<HomePage> {
                           },
                         );
                       }).toList(),
-//                      children: [
-//                        SizedBox(width: 10),
-//                        Text("Home"),
-//                        SizedBox(width: 30),
-//                        Text("Contact"),
-//                        SizedBox(width: 30),
-//                        Text("About"),
-//                        SizedBox(width: 30),
-//                        Text("Pesquisar"),
-//                        SizedBox(width: 50),
-//                      ],
                     ),
                   ],
                 ),
               ),
       ),
-      drawer: MediaQuery.of(context).size.width < 990 ? drawer() : null,
-      //body: BodyWidget(selectedMenuIndex: selectedPage),
-      body: pages[selectedPage],
+      drawer: Responsive(child: drawer()),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: pages[selectedPage],
+      ),
     );
   }
 
@@ -161,7 +157,7 @@ class _HomePageState extends State<HomePage> {
       selectedPageIndex: selectedPage,
       categoryIndex: categoryIndex,
       menuIndex: menuIndex,
-      hasHeader: true,
+      hasHeader: false,
       drawerItems: menuItems,
       onChanged: (data) {
         setState(() {

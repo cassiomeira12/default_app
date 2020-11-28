@@ -1,5 +1,4 @@
 import 'package:default_app/app/modules/home/components/copyrigth.dart';
-import 'package:default_app/app/modules/home/subroutes/contact/contact_page.dart';
 import 'package:flutter/material.dart';
 
 class InitialPage extends StatefulWidget {
@@ -9,84 +8,58 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   @override
-  void initState() {
-    super.initState();
-    print("home init");
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    print("home dispose");
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Text("History company"),
           Container(
             margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 2,
-            height: 500,
-            color: Colors.blue,
+            width: MediaQuery.of(context).size.width,
+            height: 350,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                    'https://www.deliverymuch.com.br/headertop.3a31d7985746a893c26c.jpg'),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Wrap(
+            children: [
+              Container(
+                margin: EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width / 5,
+                height: 250,
+                color: Colors.blue,
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width / 5,
+                height: 250,
+                color: Colors.pink,
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width / 5,
+                height: 250,
+                color: Colors.grey,
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width / 5,
+                height: 250,
+                color: Colors.red,
+              ),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
-            height: 400,
-            color: Colors.grey,
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
-            height: 200,
-            color: Colors.green,
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
-            height: 100,
-            color: Colors.red,
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
-            height: 300,
-            color: Colors.black45,
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
-            height: 600,
-            color: Colors.pink,
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
-            height: 200,
-            color: Colors.red,
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
+            width: MediaQuery.of(context).size.width,
             height: 200,
             color: Colors.red,
           ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
-            height: 200,
-            color: Colors.red,
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width / 1.2,
-            height: 200,
-            color: Colors.red,
-          ),
-          ContactPage(),
+          //ContactPage(),
           CopyRigth(),
         ],
       ),

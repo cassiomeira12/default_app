@@ -33,12 +33,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         elevation: 2,
         child: ListView(
           children: [
-            widget.hasHeader ? drawerHeader() : Container(),
+            widget.hasHeader ? drawerHeader() : SizedBox(height: 20),
             Column(
               children: widget.drawerItems.asMap().entries.map((e) {
                 return drawerItem(e.key, e.value);
               }).toList(),
             ),
+            SizedBox(height: 50),
           ],
         ),
       ),
@@ -58,7 +59,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             radius: 48,
             child: widget.avatarURL == null
                 ? Image.asset("images/logo_app.png")
-                : Image.network(widget.avatarURL),
+                : Image.network(widget.avatarURL, fit: BoxFit.cover),
           ),
           Text(
             widget.avatarName ?? "",

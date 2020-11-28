@@ -1,4 +1,4 @@
-const APP_NAME = "Default App";
+const APP_NAME = "Kideliver";
 
 const TAB1 = APP_NAME;
 const TAB2 = "Notificações";

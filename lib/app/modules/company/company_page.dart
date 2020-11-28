@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'company_controller.dart';
+import 'dashboard/dashboard_page.dart';
 import 'login/login_page.dart';
 
 class CompanyPage extends StatefulWidget {
@@ -9,17 +11,26 @@ class CompanyPage extends StatefulWidget {
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-  bool loggedin = false;
+  var controller = CompanyController();
 
   @override
   void initState() {
     super.initState();
-    teste();
+    checkCurrentUser();
   }
 
-  teste() async {
-    await Future.delayed(Duration(seconds: 1));
-    Get.to(LoginPage());
+  checkCurrentUser() async {
+    try {
+      var result = await controller.currentUser();
+      if (result == null) {
+        //Get.to(LoginPage());
+        Get.to(DashboardPage());
+      } else {
+        Get.to(DashboardPage());
+      }
+    } catch (error) {
+      Get.to(LoginPage());
+    }
   }
 
   @override

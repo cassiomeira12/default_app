@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 class SecondaryButton extends StatelessWidget {
   final String text;
   final Widget child;
+  final double width;
+  final double height;
   final VoidCallback onPressed;
 
   const SecondaryButton({
     this.text,
+    this.width,
+    this.height,
     this.child,
     @required this.onPressed,
   });
@@ -14,10 +18,10 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width > 500
-          ? 500
-          : MediaQuery.of(context).size.width,
-      height: 50,
+//      width: width ?? MediaQuery.of(context).size.width > 500
+//          ? 500
+//          : MediaQuery.of(context).size.width,
+      //height: height ?? 50,
       child: RaisedButton(
         elevation: 0,
         shape: RoundedRectangleBorder(

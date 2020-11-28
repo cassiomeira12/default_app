@@ -80,7 +80,7 @@ ThemeData darkTheme() {
     // primaryIconTheme:
     // primaryTextTheme:
     // sliderTheme:
-    cardColor: Colors.white70,
+    //cardColor: Colors.white70,
     hintColor: Colors.white30,
     errorColor: errorColor,
     primaryColor: primaryColor,

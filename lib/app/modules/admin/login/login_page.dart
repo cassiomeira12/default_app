@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ShapeRound(_showForm()),
+            ShapeRound(child: _showForm()),
             //Text("--- OU ---", style: Theme.of(context).textTheme.body2),
             //googleButton(),
             //signupButton(),

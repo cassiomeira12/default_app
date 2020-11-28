@@ -1,6 +1,4 @@
-import 'package:default_app/app/modules/company/dashboard/submodules/history/history_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class OrdersPage extends StatefulWidget {
   @override
@@ -10,15 +8,16 @@ class OrdersPage extends StatefulWidget {
 class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return SingleChildScrollView(
+      child: Column(
         children: [
-          Text("Company Orders"),
-          FlatButton(
-            child: Text('teste'),
-            onPressed: () {
-              Get.to(HistoryPage());
-            },
+          Container(
+            width: MediaQuery.of(context).size.width / 1.5,
+            height: 500,
+            child: Card(
+              elevation: 5,
+              child: Container(),
+            ),
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:default_app/app/components/image_network/image_network_widget.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -48,21 +49,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   Widget drawerHeader() {
     return DrawerHeader(
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColorLight,
-      ),
+      decoration: BoxDecoration(color: Theme.of(context).primaryColorLight),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.transparent,
-            radius: 48,
-            child: widget.avatarURL == null
-                ? Image.asset("images/logo_app.png")
-                : Image.network(widget.avatarURL, fit: BoxFit.cover),
-          ),
+          ImageNetworkWidget(url: widget.avatarURL, size: 90),
           Text(
-            widget.avatarName ?? "",
+            widget.avatarName ?? "Seu nome",
             style: TextStyle(
               fontSize: 20,
               color: Colors.white,

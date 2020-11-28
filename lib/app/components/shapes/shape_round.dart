@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ShapeRound extends StatelessWidget {
-  final Widget children;
+  final Widget child;
 
-  ShapeRound(this.children);
+  ShapeRound({this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ShapeRound extends StatelessWidget {
         ),
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      child: children,
+      child: child,
     );
   }
 }

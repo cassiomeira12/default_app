@@ -2,7 +2,6 @@ import 'package:default_app/app/components/drawer/drawer_widget.dart';
 import 'package:default_app/app/components/responsive/responsive.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'dashboard_controller.dart';
 import 'submodules/company/company_page.dart';
@@ -156,7 +155,11 @@ class _DashboardPageState extends State<DashboardPage> {
                     ? null
                     : Container(),
                 title: Text(
-                  "${drawerItems[categoryIndex]['menus'] == null || menuIndex == 0 ? drawerItems[categoryIndex]['value'] : List.from(drawerItems[categoryIndex]['menus'])[menuIndex - 1]['value']}",
+                  drawerItems[categoryIndex]['menus'] == null || menuIndex == 0
+                      ? drawerItems[categoryIndex]['value']
+                      : List.from(drawerItems[categoryIndex]['menus'])[
+                          menuIndex - 1]['value'],
+                  overflow: TextOverflow.fade,
                 ),
                 actions: [
                   MaterialButton(
@@ -168,7 +171,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () => Get.back(),
+                    onPressed: () => controller.signOut(context),
                   ),
                 ],
               ),

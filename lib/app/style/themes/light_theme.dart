@@ -13,46 +13,9 @@ const errorColor = Color(0xFFB00020);
 ThemeData lightTheme() {
   return ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    scaffoldBackgroundColor: Colors.white12, //backgroundColor,
+    //scaffoldBackgroundColor: Colors.white12, //backgroundColor,
     backgroundColor: Colors.white,
     brightness: brightness,
-    textTheme: TextTheme(
-      subtitle: TextStyle(
-        fontSize: 28,
-        color: Colors.black45,
-      ),
-      body1: TextStyle(
-        fontSize: 20,
-        color: Colors.black45,
-      ),
-      body2: TextStyle(
-        fontSize: 18,
-        color: Colors.black45,
-      ),
-      button: TextStyle(
-        fontSize: 14,
-        color: Colors.blue,
-      ),
-      display1: TextStyle(
-        fontSize: 18,
-        color: Colors.black45,
-        fontWeight: FontWeight.bold,
-      ),
-      display2: TextStyle(
-        fontSize: 12,
-        color: Colors.black45,
-      ),
-      display3: TextStyle(
-        fontSize: 14,
-        color: Colors.black45,
-        fontWeight: FontWeight.bold,
-      ),
-      display4: TextStyle(
-        fontSize: 14,
-        color: Colors.black54,
-        fontWeight: FontWeight.normal,
-      ),
-    ),
     // tabBarTheme:
     // accentIconTheme:
     // accentTextTheme:
@@ -80,7 +43,7 @@ ThemeData lightTheme() {
     // primaryIconTheme:
     // primaryTextTheme:
     // sliderTheme:
-    cardColor: Colors.white60,
+    //cardColor: Colors.white60,
     hintColor: Colors.grey[600],
     errorColor: errorColor,
     primaryColor: primaryColor,

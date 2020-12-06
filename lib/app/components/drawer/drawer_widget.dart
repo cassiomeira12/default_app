@@ -30,6 +30,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.grey,
       child: Drawer(
         elevation: 2,
         child: ListView(

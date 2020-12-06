@@ -1,11 +1,14 @@
 import 'package:default_app/app/components/drawer/drawer_widget.dart';
 import 'package:default_app/app/components/responsive/responsive.dart';
 import 'package:default_app/app/modules/home/home_controller.dart';
-import 'package:default_app/app/modules/home/subroutes/contact/contact_page.dart';
+import 'package:default_app/app/modules/home/subroutes/about/about_page.dart';
 import 'package:default_app/app/modules/home/subroutes/initial/initial_page.dart';
+import 'package:default_app/app/modules/home/subroutes/partners/partners_page.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'subroutes/plans/plans_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    //controller.teste();
     menuItems = [
       {
         'value': 'Home',
@@ -31,27 +33,27 @@ class _HomePageState extends State<HomePage> {
       },
       {
         'value': 'Planos',
-        'page': ContactPage(),
+        'page': PlansPage(),
       },
       {
         'value': 'Sobre',
-        'page': ContactPage(),
+        'page': AboutPage(),
       },
-      {
-        'value': 'Funcionalidades',
-        'page': ContactPage(),
-      },
+//      {
+//        'value': 'Funcionalidades',
+//        'page': ContactPage(),
+//      },
       {
         'value': 'Parceiros',
-        'page': ContactPage(),
+        'page': PartnersPage(),
       },
-      {
-        'value': 'Contato',
-        'page': ContactPage(),
-      },
+//      {
+//        'value': 'Contato',
+//        'page': ContactPage(),
+//      },
       {
         'value': 'Login',
-        'action': () => Get.toNamed('company'),
+        'action': () => Get.toNamed('/company'),
       }
     ];
     generatePageList(menuItems);

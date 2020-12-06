@@ -20,16 +20,12 @@ class _CompanyPageState extends State<CompanyPage> {
   }
 
   checkCurrentUser() async {
+    await Future.delayed(Duration(seconds: 2));
     try {
       var result = await controller.currentUser();
-      if (result == null) {
-        //Get.to(LoginPage());
-        Get.to(DashboardPage());
-      } else {
-        Get.to(DashboardPage());
-      }
+      Get.off(result == null ? LoginPage() : DashboardPage());
     } catch (error) {
-      Get.to(LoginPage());
+      Get.off(LoginPage());
     }
   }
 

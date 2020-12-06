@@ -10,20 +10,10 @@ class Routes {
     GetPage(
       name: '/',
       page: () {
-        return GetPlatform.isWeb ? HomePage() : SplashPage();
+        return true ? HomePage() : SplashPage();
       },
     ),
-    GetPage(
-      name: '/admin',
-      page: () {
-        return AdminPage();
-      },
-    ),
-    GetPage(
-      name: '/company',
-      page: () {
-        return CompanyPage();
-      },
-    ),
+    GetPage(name: '/admin', page: () => AdminPage()),
+    GetPage(name: '/company', page: () => CompanyPage()),
   ];
 }

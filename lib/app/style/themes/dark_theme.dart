@@ -16,43 +16,6 @@ ThemeData darkTheme() {
     scaffoldBackgroundColor: Colors.grey[800],
     backgroundColor: Colors.grey[700],
     brightness: brightness,
-    textTheme: TextTheme(
-      subtitle: TextStyle(
-        fontSize: 28,
-        color: Colors.white,
-      ),
-      body1: TextStyle(
-        fontSize: 20,
-        color: Colors.white,
-      ),
-      body2: TextStyle(
-        fontSize: 18,
-        color: Colors.white70,
-      ),
-      button: TextStyle(
-        fontSize: 14,
-        color: Colors.white,
-      ),
-      display1: TextStyle(
-        fontSize: 18,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
-      display2: TextStyle(
-        fontSize: 12,
-        color: Colors.white,
-      ),
-      display3: TextStyle(
-        fontSize: 14,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
-      display4: TextStyle(
-        fontSize: 14,
-        color: Colors.white,
-        fontWeight: FontWeight.normal,
-      ),
-    ),
     // tabBarTheme:
     // accentIconTheme:
     // accentTextTheme:

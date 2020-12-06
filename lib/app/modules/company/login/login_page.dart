@@ -162,6 +162,7 @@ class _LoginPageState extends State<LoginPage> {
             showLogo(),
             showEmailInput(),
             showPasswordInput(),
+            showRememberMe(),
             showForgotPasswordButton(),
             loginButton(),
           ],
@@ -212,6 +213,20 @@ class _LoginPageState extends State<LoginPage> {
         keyboardType: TextInputType.text,
         obscureText: true,
         onSaved: (value) => _password = value.trim(),
+      ),
+    );
+  }
+
+  Widget showRememberMe() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+      child: Row(
+        children: [
+          Checkbox(
+            value: true,
+          ),
+          Text("Lembrar-me"),
+        ],
       ),
     );
   }
@@ -329,9 +344,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void validateAndSubmit() {
-    _email = "cassiomeirasilva12@gmail.com";
-    _password = "123456";
-    if (!validateAndSave()) {
+    //_email = "cassiomeirasilva12@gmail.com";
+    //_password = "123456";
+    if (validateAndSave()) {
       parseLogin(_email, _password);
     }
   }
@@ -341,7 +356,7 @@ class _LoginPageState extends State<LoginPage> {
       setState(() => _loading = true);
       var result = await controller.signIn(email, password);
       print(result);
-      Get.to(DashboardPage());
+      Get.off(DashboardPage());
     } catch (error) {
       print(error);
     } finally {

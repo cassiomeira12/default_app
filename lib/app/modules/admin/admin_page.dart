@@ -1,6 +1,9 @@
-import 'package:default_app/app/modules/admin/login/login_page.dart';
+import 'package:default_app/app/modules/admin/admin_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'dashboard/dashboard_page.dart';
+import 'login/login_page.dart';
 
 class AdminPage extends StatefulWidget {
   @override
@@ -8,17 +11,22 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  bool loggedin = false;
+  var controller = AdminController();
 
   @override
   void initState() {
     super.initState();
-    teste();
+    checkCurrentUser();
   }
 
-  teste() async {
+  checkCurrentUser() async {
     await Future.delayed(Duration(seconds: 1));
-    Get.to(LoginPage());
+    try {
+      var result = await controller.currentUser();
+      Get.off(result == null ? LoginPage() : DashboardPage());
+    } catch (error) {
+      Get.off(LoginPage());
+    }
   }
 
   @override
@@ -37,7 +45,7 @@ class _AdminPageState extends State<AdminPage> {
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent,
                     radius: 100,
-                    child: Image.asset("images/logo_app.png"),
+                    child: Image.asset("assets/images/logo_app.png"),
                   ),
                 ),
               ),

@@ -4,10 +4,16 @@ import 'package:default_app/app/components/buttons/secondary_button.dart';
 import 'package:default_app/app/components/shapes/background_card.dart';
 import 'package:default_app/app/components/shapes/shape_round.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
+import 'package:default_app/app/modules/admin/dashboard/dashboard_page.dart';
+import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,13 +25,12 @@ class _LoginPageState extends State<LoginPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _loading = false;
 
-  //LoginContractPresenter loginPresenter;
-  //UserContractPresenter userPresenter;
+  var controller = LoginController();
 
   String _email;
   String _password;
 
-  var controller = TextEditingController();
+  var textController = TextEditingController();
 
   @override
   void initState() {
@@ -114,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget keyboardDismisser() {
     return KeyboardDismisser(
       gestures: [GestureType.onTap, GestureType.onVerticalDragDown],
-      child: body(),
+      child: SingleChildScrollView(child: body()),
     );
   }
 
@@ -129,18 +134,16 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget bodyAppScrollView() {
     return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ShapeRound(child: _showForm()),
-            //Text("--- OU ---", style: Theme.of(context).textTheme.body2),
-            //googleButton(),
-            //signupButton(),
-            //anonymousButton(),
-            //newCompanyButton(),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ShapeRound(child: _showForm()),
+          //Text("--- OU ---", style: Theme.of(context).textTheme.body2),
+          //googleButton(),
+          //signupButton(),
+          //anonymousButton(),
+          //newCompanyButton(),
+        ],
       ),
     );
   }
@@ -174,16 +177,13 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
             child: CircleAvatar(
               backgroundColor: Colors.transparent,
-              radius: 58.0,
-              child: Image.asset("images/logo_app.png"),
+              radius: 100,
+              child: Image.asset("assets/images/logo_app.png"),
             ),
           ),
         ),
         SizedBox(height: 10),
-        Text(
-          APP_NAME,
-          style: Theme.of(context).textTheme.body1,
-        ),
+        Text("$APP_NAME Admin", style: fontTitle(context)),
       ],
     );
   }
@@ -325,7 +325,19 @@ class _LoginPageState extends State<LoginPage> {
 
   void validateAndSubmit() {
     if (validateAndSave()) {
-      //loginPresenter.signIn(_email, _password);
+      parseLogin(_email, _password);
+    }
+  }
+
+  void parseLogin(email, password) async {
+    try {
+      setState(() => _loading = true);
+      await controller.signIn(email, password);
+      Get.off(DashboardPage());
+    } catch (error) {
+      catchError(error);
+    } finally {
+      setState(() => _loading = false);
     }
   }
 }

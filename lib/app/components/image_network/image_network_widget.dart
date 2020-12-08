@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:default_app/app/utils/image_util.dart';
 import 'package:flutter/material.dart';
 
 class ImageNetworkWidget extends StatefulWidget {
@@ -46,7 +45,7 @@ class _ImageNetworkWidgetState extends State<ImageNetworkWidget> {
               shape: BoxShape.circle,
               color: Colors.white,
               image: DecorationImage(
-                image: AssetImage(imagePath("default_image.png")),
+                image: AssetImage("assets/images/default_image.png"),
                 fit: BoxFit.cover,
               ),
             ),

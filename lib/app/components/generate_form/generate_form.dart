@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GenerateForm extends StatefulWidget {
-  final data;
+  dynamic data;
 
-  const GenerateForm({Key key, this.data}) : super(key: key);
+  GenerateForm({
+    @required this.data,
+  });
 
   @override
   _GenerateFormState createState() => _GenerateFormState();
@@ -17,6 +19,7 @@ class GenerateForm extends StatefulWidget {
 
 class _GenerateFormState extends State<GenerateForm> {
   final _formKey = GlobalKey<FormState>();
+  final controllers = Map<String, dynamic>();
   final booleans = Map<String, bool>();
   final spinners = Map<String, dynamic>();
 
@@ -73,12 +76,21 @@ class _GenerateFormState extends State<GenerateForm> {
   };
 
   @override
+  void initState() {
+    super.initState();
+    print("init");
+    if (widget.data == null) {
+      widget.data = data;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: List.from(data['fields']).map((e) {
+        children: List.from(widget.data['fields']).map((e) {
           return checkType(e);
         }).toList(),
       ),
@@ -105,16 +117,19 @@ class _GenerateFormState extends State<GenerateForm> {
   }
 
   Widget textField(data) {
-    var controller = TextEditingController(text: data['initial']);
-    if (data['result'] == null && data['initial'] != null) {
-      data['result'] = data['initial'];
+    if (!controllers.containsKey(data['field'])) {
+      controllers[data['field']] = data['initial'] != null
+          ? TextEditingController(text: data['initial'])
+          : TextEditingController();
+      data['result'] = data['initial'].toString();
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
       child: TextInputField(
         labelText: data['title'],
         enable: data['enable'] ?? true,
-        controller: controller,
+        obscureText: data['obscureText'] ?? false,
+        controller: controllers[data['field']],
         textCapitalization: TextCapitalization.sentences,
         onChanged: (value) => data['result'] = value.trim(),
         onSaved: (value) => data['result'] = value.trim(),
@@ -123,16 +138,18 @@ class _GenerateFormState extends State<GenerateForm> {
   }
 
   Widget textArea(data) {
-    var controller = TextEditingController(text: data['initial']);
-    if (data['result'] == null && data['initial'] != null) {
-      data['result'] = data['initial'];
+    if (!controllers.containsKey(data['field'])) {
+      controllers[data['field']] = data['initial'] != null
+          ? TextEditingController(text: data['initial'])
+          : TextEditingController();
+      //data['result'] = controllers[data['field']].t
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
       child: Center(
         child: AreaInputField(
           labelText: data['title'],
-          controller: controller,
+          controller: controllers[data['field']],
           maxLines: data["maxLines"] ?? 5,
           enable: data['enable'] ?? true,
           onChanged: (value) => data['result'] = value.trim(),
@@ -300,9 +317,9 @@ class _GenerateFormState extends State<GenerateForm> {
         text: data['title'],
         onPressed: () {
           if (data['validateRequired'] && validateAndSave()) {
-            data['action']?.call(generateDataResult(this.data));
+            data['action']?.call(generateDataResult(widget.data));
           } else {
-            data['action']?.call(generateDataResult(this.data));
+            data['action']?.call(generateDataResult(widget.data));
           }
         },
       ),

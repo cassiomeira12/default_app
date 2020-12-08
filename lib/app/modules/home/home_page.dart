@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:default_app/app/components/drawer/drawer_widget.dart';
 import 'package:default_app/app/components/responsive/responsive.dart';
 import 'package:default_app/app/modules/home/home_controller.dart';
@@ -7,6 +8,7 @@ import 'package:default_app/app/modules/home/subroutes/partners/partners_page.da
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'subroutes/plans/plans_page.dart';
 
@@ -51,6 +53,40 @@ class _HomePageState extends State<HomePage> {
 //        'value': 'Contato',
 //        'page': ContactPage(),
 //      },
+      {
+        'value': 'Tema',
+        'icon': Icons.brightness_medium,
+        'action': () {
+          showConfirmationDialog(
+            context: context,
+            barrierDismissible: false,
+            title: "Escolha um tema",
+            cancelLabel: "Cancelar",
+            okLabel: "OK",
+            actions: [
+              AlertDialogAction(
+                key: ThemeMode.system,
+                label: "Automático",
+                isDefaultAction: true,
+              ),
+              AlertDialogAction(
+                key: ThemeMode.light,
+                label: "Claro",
+              ),
+              AlertDialogAction(
+                key: ThemeMode.dark,
+                label: "Escuro",
+              ),
+            ],
+          ).then((value) async {
+            if (value != null) {
+              var pref = await SharedPreferences.getInstance();
+              pref.setInt("theme", ThemeMode.values.indexOf(value));
+              Get.changeThemeMode(value);
+            }
+          });
+        }
+      },
       {
         'value': 'Login',
         'action': () => Get.toNamed('/company'),

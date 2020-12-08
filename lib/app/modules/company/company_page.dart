@@ -1,4 +1,3 @@
-import 'package:default_app/app/utils/image_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +45,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent,
                     radius: 100,
-                    child: Image.asset(imagePath("logo_app.png")),
+                    child: Image.asset("assets/images/logo_app.png"),
                   ),
                 ),
               ),

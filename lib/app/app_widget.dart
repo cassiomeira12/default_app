@@ -1,13 +1,13 @@
-import 'package:default_app/app/style/themes/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../app/utils/strings/strings.dart';
 import 'modules/routes.dart';
 import 'shared/repositories/parse_init.dart';
 import 'style/themes/dark_theme.dart';
 import 'style/themes/light_theme.dart';
+import 'style/themes/theme.dart';
+import 'utils/strings/strings.dart';
 
 class AppWidget extends StatefulWidget {
   @override
@@ -34,7 +34,7 @@ class _AppWidgetState extends State<AppWidget> {
       darkTheme: darkTheme(),
       initialRoute: kIsWeb ? '/' : '/splash',
       getPages: Routes.routes,
-      enableLog: false,
+      enableLog: kDebugMode,
       defaultTransition: Transition.fade,
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,

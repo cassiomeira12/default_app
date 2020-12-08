@@ -6,7 +6,9 @@ import 'package:default_app/app/components/shapes/shape_round.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
 import 'package:default_app/app/modules/company/dashboard/dashboard_page.dart';
 import 'package:default_app/app/modules/company/login/login_controller.dart';
+import 'package:default_app/app/style/font_style.dart';
 import 'package:default_app/app/utils/image_util.dart';
+import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -120,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget keyboardDismisser() {
     return KeyboardDismisser(
       gestures: [GestureType.onTap, GestureType.onVerticalDragDown],
-      child: body(),
+      child: SingleChildScrollView(child: body()),
     );
   }
 
@@ -135,18 +137,16 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget bodyAppScrollView() {
     return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ShapeRound(child: _showForm()),
-            Text("--- OU ---", style: Theme.of(context).textTheme.body2),
-            //googleButton(),
-            signupButton(),
-            //anonymousButton(),
-            newCompanyButton(),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ShapeRound(child: _showForm()),
+          Text("--- OU ---", style: Theme.of(context).textTheme.body2),
+          //googleButton(),
+          signupButton(),
+          //anonymousButton(),
+          newCompanyButton(),
+        ],
       ),
     );
   }
@@ -163,7 +163,6 @@ class _LoginPageState extends State<LoginPage> {
             showLogo(),
             showEmailInput(),
             showPasswordInput(),
-            showRememberMe(),
             showForgotPasswordButton(),
             loginButton(),
           ],
@@ -181,16 +180,13 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
             child: CircleAvatar(
               backgroundColor: Colors.transparent,
-              radius: 58.0,
+              radius: 100,
               child: Image.asset(imagePath("logo_app.png")),
             ),
           ),
         ),
         SizedBox(height: 10),
-        Text(
-          APP_NAME,
-          style: Theme.of(context).textTheme.body1,
-        ),
+        Text(APP_NAME, style: fontTitle(context)),
       ],
     );
   }
@@ -214,20 +210,6 @@ class _LoginPageState extends State<LoginPage> {
         keyboardType: TextInputType.text,
         obscureText: true,
         onSaved: (value) => _password = value.trim(),
-      ),
-    );
-  }
-
-  Widget showRememberMe() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-      child: Row(
-        children: [
-          Checkbox(
-            value: true,
-          ),
-          Text("Lembrar-me"),
-        ],
       ),
     );
   }
@@ -345,9 +327,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void validateAndSubmit() {
-    _email = "cassiomeirasilva12@gmail.com";
-    _password = "123456";
-    if (!validateAndSave()) {
+    if (validateAndSave()) {
       parseLogin(_email, _password);
     }
   }
@@ -355,10 +335,10 @@ class _LoginPageState extends State<LoginPage> {
   void parseLogin(email, password) async {
     try {
       setState(() => _loading = true);
-      var result = await controller.signIn(email, password);
+      await controller.signIn(email, password);
       Get.off(DashboardPage());
     } catch (error) {
-      print(error);
+      catchError(error);
     } finally {
       setState(() => _loading = false);
     }

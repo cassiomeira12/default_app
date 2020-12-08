@@ -3,6 +3,7 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 class ParseUserService {
   currentUser() async {
     ParseUser currentUser = await ParseUser.currentUser();
+    print("CURRENT USER -> $currentUser");
     if (currentUser == null) {
       return null;
     } else {
@@ -26,7 +27,7 @@ class ParseUserService {
 
   signOut() async {
     //PreferencesUtil.setUserData(null);
-    ParseUser currentUser = await ParseUser.currentUser();
+    var currentUser = await ParseUser.currentUser();
     await currentUser.logout();
   }
 

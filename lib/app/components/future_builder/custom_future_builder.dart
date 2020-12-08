@@ -11,12 +11,16 @@ class CustomFutureBuilder extends StatelessWidget {
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return builder(context, snapshot);
-        } else if (snapshot.hasError) {
-          return Text(snapshot.error);
-        } else {
-          return CircularProgressIndicator();
+        try {
+          if (snapshot.hasData) {
+            return builder(context, snapshot);
+          } else if (snapshot.hasError) {
+            return Text(snapshot.error);
+          } else {
+            return CircularProgressIndicator();
+          }
+        } catch (error) {
+          return Text("Error");
         }
       },
     );

@@ -21,7 +21,7 @@ class _CompanyPageState extends State<CompanyPage> {
   }
 
   checkCurrentUser() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     try {
       var result = await controller.currentUser();
       Get.off(result == null ? LoginPage() : DashboardPage());

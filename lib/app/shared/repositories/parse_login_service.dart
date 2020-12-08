@@ -4,13 +4,10 @@ class ParseLoginService {
   @override
   signIn(String email, String password) async {
     var user = ParseUser(email, password, email);
-    return user.login().then((value) {
+    return user.login().then((value) async {
       if (value.success) {
         var json = value.result.toJson();
         return json;
-        //BaseUser user = BaseUser.fromMap(json);
-        //PreferencesUtil.setUserData(user.toMap());
-        //presenter.onSuccess(user);
       } else {
         throw value.error;
         switch (value.error.code) {

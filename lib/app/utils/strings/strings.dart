@@ -19,3 +19,6 @@ const PASSWORD = "Senha";
 const RECOVER_PASSWORD = "Recuperar senha";
 const LOGIN = "Entrar";
 const CREATE_ACCOUNT = "Criar conta";
+
+const OK = "Ok";
+const CANCELAR = "Cancelar";

@@ -10,14 +10,12 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    //SplashController controller = Get.put(SplashController());
-    //controller.getUser();
     teste();
   }
 
   teste() async {
     await Future.delayed(Duration(seconds: 1));
-    Get.toNamed("/admin");
+    Get.offAllNamed("/company");
   }
 
   @override

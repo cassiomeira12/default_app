@@ -1,3 +1,4 @@
+import 'package:default_app/app/modules/company/dashboard/components/card_page/card_page.dart';
 import 'package:flutter/material.dart';
 
 class PaymentTypesPage extends StatefulWidget {
@@ -11,7 +12,9 @@ class _PaymentTypesPageState extends State<PaymentTypesPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Text('PhoneContactPage'),
+          CardPage(
+            child: Container(),
+          ),
         ],
       ),
     );

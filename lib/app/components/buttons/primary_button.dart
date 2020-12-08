@@ -19,6 +19,7 @@ class PrimaryButton extends StatelessWidget {
 //          : MediaQuery.of(context).size.width,
 //      height: 50.0,
       child: RaisedButton(
+        padding: EdgeInsets.symmetric(horizontal: 10),
         elevation: 5.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),

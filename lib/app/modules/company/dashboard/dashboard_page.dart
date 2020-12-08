@@ -1,7 +1,9 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:default_app/app/components/drawer/drawer_widget.dart';
 import 'package:default_app/app/components/responsive/responsive.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'dashboard_controller.dart';
 import 'submodules/company/company_page.dart';
@@ -86,6 +88,38 @@ class _DashboardPageState extends State<DashboardPage> {
         'page': MenusPage(),
       },
       {
+        'value': 'Tema',
+        'icon': Icons.brightness_medium,
+        'action': () {
+          showConfirmationDialog(
+            context: context,
+            barrierDismissible: false,
+            title: "Escolha um tema",
+            cancelLabel: "Cancelar",
+            okLabel: "OK",
+            actions: [
+              AlertDialogAction(
+                key: ThemeMode.system,
+                label: "Automático",
+                isDefaultAction: true,
+              ),
+              AlertDialogAction(
+                key: ThemeMode.light,
+                label: "Claro",
+              ),
+              AlertDialogAction(
+                key: ThemeMode.dark,
+                label: "Escuro",
+              ),
+            ],
+          ).then((value) {
+            if (value != null) {
+              Get.changeThemeMode(value);
+            }
+          });
+        }
+      },
+      {
         'value': 'Configurações',
         'icon': Icons.settings,
         'page': SettingsPage(),
@@ -114,7 +148,7 @@ class _DashboardPageState extends State<DashboardPage> {
       },
     ];
     generatePageList(drawerItems);
-    //teste();
+    userData();
   }
 
   generatePageList(List<dynamic> drawerItems) async {
@@ -132,13 +166,14 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
-  teste() async {
+  userData() async {
     var user = await controller.currentUser();
-    print(user['avatarURL']);
-    setState(() {
-      userName = user['name'];
-      avatarURL = user['avatarURL'];
-    });
+    if (user != null) {
+      setState(() {
+        userName = user['name'];
+        avatarURL = user['avatarURL'];
+      });
+    }
   }
 
   @override

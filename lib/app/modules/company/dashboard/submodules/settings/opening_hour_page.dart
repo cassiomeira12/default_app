@@ -1,3 +1,4 @@
+import 'package:default_app/app/modules/company/dashboard/components/card_page/card_page.dart';
 import 'package:flutter/material.dart';
 
 class OpeningHourPage extends StatefulWidget {
@@ -11,7 +12,9 @@ class _OpeningHourPageState extends State<OpeningHourPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Text('OpeningHourPage'),
+          CardPage(
+            child: Container(),
+          ),
         ],
       ),
     );

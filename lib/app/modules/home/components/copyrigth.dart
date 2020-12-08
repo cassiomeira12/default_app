@@ -25,8 +25,8 @@ class CopyRigth extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
+          Wrap(
+            //mainAxisSize: MainAxisSize.min,
             children: [
               FlatButton(
                 child: Text(

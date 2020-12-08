@@ -344,9 +344,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void validateAndSubmit() {
-    //_email = "cassiomeirasilva12@gmail.com";
-    //_password = "123456";
-    if (validateAndSave()) {
+    _email = "cassiomeirasilva12@gmail.com";
+    _password = "123456";
+    if (!validateAndSave()) {
       parseLogin(_email, _password);
     }
   }

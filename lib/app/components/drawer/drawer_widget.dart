@@ -1,4 +1,5 @@
 import 'package:default_app/app/components/image_network/image_network_widget.dart';
+import 'package:default_app/app/style/themes/dark_theme.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -29,8 +30,8 @@ class DrawerWidget extends StatefulWidget {
 class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey,
+    return Theme(
+      data: darkTheme().copyWith(canvasColor: Color(0xFF273443)),
       child: Drawer(
         elevation: 2,
         child: ListView(

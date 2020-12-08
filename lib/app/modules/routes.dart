@@ -10,7 +10,7 @@ class Routes {
     GetPage(
       name: '/',
       page: () {
-        return true ? HomePage() : SplashPage();
+        return GetPlatform.isWeb ? HomePage() : SplashPage();
       },
     ),
     GetPage(name: '/admin', page: () => AdminPage()),

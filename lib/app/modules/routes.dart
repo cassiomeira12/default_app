@@ -7,12 +7,8 @@ import 'admin/admin_page.dart';
 
 class Routes {
   static var routes = [
-    GetPage(
-      name: '/',
-      page: () {
-        return GetPlatform.isWeb ? HomePage() : SplashPage();
-      },
-    ),
+    GetPage(name: '/', page: () => HomePage()),
+    GetPage(name: '/splash', page: () => SplashPage()),
     GetPage(name: '/admin', page: () => AdminPage()),
     GetPage(name: '/company', page: () => CompanyPage()),
   ];

@@ -6,6 +6,7 @@ import 'package:default_app/app/components/shapes/shape_round.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
 import 'package:default_app/app/modules/company/dashboard/dashboard_page.dart';
 import 'package:default_app/app/modules/company/login/login_controller.dart';
+import 'package:default_app/app/utils/image_util.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -181,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
             child: CircleAvatar(
               backgroundColor: Colors.transparent,
               radius: 58.0,
-              child: Image.asset("images/logo_app.png"),
+              child: Image.asset(imagePath("logo_app.png")),
             ),
           ),
         ),
@@ -355,7 +356,6 @@ class _LoginPageState extends State<LoginPage> {
     try {
       setState(() => _loading = true);
       var result = await controller.signIn(email, password);
-      print(result);
       Get.off(DashboardPage());
     } catch (error) {
       print(error);

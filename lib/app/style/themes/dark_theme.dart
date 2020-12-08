@@ -50,7 +50,7 @@ ThemeData darkTheme() {
     primaryColorLight: primaryColorLight,
     primaryColorDark: primaryColorDark,
     accentColor: accentColor,
+    buttonColor: primaryColorDark,
     // fontFamily: 'Montserrat',
-    buttonColor: Colors.blue[500],
   );
 }

@@ -1,3 +1,4 @@
+import 'package:default_app/app/components/generate_form/generate_form.dart';
 import 'package:default_app/app/modules/company/dashboard/components/card_page/card_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class _OpeningHourPageState extends State<OpeningHourPage> {
       child: Column(
         children: [
           CardPage(
-            child: Container(),
+            child: GenerateForm(),
           ),
         ],
       ),

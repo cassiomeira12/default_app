@@ -4,6 +4,7 @@ import 'package:default_app/app/components/responsive/responsive.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dashboard_controller.dart';
 import 'submodules/company/company_page.dart';
@@ -112,8 +113,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 label: "Escuro",
               ),
             ],
-          ).then((value) {
+          ).then((value) async {
             if (value != null) {
+              var pref = await SharedPreferences.getInstance();
+              pref.setInt("theme", ThemeMode.values.indexOf(value));
               Get.changeThemeMode(value);
             }
           });

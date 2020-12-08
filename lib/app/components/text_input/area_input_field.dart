@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AreaInputField extends StatefulWidget {
   final String labelText;
   final TextInputType inputType;
+  final bool enable;
 
   TextAlign textAlign;
   bool obscureText;
@@ -16,13 +17,12 @@ class AreaInputField extends StatefulWidget {
 
   AreaInputField({
     @required this.labelText,
-
     this.inputType = TextInputType.text,
     this.textAlign = TextAlign.center,
+    this.enable = true,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.words,
     this.maxLines = 2,
-
     this.controller,
     this.validator,
     this.onSaved,
@@ -45,6 +45,7 @@ class _AreaInputFieldState extends State<AreaInputField> {
       maxLines: widget.maxLines,
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+      enabled: widget.enable,
       decoration: InputDecoration(
         labelText: widget.labelText,
         alignLabelWithHint: true,
@@ -67,7 +68,10 @@ class _AreaInputFieldState extends State<AreaInputField> {
         ),
       ),
       controller: widget.controller,
-      validator: widget.validator == null ? (value) => value.isEmpty ? "${widget.labelText} não pode ser vazio" : null : widget.validator,
+      validator: widget.validator == null
+          ? (value) =>
+              value.isEmpty ? "${widget.labelText} não pode ser vazio" : null
+          : widget.validator,
       onSaved: widget.onSaved,
       onChanged: widget.onChanged,
     );

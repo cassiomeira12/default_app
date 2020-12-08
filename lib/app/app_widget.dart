@@ -1,3 +1,5 @@
+import 'package:default_app/app/style/themes/theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +19,9 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
     ParseInit.init();
+    getTheme().then((value) {
+      Get.changeThemeMode(value);
+    });
   }
 
   @override
@@ -27,9 +32,9 @@ class _AppWidgetState extends State<AppWidget> {
       themeMode: ThemeMode.system,
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      initialRoute: '/',
+      initialRoute: kIsWeb ? '/' : '/splash',
       getPages: Routes.routes,
-      enableLog: true,
+      enableLog: false,
       defaultTransition: Transition.fade,
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,

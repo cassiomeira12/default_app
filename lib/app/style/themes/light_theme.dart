@@ -50,7 +50,7 @@ ThemeData lightTheme() {
     primaryColorLight: primaryColorLight,
     primaryColorDark: primaryColorDark,
     accentColor: accentColor,
+    buttonColor: primaryColorLight,
     // fontFamily: 'Montserrat',
-    buttonColor: Color(0xFFFF5D5D),
   );
 }

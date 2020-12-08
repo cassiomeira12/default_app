@@ -10,11 +10,11 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    teste();
+    checkApp();
   }
 
-  teste() async {
-    await Future.delayed(Duration(seconds: 1));
+  checkApp() async {
+    await Future.delayed(Duration(milliseconds: 500));
     Get.offAllNamed("/company");
   }
 

@@ -4,6 +4,7 @@ class TextInputField extends StatefulWidget {
   final String labelText;
   final String hintText;
   final TextInputType keyboardType;
+  final bool enable;
 
   TextAlign textAlign;
   bool obscureText;
@@ -21,6 +22,7 @@ class TextInputField extends StatefulWidget {
     this.textAlign = TextAlign.left,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
+    this.enable = true,
     this.controller,
     this.validator,
     this.onSaved,
@@ -41,6 +43,7 @@ class _TextInputFieldState extends State<TextInputField> {
       obscureText: widget.obscureText,
       textCapitalization: widget.textCapitalization,
       textInputAction: TextInputAction.next,
+      enabled: widget.enable,
       onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
       decoration: InputDecoration(
         hintText: widget.hintText == null ? null : widget.hintText,

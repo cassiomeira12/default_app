@@ -1,5 +1,5 @@
 name: default_app
-description: Default Web App.
+description: Kideliver Web App.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -16,7 +16,7 @@ dependencies:
 
   get: ^3.4.6
 
-  # dio: ^3.0.9
+  dio: ^3.0.9
   parse_server_sdk: 1.0.26
 
   # path_provider: ^1.6.14

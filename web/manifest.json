@@ -1,11 +1,11 @@
 {
-    "name": "default_app",
-    "short_name": "default_app",
+    "name": "kidelver",
+    "short_name": "kideliver",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Kideliver Web App",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

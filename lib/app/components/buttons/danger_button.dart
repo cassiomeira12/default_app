@@ -20,6 +20,7 @@ class DangerButton extends StatelessWidget {
       height: 50.0,
       child: RaisedButton(
           elevation: 5.0,
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),

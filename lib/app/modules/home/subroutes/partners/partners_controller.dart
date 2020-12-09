@@ -4,6 +4,10 @@ class PartnersController {
   var repository = ParseCompanyService();
 
   listCompanies() {
+    return repository.listCompanies();
+  }
+
+  list() {
     return repository.list();
   }
 }

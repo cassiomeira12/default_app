@@ -63,7 +63,7 @@ class _TextInputFieldState extends State<TextInputField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Theme.of(context).primaryColor),
+          borderSide: BorderSide(color: Theme.of(context).primaryColorLight),
         ),
       ),
       controller: widget.controller,

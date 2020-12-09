@@ -4,6 +4,10 @@ class InitialController {
   var companyRepository = ParseCompanyService();
 
   listCompanies() {
+    return companyRepository.listCompanies();
+  }
+
+  list() {
     return companyRepository.list();
   }
 }

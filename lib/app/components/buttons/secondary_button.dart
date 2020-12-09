@@ -23,7 +23,8 @@ class SecondaryButton extends StatelessWidget {
 //          : MediaQuery.of(context).size.width,
       //height: height ?? 50,
       child: RaisedButton(
-        elevation: 5,
+        //elevation: 5,
+        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           //side: BorderSide(color: Theme.of(context).hintColor),

@@ -46,6 +46,7 @@ class CustomCard extends StatelessWidget {
                 children: [
                   Text(
                     '${title}',
+                    overflow: TextOverflow.ellipsis,
                     style: fontSubtitle(context, size: 20, bold: true),
                   ),
                   message != null
@@ -53,6 +54,7 @@ class CustomCard extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                           child: Text(
                             '${message}',
+                            overflow: TextOverflow.ellipsis,
                             style: fontMessage(context, color: Colors.grey),
                           ),
                         )

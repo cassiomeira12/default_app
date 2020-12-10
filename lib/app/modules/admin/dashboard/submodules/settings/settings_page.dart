@@ -22,11 +22,25 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      Center(
-                        child: ImageNetworkWidget(
-                          url: null,
-                          size: 160,
+                      GestureDetector(
+                        child: Center(
+                          child: ImageNetworkWidget(
+                            url: null,
+                            size: 160,
+                          ),
                         ),
+                        onTap: () async {
+                          // FilePickerResult result =
+                          //     await FilePicker.platform.pickFiles();
+                          //
+                          // if (result != null) {
+                          //   File file = File(result.files.single.path);
+                          //   print(result.files.single.path);
+                          //   print(file);
+                          // } else {
+                          //   // User canceled the picker
+                          // }
+                        },
                       ),
                       Align(
                         alignment: Alignment.bottomRight,

@@ -38,8 +38,8 @@ class _AppWidgetState extends State<AppWidget> {
       defaultTransition: Transition.fade,
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,
-      transitionDuration: Get.defaultDurationTransition,
-      defaultGlobalState: Get.defaultGlobalState,
+      //transitionDuration: Get.defaultDurationTransition,
+      //defaultGlobalState: Get.defaultGlobalState,
     );
   }
 }

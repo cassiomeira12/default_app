@@ -1,10 +1,12 @@
 import 'package:default_app/app/components/card/custom_card.dart';
 import 'package:default_app/app/components/future_builder/custom_future_builder.dart';
 import 'package:default_app/app/modules/home/components/copyrigth.dart';
-import 'package:default_app/app/modules/home/subroutes/initial/initial_controller.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
+
+import '../../home_controller.dart';
 
 class InitialPage extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
-  var controller = InitialController();
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,10 @@
 import 'package:default_app/app/components/card/custom_card.dart';
 import 'package:default_app/app/components/future_builder/custom_future_builder.dart';
 import 'package:default_app/app/modules/home/components/copyrigth.dart';
-import 'package:default_app/app/modules/home/subroutes/partners/partners_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../home_controller.dart';
 
 class PartnersPage extends StatefulWidget {
   @override
@@ -10,7 +12,7 @@ class PartnersPage extends StatefulWidget {
 }
 
 class _PartnersPageState extends State<PartnersPage> {
-  var controller = PartnersController();
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

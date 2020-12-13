@@ -1,4 +1,5 @@
 import 'package:default_app/app/modules/company/company_page.dart';
+import 'package:default_app/app/modules/home/home_bind.dart';
 import 'package:default_app/app/modules/home/home_page.dart';
 import 'package:default_app/app/pages/splash/splash_page.dart';
 import 'package:get/get.dart';
@@ -7,9 +8,22 @@ import 'admin/admin_page.dart';
 
 class Routes {
   static var routes = [
-    GetPage(name: '/', page: () => HomePage()),
-    GetPage(name: '/splash', page: () => SplashPage()),
-    GetPage(name: '/admin', page: () => AdminPage()),
-    GetPage(name: '/company', page: () => CompanyPage()),
+    GetPage(
+      name: '/',
+      page: () => HomePage(),
+      binding: HomeBind(),
+    ),
+    GetPage(
+      name: '/splash',
+      page: () => SplashPage(),
+    ),
+    GetPage(
+      name: '/admin',
+      page: () => AdminPage(),
+    ),
+    GetPage(
+      name: '/company',
+      page: () => CompanyPage(),
+    ),
   ];
 }

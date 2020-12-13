@@ -23,7 +23,9 @@ class _HomePageState extends State<HomePage> {
   List<dynamic> menuItems;
   List<dynamic> pages = List();
 
-  var controller = HomeController();
+  //var controller = HomeController();
+
+  final controller2 = Get.put(HomeController());
 
   @override
   void initState() {
@@ -41,10 +43,10 @@ class _HomePageState extends State<HomePage> {
         'value': 'Sobre',
         'page': AboutPage(),
       },
-//      {
-//        'value': 'Funcionalidades',
-//        'page': ContactPage(),
-//      },
+      // {
+      //   'value': 'Funcionalidades',
+      //   'page': ContactPage(),
+      // },
       {
         'value': 'Parceiros',
         'page': PartnersPage(),

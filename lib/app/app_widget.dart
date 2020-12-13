@@ -32,14 +32,13 @@ class _AppWidgetState extends State<AppWidget> {
       themeMode: ThemeMode.system,
       theme: lightTheme(),
       darkTheme: darkTheme(),
+      locale: Get.deviceLocale,
       initialRoute: kIsWeb ? '/' : '/splash',
       getPages: Routes.routes,
       enableLog: kDebugMode,
-      defaultTransition: Transition.fade,
+      defaultTransition: kIsWeb ? Transition.fade : Transition.native,
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,
-      //transitionDuration: Get.defaultDurationTransition,
-      //defaultGlobalState: Get.defaultGlobalState,
     );
   }
 }

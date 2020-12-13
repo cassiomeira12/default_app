@@ -15,30 +15,41 @@ class _PartnersPageState extends State<PartnersPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 20),
-          Center(
-            child: CustomFutureBuilder(
-              future: controller.listCompanies(),
-              builder: (context, snapshot) {
-                List list = List.from(snapshot.data);
-                return Wrap(
-                  alignment: WrapAlignment.center,
-                  crossAxisAlignment: WrapCrossAlignment.start,
-                  children: list.map((e) {
-                    return CustomCard(
-                      title: "${e['name']}",
-                      url: e['logoURL'],
-                      height: 200,
-                    );
-                  }).toList(),
-                );
-              },
-            ),
-          ),
-          CopyRigth(),
-        ],
+      child: Container(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height - 56,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            body(),
+            CopyRigth(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget body() {
+    return Padding(
+      padding: EdgeInsets.only(top: 20, bottom: 20),
+      child: CustomFutureBuilder(
+        future: controller.listCompanies(),
+        builder: (context, snapshot) {
+          List list = List.from(snapshot.data);
+          return Wrap(
+            alignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: list.map((e) {
+              return CustomCard(
+                title: "${e['name']}",
+                url: e['logoURL'],
+                height: 200,
+              );
+            }).toList(),
+          );
+        },
       ),
     );
   }

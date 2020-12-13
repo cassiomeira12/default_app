@@ -9,7 +9,7 @@ class CopyRigth extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       color: Color(0xFF273443),
-      margin: EdgeInsets.only(top: 100),
+      //margin: EdgeInsets.only(top: 100),
       padding: EdgeInsets.only(left: 50, right: 50, top: 7, bottom: 7),
       child: Wrap(
         alignment: WrapAlignment.spaceBetween,

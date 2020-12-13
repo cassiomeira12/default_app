@@ -17,6 +17,25 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      child: Container(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height - 56,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            body(),
+            CopyRigth(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget body() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -99,7 +118,6 @@ class _InitialPageState extends State<InitialPage> {
               ),
             ),
           ),
-          CopyRigth(),
         ],
       ),
     );

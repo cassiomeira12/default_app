@@ -4,7 +4,6 @@ import 'package:default_app/app/components/buttons/secondary_button.dart';
 import 'package:default_app/app/components/shapes/background_card.dart';
 import 'package:default_app/app/components/shapes/shape_round.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
-import 'package:default_app/app/modules/company/dashboard/dashboard_page.dart';
 import 'package:default_app/app/modules/company/login/login_controller.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:default_app/app/utils/strings/errors.dart';
@@ -335,7 +334,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       setState(() => _loading = true);
       await controller.signIn(email, password);
-      Get.off(DashboardPage());
+      Get.offNamed('/company/dashboard');
     } catch (error) {
       catchError(error);
     } finally {

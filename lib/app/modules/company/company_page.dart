@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'company_controller.dart';
-import 'dashboard/dashboard_page.dart';
-import 'login/login_page.dart';
 
 class CompanyPage extends StatefulWidget {
   @override
@@ -23,9 +21,9 @@ class _CompanyPageState extends State<CompanyPage> {
     await Future.delayed(Duration(seconds: 1));
     try {
       var result = await controller.currentUser();
-      Get.off(result == null ? LoginPage() : DashboardPage());
+      Get.offNamed(result == null ? '/company/login' : '/company/dashboard');
     } catch (error) {
-      Get.off(LoginPage());
+      Get.offNamed('/company/login');
     }
   }
 

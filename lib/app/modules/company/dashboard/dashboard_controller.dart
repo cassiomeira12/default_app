@@ -22,7 +22,7 @@ class DashBoardController {
     switch (result) {
       case OkCancelResult.ok:
         await userService.signOut();
-        return kIsWeb ? Get.back() : Get.offNamed('/splash');
+        return kIsWeb ? Get.offNamed('/company') : Get.offNamed('/splash');
       case OkCancelResult.cancel:
         return;
     }

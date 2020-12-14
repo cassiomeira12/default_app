@@ -33,7 +33,7 @@ class _AppWidgetState extends State<AppWidget> {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       locale: Get.deviceLocale,
-      initialRoute: kIsWeb ? '/' : '/splash',
+      initialRoute: kIsWeb ? '/admin' : '/splash',
       getPages: Routes.routes,
       enableLog: kDebugMode,
       defaultTransition: kIsWeb ? Transition.fade : Transition.native,

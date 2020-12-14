@@ -11,9 +11,9 @@ import 'submodules/companies/companies_page.dart';
 import 'submodules/companies/new_company_page.dart';
 import 'submodules/notifications/notifications_page.dart';
 import 'submodules/report/report_page.dart';
-import 'submodules/settings/opening_hour_page.dart';
 import 'submodules/settings/payment_types_page.dart';
 import 'submodules/settings/settings_page.dart';
+import 'submodules/settings/version_app_page.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -111,8 +111,8 @@ class _DashboardPageState extends State<DashboardPage> {
         'page': SettingsPage(),
         'menus': [
           {
-            'value': 'Horários de funcionamento',
-            'page': OpeningHourPage(),
+            'value': 'Aplicativos',
+            'page': VersionAppPage(),
           },
           {
             'value': 'Endereço do estabelecimento',

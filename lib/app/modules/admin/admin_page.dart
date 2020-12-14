@@ -2,9 +2,6 @@ import 'package:default_app/app/modules/admin/admin_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'dashboard/dashboard_page.dart';
-import 'login/login_page.dart';
-
 class AdminPage extends StatefulWidget {
   @override
   _AdminPageState createState() => _AdminPageState();
@@ -23,9 +20,9 @@ class _AdminPageState extends State<AdminPage> {
     await Future.delayed(Duration(seconds: 1));
     try {
       var result = await controller.currentUser();
-      Get.off(result == null ? LoginPage() : DashboardPage());
+      Get.offNamed(result == null ? '/admin/login' : '/admin/dashboard');
     } catch (error) {
-      Get.off(LoginPage());
+      Get.offNamed('/admin/login');
     }
   }
 

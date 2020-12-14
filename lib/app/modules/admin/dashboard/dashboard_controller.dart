@@ -1,11 +1,15 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:default_app/app/shared/repositories/parse_user_service.dart';
+import 'package:default_app/app/shared/repositories/parse_version_app_service.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class DashBoardController {
+class DashBoardController extends GetxController {
   var userService = ParseUserService();
+  var versionAppService = ParseVersionAppService();
+
+  Future<dynamic> versionApps;
 
   currentUser() {
     return userService.currentUser();
@@ -22,9 +26,16 @@ class DashBoardController {
     switch (result) {
       case OkCancelResult.ok:
         await userService.signOut();
-        return kIsWeb ? Get.back() : Get.offNamed('/splash');
+        return kIsWeb ? Get.offNamed('/admin') : Get.offNamed('/splash');
       case OkCancelResult.cancel:
         return;
     }
+  }
+
+  listVersionApps() {
+    if (versionApps == null) {
+      versionApps = versionAppService.list();
+    }
+    return versionApps;
   }
 }

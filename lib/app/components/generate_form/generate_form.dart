@@ -1,6 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:default_app/app/components/buttons/primary_button.dart';
-import 'package:default_app/app/components/buttons/secondary_button.dart';
 import 'package:default_app/app/components/text_input/area_input_field.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
 import 'package:flutter/material.dart';
@@ -285,32 +284,39 @@ class _GenerateFormState extends State<GenerateForm> {
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-      child: SecondaryButton(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '${data['title']}',
-              style: TextStyle(fontSize: 15),
-            ),
-            Switch(
-              value: booleans[data['field']],
-              activeColor: Theme.of(context).primaryColor,
-              onChanged: (value) {
-                setState(() {
-                  booleans[data['field']] = value;
-                  data['result'] = value.toString();
-                });
-              },
-            ),
-          ],
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: FlatButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(color: Theme.of(context).hintColor),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '${data['title']}',
+                style: TextStyle(fontSize: 15),
+              ),
+              Switch(
+                value: booleans[data['field']],
+                activeColor: Theme.of(context).primaryColor,
+                onChanged: (value) {
+                  setState(() {
+                    booleans[data['field']] = value;
+                    data['result'] = value.toString();
+                  });
+                },
+              ),
+            ],
+          ),
+          onPressed: () {
+            setState(() {
+              booleans[data['field']] = !booleans[data['field']];
+              data['result'] = booleans[data['field']].toString();
+            });
+          },
         ),
-        onPressed: () {
-          setState(() {
-            booleans[data['field']] = !booleans[data['field']];
-            data['result'] = booleans[data['field']].toString();
-          });
-        },
       ),
     );
   }

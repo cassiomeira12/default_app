@@ -150,23 +150,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       },
     ];
-    generatePageList(drawerItems);
     userData();
-  }
-
-  generatePageList(List<dynamic> drawerItems) async {
-    int index = 0;
-    for (var item in drawerItems) {
-      pages.add(item['page']);
-      item['index'] = index++;
-      if (item['menus'] != null) {
-        for (var menu in List.from(item['menus'])) {
-          pages.add(menu['page']);
-          menu['index'] = index++;
-        }
-      }
-      print(item);
-    }
   }
 
   userData() async {
@@ -233,6 +217,7 @@ class _DashboardPageState extends State<DashboardPage> {
       menuIndex: menuIndex,
       hasHeader: true,
       drawerItems: drawerItems,
+      pages: pages,
       avatarName: userName,
       avatarURL: avatarURL,
       onChanged: (data) {

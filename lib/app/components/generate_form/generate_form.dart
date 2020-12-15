@@ -89,9 +89,9 @@ class _GenerateFormState extends State<GenerateForm> {
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: List.from(widget.data['fields']).map((e) {
-            return checkType(e);
-          }).toList(),
+          children: List.from(widget.data['fields'])
+              .map((e) => checkType(e))
+              .toList(),
         ),
       ),
     );

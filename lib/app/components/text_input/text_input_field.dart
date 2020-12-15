@@ -44,7 +44,7 @@ class _TextInputFieldState extends State<TextInputField> {
       textCapitalization: widget.textCapitalization,
       textInputAction: TextInputAction.next,
       enabled: widget.enable,
-      onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+      //onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
       decoration: InputDecoration(
         hintText: widget.hintText == null ? null : widget.hintText,
         labelText: widget.labelText,

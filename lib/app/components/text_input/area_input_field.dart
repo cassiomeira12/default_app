@@ -44,7 +44,7 @@ class _AreaInputFieldState extends State<AreaInputField> {
       maxLength: 25 * widget.maxLines,
       maxLines: widget.maxLines,
       textInputAction: TextInputAction.next,
-      onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+      //onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
       enabled: widget.enable,
       decoration: InputDecoration(
         labelText: widget.labelText,

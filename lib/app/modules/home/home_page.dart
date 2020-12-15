@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   List<dynamic> menuItems;
   List<dynamic> pages = List();
 
-  final controller2 = Get.put(HomeController());
+  final controller = Get.put(HomeController());
 
   @override
   void initState() {

@@ -20,6 +20,8 @@ class ParseCompanyService {
   }
 
   list() {
-    return service.list();
+    return service.list().catchError((error) {
+      return throw error.message;
+    });
   }
 }

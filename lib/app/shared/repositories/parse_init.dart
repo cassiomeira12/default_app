@@ -12,15 +12,24 @@ class ParseInit {
   static String clientKey = "hX0GOokmRVb1nQg4gjlM0n1RpkTk7NbWRgoQgBNH";
   static String restApiKet = "6O4o1phUq74aalaJ75qqRrz3kbQgNWQORBg5kR7R";
 
+  static Parse parse;
+
   static Future<bool> init() async {
-    var parse = await Parse().initialize(
-      appId,
-      serverUrl,
-      liveQueryUrl: serverUrl,
-      clientKey: clientKey,
-      autoSendSessionId: true,
-      debug: kDebugMode,
-    );
-    return (await parse.healthCheck()).success;
+    if (parse == null) {
+      parse = await Parse().initialize(
+        appId,
+        serverUrl,
+        liveQueryUrl: serverUrl,
+        clientKey: clientKey,
+        autoSendSessionId: true,
+        debug: kDebugMode,
+      );
+      //return (await parse.healthCheck()).success;
+    }
+    return parse.hasParseBeenInitialized();
+  }
+
+  static Future<bool> isInitialize() async {
+    return await init();
   }
 }

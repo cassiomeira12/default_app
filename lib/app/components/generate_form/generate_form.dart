@@ -89,9 +89,9 @@ class _GenerateFormState extends State<GenerateForm> {
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: List.from(widget.data['fields'])
-              .map((e) => checkType(e))
-              .toList(),
+          children: List.from(widget.data['fields']).map((e) {
+            return checkType(e);
+          }).toList(),
         ),
       ),
     );
@@ -170,12 +170,16 @@ class _GenerateFormState extends State<GenerateForm> {
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
       child: FlatButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(color: Theme.of(context).hintColor),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               '${data['title']}',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 15),
             ),
             Checkbox(
               value: booleans[data['field']],
@@ -204,13 +208,12 @@ class _GenerateFormState extends State<GenerateForm> {
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        child: RaisedButton(
-          elevation: 5,
+        child: FlatButton(
           padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(color: Theme.of(context).hintColor),
           ),
-          color: Theme.of(context).backgroundColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -236,7 +239,7 @@ class _GenerateFormState extends State<GenerateForm> {
                                 ? spinners[data['field']]['title']
                                 : data['title'],
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 15),
                           ),
                         ],
                       ),
@@ -288,7 +291,7 @@ class _GenerateFormState extends State<GenerateForm> {
           children: [
             Text(
               '${data['title']}',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 15),
             ),
             Switch(
               value: booleans[data['field']],

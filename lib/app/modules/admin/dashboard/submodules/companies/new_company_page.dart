@@ -8,54 +8,60 @@ class NewCompanyPage extends StatefulWidget {
 }
 
 class _NewCompanyPageState extends State<NewCompanyPage> {
-  dynamic form = {
-    "fields": [
-      {
-        "field": "name",
-        "type": "textField",
-        "title": "Nome da empresa",
-      },
-      {
-        "field": "topic",
-        "type": "textField",
-        "title": "Tópico",
-      },
-      {
-        "field": "cnpj",
-        "type": "textField",
-        "title": "CNPJ",
-      },
-      {
-        "field": "logoURL",
-        "type": "textField",
-        "title": "Logo URL",
-      },
-      {
-        "field": "bannerURL",
-        "type": "textField",
-        "title": "Banner URL",
-      },
-      {
-        "field": "show",
-        "type": "checkbox",
-        "title": "Mostrar",
-      },
-      {
-        "field": "initiated",
-        "type": "checkbox",
-        "title": "Inicializado",
-      },
-      {
-        "type": "button",
-        "title": "Salvar",
-        "validateRequired": false,
-        "action": (data2) {
-          print("Result");
-          print(data2);
+  dynamic form;
+
+  @override
+  void initState() {
+    super.initState();
+    form = {
+      "fields": [
+        {
+          "field": "name",
+          "type": "textField",
+          "title": "Nome da empresa",
         },
-      }
-    ]
-  };
+        {
+          "field": "topic",
+          "type": "textField",
+          "title": "Tópico",
+        },
+        {
+          "field": "cnpj",
+          "type": "textField",
+          "title": "CNPJ",
+        },
+        {
+          "field": "logoURL",
+          "type": "textField",
+          "title": "Logo URL",
+        },
+        {
+          "field": "bannerURL",
+          "type": "textField",
+          "title": "Banner URL",
+        },
+        {
+          "field": "show",
+          "type": "checkbox",
+          "title": "Mostrar",
+        },
+        {
+          "field": "initiated",
+          "type": "checkbox",
+          "title": "Inicializado",
+        },
+        {
+          "type": "button",
+          "title": "Salvar",
+          "validateRequired": false,
+          "action": (data2) {
+            print("Result");
+            print(data2);
+          },
+        }
+      ]
+    };
+  }
 
   @override
   Widget build(BuildContext context) {

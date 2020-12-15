@@ -1,5 +1,6 @@
 import 'package:default_app/app/components/image_network/image_network_widget.dart';
 import 'package:default_app/app/style/themes/dark_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -11,6 +12,7 @@ class DrawerWidget extends StatefulWidget {
   final String avatarName;
   final List<dynamic> drawerItems;
   final ValueChanged<dynamic> onChanged;
+  final List<dynamic> pages;
 
   DrawerWidget({
     this.selectedPageIndex,
@@ -20,8 +22,32 @@ class DrawerWidget extends StatefulWidget {
     this.avatarURL,
     this.avatarName,
     @required this.drawerItems,
+    @required this.pages,
     @required this.onChanged,
-  }) : assert(drawerItems != null);
+  }) : assert(drawerItems != null) {
+    int index = 0;
+    for (var item in drawerItems) {
+      if (item['page'] == null) {
+        pages.add(null);
+        item['index'] = index++;
+        if (item['menus'] != null) {
+          for (var menu in List.from(item['menus'])) {
+            pages.add(menu['page']);
+            menu['index'] = index++;
+          }
+        }
+      } else {
+        pages.add(item['page']);
+        item['index'] = index++;
+        if (item['menus'] != null) {
+          for (var menu in List.from(item['menus'])) {
+            pages.add(menu['page']);
+            menu['index'] = index++;
+          }
+        }
+      }
+    }
+  }
 
   @override
   _DrawerWidgetState createState() => _DrawerWidgetState();
@@ -51,9 +77,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   Widget drawerHeader() {
     return DrawerHeader(
-      decoration: BoxDecoration(color: Theme.of(context).primaryColorLight),
+      //decoration: BoxDecoration(color: Theme.of(context).primaryColorLight),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           ImageNetworkWidget(url: widget.avatarURL, size: 90),
           Text(
@@ -98,17 +124,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             onPressed: () {
               if (data['action'] == null) {
-                MediaQuery.of(context).size.width < 990
+                MediaQuery.of(context).size.width < 990 && data['menus'] == null
                     ? Navigator.pop(context)
                     : null;
                 var selectedIndex = {
-                  'page': data['index'],
+                  'page':
+                      data['page'] == null ? data['index'] + 1 : data['index'],
                   'category': index,
                   'menu': 0,
                 };
                 widget.onChanged(selectedIndex);
               } else {
-                MediaQuery.of(context).size.width < 990
+                MediaQuery.of(context).size.width < 990 && data['menus'] == null
                     ? Navigator.pop(context)
                     : null;
                 data['action'].call();
@@ -121,12 +148,17 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ? Container()
                 : Column(
                     children: [
-                      drawerMenu(index, 0, data),
+                      data['page'] != null
+                          ? drawerMenu(index, 0, data)
+                          : Container(),
                       Column(
                         children: List.from(data['menus'])
                             .asMap()
                             .entries
-                            .map((e) => drawerMenu(index, e.key + 1, e.value))
+                            .map((e) => drawerMenu(
+                                index,
+                                data['page'] != null ? e.key + 1 : e.key,
+                                e.value))
                             .toList(),
                       ),
                     ],

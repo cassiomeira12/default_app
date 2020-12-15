@@ -9,9 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class GenerateForm extends StatefulWidget {
   dynamic data;
 
-  GenerateForm({
-    @required this.data,
-  });
+  GenerateForm({@required this.data});
 
   @override
   _GenerateFormState createState() => _GenerateFormState();
@@ -78,7 +76,6 @@ class _GenerateFormState extends State<GenerateForm> {
   @override
   void initState() {
     super.initState();
-    print("init");
     if (widget.data == null) {
       widget.data = data;
     }
@@ -88,11 +85,14 @@ class _GenerateFormState extends State<GenerateForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: List.from(widget.data['fields']).map((e) {
-          return checkType(e);
-        }).toList(),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: List.from(widget.data['fields']).map((e) {
+            return checkType(e);
+          }).toList(),
+        ),
       ),
     );
   }
@@ -119,18 +119,19 @@ class _GenerateFormState extends State<GenerateForm> {
   Widget textField(data) {
     if (!controllers.containsKey(data['field'])) {
       controllers[data['field']] = data['initial'] != null
-          ? TextEditingController(text: data['initial'])
+          ? TextEditingController(text: data['initial'].toString())
           : TextEditingController();
       data['result'] = data['initial'].toString();
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
       child: TextInputField(
-        labelText: data['title'],
+        labelText: '${data['title']}',
         enable: data['enable'] ?? true,
         obscureText: data['obscureText'] ?? false,
         controller: controllers[data['field']],
         textCapitalization: TextCapitalization.sentences,
+        keyboardType: data['textInputType'],
         onChanged: (value) => data['result'] = value.trim(),
         onSaved: (value) => data['result'] = value.trim(),
       ),
@@ -140,18 +141,19 @@ class _GenerateFormState extends State<GenerateForm> {
   Widget textArea(data) {
     if (!controllers.containsKey(data['field'])) {
       controllers[data['field']] = data['initial'] != null
-          ? TextEditingController(text: data['initial'])
+          ? TextEditingController(text: data['initial'].toString())
           : TextEditingController();
-      //data['result'] = controllers[data['field']].t
+      data['result'] = data['initial'].toString();
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
       child: Center(
         child: AreaInputField(
-          labelText: data['title'],
+          labelText: '${data['title']}',
           controller: controllers[data['field']],
           maxLines: data["maxLines"] ?? 5,
           enable: data['enable'] ?? true,
+          keyboardType: data['textInputType'],
           onChanged: (value) => data['result'] = value.trim(),
           onSaved: (value) => data['result'] = value.trim(),
         ),
@@ -167,12 +169,12 @@ class _GenerateFormState extends State<GenerateForm> {
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-      child: SecondaryButton(
+      child: FlatButton(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              data['title'],
+              '${data['title']}',
               style: TextStyle(fontSize: 18),
             ),
             Checkbox(
@@ -285,7 +287,7 @@ class _GenerateFormState extends State<GenerateForm> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              data['title'],
+              '${data['title']}',
               style: TextStyle(fontSize: 18),
             ),
             Switch(
@@ -314,7 +316,7 @@ class _GenerateFormState extends State<GenerateForm> {
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
       child: PrimaryButton(
-        text: data['title'],
+        text: '${data['title']}',
         onPressed: () {
           if (data['validateRequired'] && validateAndSave()) {
             data['action']?.call(generateDataResult(widget.data));
@@ -326,16 +328,34 @@ class _GenerateFormState extends State<GenerateForm> {
     );
   }
 
-  List<dynamic> generateDataResult(data) {
-    List<dynamic> result = [];
+  generateDataResult(data) {
+    var result = Map<String, dynamic>();
     List.from(data['fields']).forEach((e) {
       if (e['field'] != null) {
-        result.add({
-          e['field']: e['result'],
-        });
+        result[e['field']] = convertToInitialType(
+          e['initial'],
+          e['result'],
+        );
       }
     });
     return result;
+  }
+
+  convertToInitialType(initial, value) {
+    if (initial == null) {
+      return value;
+    }
+    print("[$initial] -> [${initial.runtimeType}]");
+    switch (initial.runtimeType) {
+      case int:
+        return int.parse(value);
+      case double:
+        return double.parse(value);
+      case bool:
+        return bool.fromEnvironment(value);
+      default:
+        return value;
+    }
   }
 
   bool validateAndSave() {

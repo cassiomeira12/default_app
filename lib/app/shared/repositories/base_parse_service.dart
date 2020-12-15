@@ -30,10 +30,10 @@ class BaseParseService {
 
   Future<Map<String, dynamic>> update(Map<String, dynamic> data) async {
     var object = ParseObject(className);
-//    object.objectId = item.id;
-//    item.toMap().forEach((key, value) {
-//      object.set(key, value);
-//    });
+    object.objectId = data['objectId'];
+    data.forEach((key, value) {
+      object.set(key, value);
+    });
     return await object.update().then((value) {
       return value.success ? value.result.toJson() : throw value.error;
     });

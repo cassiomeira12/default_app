@@ -72,6 +72,28 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       },
       {
+        'value': 'Cadastros',
+        'icon': Icons.add,
+        'menus': [
+          {
+            'value': 'Pais',
+            'page': NotificationsPage(),
+          },
+          {
+            'value': 'Estados',
+            'page': NotificationsPage(),
+          },
+          {
+            'value': 'Cidades',
+            'page': NotificationsPage(),
+          },
+          {
+            'value': 'Distritos',
+            'page': NotificationsPage(),
+          },
+        ],
+      },
+      {
         'value': 'Tema',
         'icon': Icons.brightness_medium,
         'action': () {
@@ -133,23 +155,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       },
     ];
-    generatePageList(drawerItems);
-    userData();
-  }
-
-  generatePageList(List<dynamic> drawerItems) async {
-    int index = 0;
-    for (var item in drawerItems) {
-      pages.add(item['page']);
-      item['index'] = index++;
-      if (item['menus'] != null) {
-        for (var menu in List.from(item['menus'])) {
-          pages.add(menu['page']);
-          menu['index'] = index++;
-        }
-      }
-      print(item);
-    }
   }
 
   userData() async {
@@ -177,9 +182,15 @@ class _DashboardPageState extends State<DashboardPage> {
                     : Container(),
                 title: Text(
                   drawerItems[categoryIndex]['menus'] == null || menuIndex == 0
-                      ? drawerItems[categoryIndex]['value']
-                      : List.from(drawerItems[categoryIndex]['menus'])[
-                          menuIndex - 1]['value'],
+                      ? drawerItems[categoryIndex]['page'] == null
+                          ? List.from(drawerItems[categoryIndex]['menus'])[
+                              menuIndex]['value']
+                          : drawerItems[categoryIndex]['value']
+                      : drawerItems[categoryIndex]['page'] == null
+                          ? List.from(drawerItems[categoryIndex]['menus'])[
+                              menuIndex]['value']
+                          : List.from(drawerItems[categoryIndex]['menus'])[
+                              menuIndex - 1]['value'],
                   overflow: TextOverflow.fade,
                 ),
                 actions: [
@@ -215,6 +226,7 @@ class _DashboardPageState extends State<DashboardPage> {
       categoryIndex: categoryIndex,
       menuIndex: menuIndex,
       hasHeader: true,
+      pages: pages,
       drawerItems: drawerItems,
       avatarName: userName,
       avatarURL: avatarURL,

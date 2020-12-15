@@ -40,19 +40,14 @@ class ParseVersionAppService {
 
   @override
   Future<dynamic> update(dynamic item) {
+    return service.update(item);
     // return service.update(item).then((response) {
-    //   Cupon temp = Cupon();
-    //   temp.updateData(item);
-    //   temp.updatedAt = DateTime.parse(response["updatedAt"]).toLocal();
-    //   return response == null ? null : temp;
+    //   //Cupon temp = Cupon();
+    //   //temp.updateData(item);
+    //   //temp.updatedAt = DateTime.parse(response["updatedAt"]).toLocal();
+    //   //return response == null ? null : temp;
     // }).catchError((error) {
-    //   switch (error.code) {
-    //     case -1:
-    //       throw Exception(ERROR_NETWORK);
-    //       break;
-    //     default:
-    //       throw Exception(error.message);
-    //   }
+    //   throw Exception(error);
     // });
   }
 

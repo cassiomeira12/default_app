@@ -32,10 +32,14 @@ class DashBoardController extends GetxController {
     }
   }
 
+  updateVersionApp(item) {
+    return versionAppService.update(item);
+  }
+
   listVersionApps() {
-    if (versionApps == null) {
-      versionApps = versionAppService.list();
-    }
+    //if (versionApps == null) {
+    versionApps = versionAppService.list();
+    //}
     return versionApps;
   }
 }

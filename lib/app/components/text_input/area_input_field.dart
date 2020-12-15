@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AreaInputField extends StatefulWidget {
   final String labelText;
-  final TextInputType inputType;
+  final TextInputType keyboardType;
   final bool enable;
 
   TextAlign textAlign;
@@ -17,7 +17,7 @@ class AreaInputField extends StatefulWidget {
 
   AreaInputField({
     @required this.labelText,
-    this.inputType = TextInputType.text,
+    this.keyboardType = TextInputType.text,
     this.textAlign = TextAlign.center,
     this.enable = true,
     this.obscureText = false,
@@ -37,7 +37,7 @@ class _AreaInputFieldState extends State<AreaInputField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: widget.inputType,
+      keyboardType: widget.keyboardType,
       style: Theme.of(context).textTheme.body2,
       textAlign: TextAlign.left,
       textCapitalization: widget.textCapitalization,

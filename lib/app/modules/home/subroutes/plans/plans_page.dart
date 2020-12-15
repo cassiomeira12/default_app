@@ -1,6 +1,10 @@
 import 'package:default_app/app/components/card/custom_card.dart';
+import 'package:default_app/app/components/future_builder/custom_future_builder.dart';
 import 'package:default_app/app/modules/home/components/copyrigth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../home_controller.dart';
 
 class PlansPage extends StatefulWidget {
   @override
@@ -8,6 +12,8 @@ class PlansPage extends StatefulWidget {
 }
 
 class _PlansPageState extends State<PlansPage> {
+  final controller = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -28,27 +34,24 @@ class _PlansPageState extends State<PlansPage> {
   }
 
   Widget body() {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      crossAxisAlignment: WrapCrossAlignment.start,
-      children: [
-        CustomCard(
-          title: "Plano Gratuito",
-          message: "Plano gratuito, 30 dias de teste",
-        ),
-        CustomCard(
-          title: "Plano Mensal",
-          message: "Plano com mensal por apenas R\$: 30,00",
-        ),
-        CustomCard(
-          title: "Plano Semestral",
-          message: "Plano com semestral por apenas R\$: 150,00",
-        ),
-        CustomCard(
-          title: "Plano Anual",
-          message: "Plano com anual por apenas R\$: 240,00",
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(top: 20, bottom: 20),
+      child: CustomFutureBuilder(
+        future: controller.listPlans(),
+        builder: (context, snapshot) {
+          List list = List.from(snapshot.data);
+          return Wrap(
+            alignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: list.map((e) {
+              return CustomCard(
+                title: e['name'],
+                message: e['description'],
+              );
+            }).toList(),
+          );
+        },
+      ),
     );
   }
 }

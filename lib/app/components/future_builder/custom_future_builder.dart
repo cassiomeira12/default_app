@@ -20,7 +20,7 @@ class CustomFutureBuilder extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
         } catch (error) {
-          return Center(child: Text("Error"));
+          return Center(child: Text("Ops! ocorreu um erro"));
         }
       },
     );

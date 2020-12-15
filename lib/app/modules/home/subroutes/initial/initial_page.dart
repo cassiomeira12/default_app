@@ -96,27 +96,22 @@ class _InitialPageState extends State<InitialPage> {
           Container(
             height: 350,
             child: Center(
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                children: [
-                  CustomCard(
-                    title: "Plano Gratuito",
-                    message: "Plano gratuito, 30 dias de teste",
-                  ),
-                  CustomCard(
-                    title: "Plano Mensal",
-                    message: "Plano com mensal por apenas R\$: 30,00",
-                  ),
-                  CustomCard(
-                    title: "Plano Semestral",
-                    message: "Plano com semestral por apenas R\$: 150,00",
-                  ),
-                  CustomCard(
-                    title: "Plano Anual",
-                    message: "Plano com anual por apenas R\$: 240,00",
-                  ),
-                ],
+              child: CustomFutureBuilder(
+                future: controller.listPlans(),
+                builder: (context, snapshot) {
+                  List list = List.from(snapshot.data);
+                  return ListView.builder(
+                    itemCount: list.length,
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CustomCard(
+                        title: list[index]['name'],
+                        message: list[index]['description'],
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ),

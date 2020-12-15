@@ -54,7 +54,8 @@ class CustomCard extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                           child: Text(
                             '${message}',
-                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            //overflow: TextOverflow.ellipsis,
                             style: fontMessage(context, color: Colors.grey),
                           ),
                         )

@@ -1,7 +1,9 @@
+import 'package:default_app/app/components/future_builder/custom_future_builder.dart';
+import 'package:default_app/app/components/image_network/image_network_widget.dart';
+import 'package:default_app/app/modules/company/dashboard/dashboard_controller.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:flutter/material.dart';
-
-import 'company_controller.dart';
+import 'package:get/get.dart';
 
 class CompanyPage extends StatefulWidget {
   @override
@@ -9,7 +11,7 @@ class CompanyPage extends StatefulWidget {
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-  var controller = CompanyController();
+  final controller = Get.put(DashBoardController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,20 +35,24 @@ class _CompanyPageState extends State<CompanyPage> {
                 child: Container(
                   margin: EdgeInsets.all(20),
                   width: 300,
-                  height: 250,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 150,
-                        height: 150,
-                        color: Colors.red,
-                      ),
-                      Text(
-                        "Villa Pub",
-                        style: fontTitle(context),
-                      ),
-                    ],
+                  child: CustomFutureBuilder(
+                    future: controller.getCompanyFromAdmin(),
+                    builder: (context, snapshot) {
+                      var company = snapshot.data;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ImageNetworkWidget(
+                            url: company['logoURL'],
+                            size: 200,
+                          ),
+                          Text(
+                            "${company['name']}",
+                            style: fontTitle(context),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
@@ -56,92 +62,70 @@ class _CompanyPageState extends State<CompanyPage> {
                 child: Container(
                   margin: EdgeInsets.all(20),
                   width: 300,
-                  height: 250,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hoje: Fechado ",
-                        style: fontSubtitle(context),
-                      ),
-                      Text(
-                        "Abre hoje às 18:00h",
-                        style: fontSubtitle(context),
-                      ),
-                      SizedBox(height: 10),
-                      Wrap(
+                  child: CustomFutureBuilder(
+                    future: controller.getCompanyFromAdmin(),
+                    builder: (context, snapshot) {
+                      List<dynamic> list =
+                          List.from(snapshot.data['openHours']);
+                      print(list);
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Card(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.calendar_today),
-                                    Text("Segunda",
-                                        style: fontMessage(context, size: 18)),
-                                  ],
-                                ),
-                                Text("Abre às 06:00h",
-                                    style: fontMessage(context, size: 18)),
-                                Text("Fecha às 23:59h",
-                                    style: fontMessage(context, size: 18)),
-                              ],
-                            ),
+                          Text(
+                            "Hoje: Fechado ",
+                            style: fontSubtitle(context),
                           ),
-                          Card(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.calendar_today),
-                                    Text("Segunda",
-                                        style: fontMessage(context, size: 18)),
-                                  ],
-                                ),
-                                Text("Abre às 06:00h",
-                                    style: fontMessage(context, size: 18)),
-                                Text("Fecha às 23:59h",
-                                    style: fontMessage(context, size: 18)),
-                              ],
-                            ),
+                          Text(
+                            "Abre hoje às 18:00h",
+                            style: fontSubtitle(context),
                           ),
-                          Card(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
+                          SizedBox(height: 10),
+                          Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: list.map((e) {
+                              return Card(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Icon(Icons.calendar_today),
-                                    Text("Segunda",
-                                        style: fontMessage(context, size: 18)),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(Icons.calendar_today),
+                                        Text(
+                                          "Segunda",
+                                          style: fontMessage(context, size: 18),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      "Abre às 06:00h",
+                                      style: fontMessage(context, size: 18),
+                                    ),
+                                    Text(
+                                      "Fecha às 23:59h",
+                                      style: fontMessage(context, size: 18),
+                                    ),
                                   ],
                                 ),
-                                Text("Abre às 06:00h",
-                                    style: fontMessage(context, size: 18)),
-                                Text("Fecha às 23:59h",
-                                    style: fontMessage(context, size: 18)),
-                              ],
-                            ),
+                              );
+                            }).toList(),
                           ),
                         ],
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
               ),
             ],
           ),
-          Container(
-            margin: EdgeInsets.all(20),
-            width: 100,
-            height: 400,
-            color: Colors.red,
-          ),
+          // Container(
+          //   margin: EdgeInsets.all(20),
+          //   width: 100,
+          //   height: 400,
+          //   color: Colors.red,
+          // ),
 //          Container(
 //            margin: EdgeInsets.all(20),
 //            width: 100,

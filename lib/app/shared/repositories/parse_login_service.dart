@@ -10,29 +10,9 @@ class ParseLoginService {
         return json;
       } else {
         throw value.error;
-        switch (value.error.code) {
-          case -1:
-            //presenter.onFailure(ERROR_NETWORK);
-            break;
-          case 101:
-            //presenter.onFailure(ERROR_LOGIN_PASSWORD);
-            break;
-          default:
-          //presenter.onFailure(value.error.message);
-        }
       }
     }).catchError((error) {
       throw error;
-      switch (error.code) {
-        case -1:
-          //presenter.onFailure(ERROR_NETWORK);
-          break;
-        case 101:
-          //presenter.onFailure(ERROR_LOGIN_PASSWORD);
-          break;
-        default:
-        //presenter.onFailure(error.message);
-      }
     });
   }
 

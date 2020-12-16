@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:get/get.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 import 'strings.dart';
 
@@ -10,15 +11,20 @@ const ERROR_ALREADY_EXISTS =
 const ERROR_LOGIN_PASSWORD = "Login ou Senha inválidos";
 
 catchError(error) {
-  switch (error.code) {
-    case -1:
-      _showDialog(title: "Internet", message: ERROR_NETWORK);
-      break;
-    case 101:
-      _showDialog(title: "Erro ao fazer login", message: ERROR_LOGIN_PASSWORD);
-      break;
-    default:
-      _showDialog(message: error.message);
+  if (error.runtimeType == ParseError) {
+    switch (error.code) {
+      case -1:
+        _showDialog(title: "Internet", message: ERROR_NETWORK);
+        break;
+      case 101:
+        _showDialog(
+            title: "Erro ao fazer login", message: ERROR_LOGIN_PASSWORD);
+        break;
+      default:
+        _showDialog(message: error.message);
+    }
+  } else {
+    _showDialog(title: "Error", message: error.message);
   }
 }
 

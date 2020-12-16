@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:default_app/app/shared/repositories/base_parse_service.dart';
 import 'package:default_app/app/shared/repositories/parse_init.dart';
 import 'package:dio/dio.dart';
-import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class ParseCompanyService {
   var service = BaseParseService('Company');
@@ -62,7 +62,7 @@ class ParseCompanyService {
     var dio = Dio();
     var response = await dio.post(
       "${ParseInit.serverUrl}functions/companies",
-      options: Options(
+      options: RequestOptions(
         headers: {
           'X-Parse-Application-Id': ParseInit.appId,
           'X-Parse-REST-API-Key': ParseInit.restApiKet,

@@ -1,5 +1,6 @@
+import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/foundation.dart';
-import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class ParseInit {
 //  static String appId = "123456";
@@ -19,12 +20,14 @@ class ParseInit {
       parse = await Parse().initialize(
         appId,
         serverUrl,
+        appName: APP_NAME,
+        appVersion: kIsWeb ? "web" : null,
+        appPackageName: kIsWeb ? "web" : null,
         liveQueryUrl: serverUrl,
         clientKey: clientKey,
         autoSendSessionId: true,
         debug: kDebugMode,
       );
-      //return (await parse.healthCheck()).success;
     }
     return parse.hasParseBeenInitialized();
   }

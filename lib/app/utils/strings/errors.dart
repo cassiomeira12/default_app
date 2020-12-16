@@ -21,10 +21,15 @@ catchError(error) {
             title: "Erro ao fazer login", message: ERROR_LOGIN_PASSWORD);
         break;
       default:
-        _showDialog(message: error.message);
+        _showDialog(
+          message: error.message == null ? SOME_ERROR : error.message,
+        );
     }
   } else {
-    _showDialog(title: "Error", message: error.message);
+    _showDialog(
+      title: "Error",
+      message: error.message == null ? SOME_ERROR : error.message,
+    );
   }
 }
 

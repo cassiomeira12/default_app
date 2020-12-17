@@ -1,5 +1,5 @@
-import 'package:default_app/app/shared/repositories/parse_company_service.dart';
-import 'package:default_app/app/shared/repositories/parse_plan_service.dart';
+import 'package:default_app/app/shared/repositories/parse/parse_company_service.dart';
+import 'package:default_app/app/shared/repositories/parse/parse_plan_service.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {

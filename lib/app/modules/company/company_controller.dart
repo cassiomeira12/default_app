@@ -1,4 +1,4 @@
-import 'package:default_app/app/shared/repositories/parse_user_service.dart';
+import 'package:default_app/app/shared/repositories/parse/parse_user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CompanyController {

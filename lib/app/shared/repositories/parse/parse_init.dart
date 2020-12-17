@@ -26,13 +26,26 @@ class ParseInit {
         liveQueryUrl: serverUrl,
         clientKey: clientKey,
         autoSendSessionId: true,
-        debug: kDebugMode,
+        debug: false,
       );
     }
+    initInstallation();
     return parse.hasParseBeenInitialized();
   }
 
-  static Future<bool> isInitialize() async {
-    return await init();
+  // static Future<bool> isInitialize() async {
+  //   return await init();
+  // }
+
+  static Future initInstallation() async {
+    var installation = await ParseInstallation.currentInstallation();
+    if (installation.objectId == null) {
+      var result = await installation.create();
+    } else {
+      var result = await installation.update();
+    }
+    //String notificationToken = await PreferencesUtil.getNotificationToken();
+    //installation.deviceToken = notificationToken;
+    //await installation.create();
   }
 }

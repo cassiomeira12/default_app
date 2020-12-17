@@ -1,6 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:default_app/app/shared/repositories/parse_company_service.dart';
-import 'package:default_app/app/shared/repositories/parse_user_service.dart';
+import 'package:default_app/app/shared/repositories/parse/parse_company_service.dart';
+import 'package:default_app/app/shared/repositories/parse/parse_user_service.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';

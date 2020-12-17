@@ -1,5 +1,5 @@
-import 'package:default_app/app/shared/repositories/parse_company_service.dart';
-import 'package:default_app/app/shared/repositories/parse_login_service.dart';
+import 'package:default_app/app/shared/repositories/parse/parse_company_service.dart';
+import 'package:default_app/app/shared/repositories/parse/parse_login_service.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,4 +1,4 @@
-import 'package:default_app/app/modules/admin/admin_controller.dart';
+import 'package:default_app/app/shared/repositories/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +8,7 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  var controller = AdminController();
+  var auth = Get.put(AuthService());
 
   @override
   void initState() {
@@ -19,7 +19,7 @@ class _AdminPageState extends State<AdminPage> {
   checkCurrentUser() async {
     await Future.delayed(Duration(seconds: 1));
     try {
-      var result = await controller.currentUser();
+      var result = await auth.currentUser();
       Get.offNamed(result == null ? '/admin/login' : '/admin/dashboard');
     } catch (error) {
       Get.offNamed('/admin/login');

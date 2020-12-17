@@ -5,6 +5,7 @@ import 'package:default_app/app/components/shapes/background_card.dart';
 import 'package:default_app/app/components/shapes/shape_round.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
 import 'package:default_app/app/modules/company/login/login_controller.dart';
+import 'package:default_app/app/shared/repositories/auth_service.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
@@ -23,10 +24,8 @@ class _LoginPageState extends State<LoginPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _loading = false;
 
-  //LoginContractPresenter loginPresenter;
-  //UserContractPresenter userPresenter;
-
   var controller = LoginController();
+  var auth = Get.put(AuthService());
 
   String _email;
   String _password;
@@ -36,18 +35,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-//    loginPresenter = LoginPresenter(this);
-//    userPresenter = UserPresenter(null);
-//    if (Singletons.user().id != null) {
-//      controller.text = Singletons.user().email;
-//    }
+    checkCurrentUser();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-//    loginPresenter.dispose();
-//    userPresenter.dispose();
+  checkCurrentUser() async {
+    var result = await auth.currentUser();
+    if (result != null) {
+      Get.offNamed('/company/dashboard');
+    }
   }
 
   @override

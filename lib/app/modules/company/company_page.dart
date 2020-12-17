@@ -1,7 +1,6 @@
+import 'package:default_app/app/shared/repositories/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'company_controller.dart';
 
 class CompanyPage extends StatefulWidget {
   @override
@@ -9,7 +8,7 @@ class CompanyPage extends StatefulWidget {
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-  var controller = CompanyController();
+  var auth = Get.put(AuthService());
 
   @override
   void initState() {
@@ -20,7 +19,7 @@ class _CompanyPageState extends State<CompanyPage> {
   checkCurrentUser() async {
     await Future.delayed(Duration(seconds: 1));
     try {
-      var result = await controller.currentUser();
+      var result = await auth.currentUser();
       Get.offNamed(result == null ? '/company/login' : '/company/dashboard');
     } catch (error) {
       Get.offNamed('/company/login');

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'modules/routes.dart';
-import 'shared/repositories/parse_init.dart';
+import 'shared/repositories/parse/parse_init.dart';
 import 'style/themes/dark_theme.dart';
 import 'style/themes/light_theme.dart';
 import 'style/themes/theme.dart';
@@ -36,7 +36,7 @@ class _AppWidgetState extends State<AppWidget> {
       initialRoute: kIsWeb ? '/admin' : '/company',
       getPages: Routes.routes,
       enableLog: kDebugMode,
-      defaultTransition: kIsWeb ? Transition.fade : Transition.cupertino,
+      defaultTransition: !kIsWeb ? Transition.fade : Transition.cupertino,
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,
     );

@@ -1,5 +1,5 @@
-import 'package:default_app/app/shared/repositories/base_parse_service.dart';
-import 'package:default_app/app/shared/repositories/parse_init.dart';
+import 'package:default_app/app/shared/repositories/parse/base_parse_service.dart';
+import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
 import 'package:dio/dio.dart';
 
 class ParsePlanService {

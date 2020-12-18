@@ -20,10 +20,9 @@ class AdminCompanyService extends GetxController {
     } else {
       var hasCompany = await companyService.userHasCompany(user);
       admin.value = hasCompany;
-      if (hasCompany) {
-        var pref = await SharedPreferences.getInstance();
-        pref.setBool("hasCompany", hasCompany);
-      } else {
+      var pref = await SharedPreferences.getInstance();
+      pref.setBool("hasCompany", hasCompany);
+      if (!hasCompany) {
         await user.logout();
       }
     }

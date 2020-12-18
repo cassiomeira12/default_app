@@ -1,19 +1,16 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:default_app/app/shared/repositories/parse/parse_user_service.dart';
+import 'package:default_app/app/shared/repositories/auth_service.dart';
 import 'package:default_app/app/shared/repositories/parse/parse_version_app_service.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class DashBoardController extends GetxController {
-  var userService = ParseUserService();
   var versionAppService = ParseVersionAppService();
 
   Future<dynamic> versionApps;
 
-  currentUser() {
-    return userService.currentUser();
-  }
+  var auth = Get.find<AuthService>();
 
   signOut(context) async {
     final result = await showOkCancelAlertDialog(
@@ -25,7 +22,7 @@ class DashBoardController extends GetxController {
     );
     switch (result) {
       case OkCancelResult.ok:
-        await userService.signOut();
+        await auth.currentUser().signOut();
         return kIsWeb ? Get.offNamed('/admin') : Get.offNamed('/splash');
       case OkCancelResult.cancel:
         return;

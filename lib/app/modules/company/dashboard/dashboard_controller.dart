@@ -1,20 +1,17 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:default_app/app/shared/repositories/auth_service.dart';
 import 'package:default_app/app/shared/repositories/parse/parse_company_service.dart';
-import 'package:default_app/app/shared/repositories/parse/parse_user_service.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 class DashBoardController {
-  var userService = ParseUserService();
   var companyService = ParseCompanyService();
 
   dynamic company;
 
-  currentUser() {
-    return userService.currentUser();
-  }
+  var auth = Get.find<AuthService>();
 
   signOut(context) async {
     final result = await showOkCancelAlertDialog(
@@ -26,7 +23,7 @@ class DashBoardController {
     );
     switch (result) {
       case OkCancelResult.ok:
-        await userService.signOut();
+        await auth.currentUser().signOut();
         return kIsWeb ? Get.offNamed('/company') : Get.offNamed('/splash');
       case OkCancelResult.cancel:
         return;

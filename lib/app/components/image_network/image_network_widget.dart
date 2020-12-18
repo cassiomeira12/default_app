@@ -15,43 +15,58 @@ class ImageNetworkWidget extends StatefulWidget {
 }
 
 class _ImageNetworkWidgetState extends State<ImageNetworkWidget> {
+  final defaultImagePath = "assets/images/default_image.png";
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: widget.size,
       height: widget.size,
-      child: CachedNetworkImage(
-        useOldImageOnUrlChange: true,
-        imageUrl: widget.url == null ? "" : widget.url,
-        imageBuilder: (context, imageProvider) => Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-            image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        progressIndicatorBuilder: (context, url, downloadProgress) {
-          return Container(
-            margin: EdgeInsets.all(widget.size / 5),
-            child: CircularProgressIndicator(value: downloadProgress.progress),
-          );
-        },
-        errorWidget: (context, url, error) {
-          return Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              image: DecorationImage(
-                image: AssetImage("assets/images/default_image.png"),
-                fit: BoxFit.cover,
+      child: widget.url == null
+          ? Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                image: DecorationImage(
+                  image: AssetImage(defaultImagePath),
+                  fit: BoxFit.cover,
+                ),
               ),
+            )
+          : CachedNetworkImage(
+              useOldImageOnUrlChange: true,
+              imageUrl: widget.url,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              progressIndicatorBuilder: (context, url, downloadProgress) {
+                return Container(
+                  margin: EdgeInsets.all(widget.size / 5),
+                  child: CircularProgressIndicator(
+                    value: downloadProgress.progress,
+                  ),
+                );
+              },
+              errorWidget: (context, url, error) {
+                return Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    image: DecorationImage(
+                      image: AssetImage(defaultImagePath),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:default_app/app/components/drawer/drawer_widget.dart';
 import 'package:default_app/app/components/responsive/responsive.dart';
+import 'package:default_app/app/shared/repositories/auth_service.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,6 +30,8 @@ class _DashboardPageState extends State<DashboardPage> {
   String userName, avatarURL;
 
   var controller = DashBoardController();
+
+  var auth = Get.find<AuthService>();
 
   @override
   void initState() {
@@ -155,16 +158,15 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       },
     ];
+    userData();
   }
 
   userData() async {
-    var user = await controller.currentUser();
-    if (user != null) {
-      setState(() {
-        userName = user['name'];
-        avatarURL = user['avatarURL'];
-      });
-    }
+    var user = await auth.currentUser();
+    setState(() {
+      userName = user['name'];
+      avatarURL = user['avatarURL'];
+    });
   }
 
   @override

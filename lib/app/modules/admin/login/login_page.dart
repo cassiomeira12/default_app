@@ -4,7 +4,7 @@ import 'package:default_app/app/components/buttons/secondary_button.dart';
 import 'package:default_app/app/components/shapes/background_card.dart';
 import 'package:default_app/app/components/shapes/shape_round.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
-import 'package:default_app/app/shared/repositories/auth_service.dart';
+import 'package:default_app/app/shared/repositories/admin_service.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
@@ -26,11 +26,10 @@ class _LoginPageState extends State<LoginPage> {
   bool _loading = false;
 
   var controller = LoginController();
-  var auth = Get.put(AuthService());
 
-  String _email;
-  String _password;
+  var admin = Get.put(AdminService());
 
+  String _email, _password;
   var textController = TextEditingController();
 
   @override
@@ -40,8 +39,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   checkCurrentUser() async {
-    var result = await auth.currentUser();
-    if (result != null) {
+    await admin.currentAdminUser();
+    if (admin.isAdmin()) {
       Get.offNamed('/admin/dashboard');
     }
   }

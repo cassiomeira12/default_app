@@ -29,7 +29,7 @@ class ParseInit {
         debug: false,
       );
     }
-    initInstallation();
+    //initInstallation();
     return parse.hasParseBeenInitialized();
   }
 

@@ -1,4 +1,5 @@
 import 'package:default_app/app/pages/splash/splash_page.dart';
+import 'package:default_app/app/utils/middlewares/admin_middleware.dart';
 import 'package:default_app/app/utils/middlewares/auth_middleware.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +37,9 @@ class Routes {
           name: '/dashboard',
           page: () => AdminDashboard.DashboardPage(),
           binding: AdminDashboard.DashboardBind(),
-          middlewares: [AuthMiddleware(redirectPath: '/admin')],
+          middlewares: [
+            AdminMiddleware(redirectPath: '/admin'),
+          ],
         ),
       ],
     ),

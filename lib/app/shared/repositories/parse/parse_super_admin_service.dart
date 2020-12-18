@@ -4,9 +4,7 @@ class ParseSuperAdminService {
   var service = BaseParseService('SuperAdmin');
 
   create(item) async {
-    return service.create(item).catchError((error) {
-      return throw error.message;
-    });
+    return service.create(item);
     // return await service.create(item).then((value) {
     //   if (_view != null) _view.onSuccess(value);
     //   return value;
@@ -17,9 +15,7 @@ class ParseSuperAdminService {
   }
 
   read(item) async {
-    return service.read(item).catchError((error) {
-      return throw error.message;
-    });
+    return service.read(item);
     // return await service.read(item).then((value) {
     //   if (_view != null) _view.onSuccess(value);
     //   return value;
@@ -30,9 +26,7 @@ class ParseSuperAdminService {
   }
 
   update(item) async {
-    return service.update(item).catchError((error) {
-      return throw error.message;
-    });
+    return service.update(item);
     // return await service.update(item).then((value) {
     //   if (_view != null) _view.onSuccess(value);
     //   return value;
@@ -43,9 +37,7 @@ class ParseSuperAdminService {
   }
 
   delete(item) async {
-    return service.delete(item).catchError((error) {
-      return throw error.message;
-    });
+    return service.delete(item);
     // return await service.delete(item).then((value) {
     //   if (_view != null) _view.onSuccess(value);
     //   return value;
@@ -56,9 +48,7 @@ class ParseSuperAdminService {
   }
 
   findBy(String field, value) async {
-    return service.findBy(field, value).catchError((error) {
-      return throw error.message;
-    });
+    return service.findBy(field, value);
     // return await service.findBy(field, value).then((value) {
     //   if (_view != null) _view.listSuccess(value);
     //   return value;
@@ -69,8 +59,6 @@ class ParseSuperAdminService {
   }
 
   list() {
-    return service.list().catchError((error) {
-      return throw error.message;
-    });
+    return service.list();
   }
 }

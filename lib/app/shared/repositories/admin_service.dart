@@ -1,4 +1,5 @@
 import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
+import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:get/get.dart';
 
 import 'auth_service.dart';
@@ -17,7 +18,11 @@ class AdminService extends GetxController {
     if (user == null) {
       admin.value = false;
     } else {
-      var isAdmin = await superAdminService.findBy('user', user.toPointer());
+      var isAdmin = await superAdminService
+          .findBy('user', user.toPointer())
+          .catchError((error) {
+        throw Exception(ERROR_LOGIN_PASSWORD);
+      });
       admin.value = isAdmin.isNotEmpty;
       if (isAdmin.isEmpty) {
         await user.logout();

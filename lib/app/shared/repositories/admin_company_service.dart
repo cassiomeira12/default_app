@@ -1,4 +1,5 @@
 import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
+import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +19,10 @@ class AdminCompanyService extends GetxController {
     if (user == null) {
       admin.value = false;
     } else {
-      var hasCompany = await companyService.userHasCompany(user);
+      var hasCompany =
+          await companyService.userHasCompany(user).catchError((error) {
+        throw Exception(ERROR_LOGIN_PASSWORD);
+      });
       admin.value = hasCompany;
       var pref = await SharedPreferences.getInstance();
       pref.setBool("hasCompany", hasCompany);

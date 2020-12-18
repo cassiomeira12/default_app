@@ -10,15 +10,20 @@ const ERROR_ALREADY_EXISTS =
     "Error, já existe uma conta com esse email, tente novamente.";
 const ERROR_LOGIN_PASSWORD = "Login ou Senha inválidos";
 
-catchError(error) {
+catchError({title, error}) {
   if (error.runtimeType == ParseError) {
     switch (error.code) {
       case -1:
-        _showDialog(title: "Internet", message: ERROR_NETWORK);
+        _showDialog(
+          title: title ?? "Internet",
+          message: ERROR_NETWORK,
+        );
         break;
       case 101:
         _showDialog(
-            title: "Erro ao fazer login", message: ERROR_LOGIN_PASSWORD);
+          title: "Erro ao fazer login",
+          message: ERROR_LOGIN_PASSWORD,
+        );
         break;
       default:
         _showDialog(
@@ -27,7 +32,7 @@ catchError(error) {
     }
   } else {
     _showDialog(
-      title: "Error",
+      title: title ?? "Error",
       message: error.message == null ? SOME_ERROR : error.message,
     );
   }

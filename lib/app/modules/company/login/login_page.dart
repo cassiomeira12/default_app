@@ -330,7 +330,7 @@ class _LoginPageState extends State<LoginPage> {
       await controller.signIn(email, password);
       Get.offNamed('/company/dashboard');
     } catch (error) {
-      catchError(error);
+      catchError(title: 'Erro ao fazer login', error: error);
     } finally {
       setState(() => _loading = false);
     }

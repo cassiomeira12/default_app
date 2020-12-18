@@ -56,7 +56,6 @@ class _CompanyPageState extends State<CompanyPage> {
                   ),
                 ),
               ),
-
               Card(
                 elevation: 5,
                 child: Container(
@@ -67,7 +66,6 @@ class _CompanyPageState extends State<CompanyPage> {
                     builder: (context, snapshot) {
                       List<dynamic> list =
                           List.from(snapshot.data['openHours']);
-                      print(list);
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [

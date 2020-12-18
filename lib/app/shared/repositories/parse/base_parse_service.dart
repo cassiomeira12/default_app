@@ -76,7 +76,6 @@ class BaseParseService {
     var object = ParseObject(className);
     return await object.getAll().then((value) {
       if (value.success) {
-        print(value.result);
         if (value.result == null) {
           return List();
         } else {

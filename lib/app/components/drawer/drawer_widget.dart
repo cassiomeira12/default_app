@@ -111,13 +111,24 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               child: Container(
                 padding: EdgeInsets.only(top: 16, bottom: 16, right: 16),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Visibility(
-                      visible: data['icon'] != null,
-                      child: Icon(data['icon']),
+                    Flexible(
+                      child: Row(
+                        children: [
+                          Visibility(
+                            visible: data['icon'] != null,
+                            child: Icon(data['icon']),
+                          ),
+                          SizedBox(width: 8),
+                          Flexible(child: Text(data['value'])),
+                        ],
+                      ),
                     ),
-                    SizedBox(width: 8),
-                    Flexible(child: Text(data['value'])),
+                    Visibility(
+                      visible: data['menus'] != null,
+                      child: Icon(Icons.arrow_forward_ios, size: 15),
+                    ),
                   ],
                 ),
               ),
@@ -171,7 +182,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   Widget drawerMenu(int categoryIndex, int menuIndex, dynamic data) {
     return Padding(
-      padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+      padding: EdgeInsets.only(top: 5, left: 20),
       child: FlatButton(
         color: widget.categoryIndex == categoryIndex &&
                 widget.menuIndex == menuIndex
@@ -186,7 +197,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             padding: EdgeInsets.only(top: 10, bottom: 10, right: 16),
             child: Row(
               children: [
-                Flexible(child: Text(data['value'])),
+                Flexible(
+                  child: Text(
+                    data['value'],
+                    style: DefaultTextStyle.of(context)
+                        .style
+                        .copyWith(fontSize: 13),
+                  ),
+                ),
               ],
             ),
           ),

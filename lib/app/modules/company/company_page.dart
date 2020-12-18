@@ -1,3 +1,4 @@
+import 'package:default_app/app/shared/repositories/admin_company_service.dart';
 import 'package:default_app/app/shared/repositories/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,7 @@ class CompanyPage extends StatefulWidget {
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-  var auth = Get.put(AuthService());
+  var admin = Get.put(AdminCompanyService());
 
   @override
   void initState() {
@@ -17,13 +18,8 @@ class _CompanyPageState extends State<CompanyPage> {
   }
 
   checkCurrentUser() async {
-    await Future.delayed(Duration(seconds: 1));
-    try {
-      var result = await auth.currentUser();
-      Get.offNamed(result == null ? '/company/login' : '/company/dashboard');
-    } catch (error) {
-      Get.offNamed('/company/login');
-    }
+    await admin.currentAdminUser();
+    Get.offNamed(admin.isAdmin() ? '/company/dashboard' : '/company/login');
   }
 
   @override
@@ -31,7 +27,7 @@ class _CompanyPageState extends State<CompanyPage> {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        child: Container(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[

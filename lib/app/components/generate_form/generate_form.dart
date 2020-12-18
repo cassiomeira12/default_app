@@ -174,12 +174,8 @@ class _GenerateFormState extends State<GenerateForm> {
           side: BorderSide(color: Theme.of(context).hintColor),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              '${data['title']}',
-              style: TextStyle(fontSize: 15),
-            ),
             Checkbox(
               value: booleans[data['field']],
               activeColor: Theme.of(context).primaryColor,
@@ -189,6 +185,10 @@ class _GenerateFormState extends State<GenerateForm> {
                   data['result'] = value.toString();
                 });
               },
+            ),
+            Text(
+              '${data['title']}',
+              style: TextStyle(fontSize: 15),
             ),
           ],
         ),

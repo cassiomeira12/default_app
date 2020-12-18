@@ -1,21 +1,15 @@
-import 'package:default_app/app/shared/repositories/parse/parse_company_service.dart';
+import 'package:default_app/app/shared/repositories/admin_company_service.dart';
 import 'package:default_app/app/shared/repositories/parse/parse_login_service.dart';
-import 'package:parse_server_sdk/parse_server_sdk.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 class LoginController {
   var loginService = ParseLoginService();
-  var companyService = ParseCompanyService();
+  var admin = Get.put(AdminCompanyService());
 
   signIn(email, password) async {
     var result = await loginService.signIn(email, password);
-    ParseUser currentUser = await ParseUser.currentUser();
-    var hasCompany = await companyService.userHasCompany(currentUser);
-    if (hasCompany) {
-      var pref = await SharedPreferences.getInstance();
-      pref.setBool("hasCompany", hasCompany);
-    } else {
-      await currentUser.logout();
+    await admin.currentAdminUser();
+    if (!admin.isAdmin()) {
       throw Exception("Estabelecimento não encontrado");
     }
     return result;

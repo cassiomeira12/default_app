@@ -38,8 +38,13 @@ class _DashboardPageState extends State<DashboardPage> {
     super.initState();
     drawerItems = [
       {
-        'value': 'Estabelecimentos',
+        'value': 'Dashboard',
         'icon': Icons.dashboard,
+        'page': NotificationsPage(),
+      },
+      {
+        'value': 'Estabelecimentos',
+        'icon': Icons.home_work_rounded,
         'page': CompaniesPage(),
         'menus': [
           {
@@ -50,7 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
       },
       {
         'value': 'Relatórios',
-        'icon': Icons.pages,
+        'icon': Icons.insert_chart_outlined_sharp,
         'page': ReportPage(),
         'menus': [
           {
@@ -66,6 +71,17 @@ class _DashboardPageState extends State<DashboardPage> {
       {
         'value': 'Notificações',
         'icon': Icons.notifications,
+        'page': NotificationsPage(),
+        'menus': [
+          {
+            'value': 'Todas notificações',
+            'page': NotificationsPage(),
+          }
+        ],
+      },
+      {
+        'value': 'Planos',
+        'icon': Icons.money,
         'page': NotificationsPage(),
         'menus': [
           {
@@ -92,6 +108,24 @@ class _DashboardPageState extends State<DashboardPage> {
           },
           {
             'value': 'Distritos',
+            'page': NotificationsPage(),
+          },
+        ],
+      },
+      {
+        'value': 'Gerenciamento',
+        'icon': Icons.lock,
+        'menus': [
+          {
+            'value': 'Super Admin',
+            'page': NotificationsPage(),
+          },
+          {
+            'value': 'Admin Company',
+            'page': NotificationsPage(),
+          },
+          {
+            'value': 'Grupos',
             'page': NotificationsPage(),
           },
         ],

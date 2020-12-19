@@ -200,9 +200,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 Flexible(
                   child: Text(
                     data['value'],
-                    style: DefaultTextStyle.of(context)
-                        .style
-                        .copyWith(fontSize: 13),
+                    style:
+                        darkTheme().textTheme.headline4.copyWith(fontSize: 13),
                   ),
                 ),
               ],

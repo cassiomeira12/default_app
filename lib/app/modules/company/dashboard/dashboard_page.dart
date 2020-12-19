@@ -41,6 +41,11 @@ class _DashboardPageState extends State<DashboardPage> {
     super.initState();
     drawerItems = [
       {
+        'value': 'Dashboard',
+        'icon': Icons.dashboard,
+        'page': CompanyPage(),
+      },
+      {
         'value': 'Meu estabelecimento',
         'icon': Icons.dashboard,
         'page': CompanyPage(),
@@ -62,7 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
       },
       {
         'value': 'Relatórios',
-        'icon': Icons.pages,
+        'icon': Icons.insert_chart_outlined_sharp,
         'page': ReportPage(),
         'menus': [
           {

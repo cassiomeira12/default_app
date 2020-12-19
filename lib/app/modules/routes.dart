@@ -10,6 +10,7 @@ import 'admin/login/login_page.dart' as AdminLogin;
 import 'company/company_page.dart';
 import 'company/dashboard/dashboard_bind.dart' as CompanyBind;
 import 'company/dashboard/dashboard_page.dart' as CompanyDashboard;
+import 'company/dashboard/submodules/orders/order_details_page.dart';
 import 'company/login/login_page.dart' as CompanyLogin;
 import 'home/home_bind.dart';
 import 'home/home_page.dart';
@@ -53,7 +54,13 @@ class Routes {
           name: '/dashboard',
           page: () => CompanyDashboard.DashboardPage(),
           binding: CompanyBind.DashboardBind(),
-          middlewares: [CompanyMiddleware(redirectPath: '/company')],
+          middlewares: [CompanyMiddleware(0, redirectPath: '/company')],
+          children: [
+            GetPage(
+              name: '/order_details',
+              page: () => OrderDetailsPage(),
+            ),
+          ],
         ),
       ],
     ),

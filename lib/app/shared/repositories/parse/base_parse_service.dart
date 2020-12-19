@@ -87,4 +87,37 @@ class BaseParseService {
       }
     });
   }
+
+  Future<List<Map<String, dynamic>>> query(query, {includes}) async {
+    await ParseInit.init();
+    return await query.query().then((value) {
+      if (value.success) {
+        if (value.result == null) {
+          return List<Map<String, dynamic>>();
+        } else {
+          List<ParseObject> listObj = value.result;
+
+          var list = listObj.map<Map<String, dynamic>>((e) {
+            var objectJson = e.toJson();
+
+            if (includes != null) {
+              for (var include in includes) {
+                if (e.get(include) != null) {
+                  var json = e.get(include).toJson();
+                  objectJson[include] = json;
+                }
+              }
+            }
+
+            return objectJson;
+          }).toList();
+
+          return list;
+          //return list.map<Map<String, dynamic>>((e) => e.toJson()).toList();
+        }
+      } else {
+        return throw value.error;
+      }
+    });
+  }
 }

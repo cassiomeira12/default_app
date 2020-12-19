@@ -38,7 +38,7 @@ class Routes {
           name: '/dashboard',
           page: () => AdminDashboard.DashboardPage(),
           binding: AdminDashboard.DashboardBind(),
-          middlewares: [AdminMiddleware(redirectPath: '/admin')],
+          middlewares: [AdminMiddleware(0, redirectPath: '/admin')],
         ),
       ],
     ),

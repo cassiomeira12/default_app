@@ -8,9 +8,7 @@ class CompanyMiddleware extends GetMiddleware {
   String redirectPath;
 
   CompanyMiddleware(int priority, {this.redirectPath})
-      : super(priority: priority) {
-    _auth.currentAdminUser();
-  }
+      : super(priority: priority);
 
   @override
   RouteSettings redirect(String route) {

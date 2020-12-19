@@ -26,7 +26,7 @@ class ParseInit {
         liveQueryUrl: serverUrl,
         clientKey: clientKey,
         autoSendSessionId: true,
-        debug: true,
+        debug: kDebugMode,
       );
     }
     //initInstallation();

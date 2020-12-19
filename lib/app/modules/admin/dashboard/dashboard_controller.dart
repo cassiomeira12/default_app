@@ -22,8 +22,11 @@ class DashBoardController extends GetxController {
     );
     switch (result) {
       case OkCancelResult.ok:
-        await auth.currentUser().signOut();
-        return kIsWeb ? Get.offNamed('/admin') : Get.offNamed('/splash');
+        var logout = await auth.logout();
+        if (logout) {
+          return kIsWeb ? Get.offNamed('/admin') : Get.offNamed('/admin');
+        }
+        return;
       case OkCancelResult.cancel:
         return;
     }

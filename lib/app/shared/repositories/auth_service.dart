@@ -16,4 +16,11 @@ class AuthService extends GetxController {
   isAuth() {
     return authed.value;
   }
+
+  Future<bool> logout() async {
+    if (isAuth()) {
+      return _user.logout().then((value) => value.success);
+    }
+    return false;
+  }
 }

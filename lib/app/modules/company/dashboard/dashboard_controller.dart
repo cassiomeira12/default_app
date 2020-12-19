@@ -23,8 +23,11 @@ class DashBoardController {
     );
     switch (result) {
       case OkCancelResult.ok:
-        await auth.currentUser().signOut();
-        return kIsWeb ? Get.offNamed('/company') : Get.offNamed('/splash');
+        var logout = await auth.logout();
+        if (logout) {
+          return kIsWeb ? Get.offNamed('/company') : Get.offNamed('/company');
+        }
+        return;
       case OkCancelResult.cancel:
         return;
     }

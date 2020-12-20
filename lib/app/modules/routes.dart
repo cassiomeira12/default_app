@@ -1,3 +1,5 @@
+import 'package:default_app/app/modules/home/subroutes/privacy/privacy_page.dart';
+import 'package:default_app/app/modules/home/subroutes/terms/terms_page.dart';
 import 'package:default_app/app/pages/splash/splash_page.dart';
 import 'package:default_app/app/utils/middlewares/admin_middleware.dart';
 import 'package:default_app/app/utils/middlewares/company_middleware.dart';
@@ -21,6 +23,14 @@ class Routes {
       name: '/',
       page: () => HomePage(),
       binding: HomeBind(),
+    ),
+    GetPage(
+      name: '/politica-de-privacidade',
+      page: () => PrivacyPage(),
+    ),
+    GetPage(
+      name: '/termos_de_uso',
+      page: () => TermsPage(),
     ),
     GetPage(
       name: '/splash',

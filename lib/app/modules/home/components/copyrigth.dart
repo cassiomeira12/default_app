@@ -1,6 +1,7 @@
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CopyRigth extends StatelessWidget {
@@ -36,7 +37,7 @@ class CopyRigth extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () => Get.toNamed('/termos_de_uso'),
               ),
               FlatButton(
                 child: Text(
@@ -46,18 +47,18 @@ class CopyRigth extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () => Get.toNamed('/politica-de-privacidade'),
               ),
-              FlatButton(
-                child: Text(
-                  "Contato",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
-                ),
-                onPressed: () {},
-              ),
+              // FlatButton(
+              //   child: Text(
+              //     "Contato",
+              //     style: TextStyle(
+              //       fontSize: 15,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              //   onPressed: () {},
+              // ),
             ],
           ),
           Row(

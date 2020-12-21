@@ -1,5 +1,6 @@
 import 'package:default_app/app/components/card/custom_card.dart';
 import 'package:default_app/app/components/future_builder/custom_future_builder.dart';
+import 'package:default_app/app/modules/home/components/card_team.dart';
 import 'package:default_app/app/modules/home/components/copyrigth.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _InitialPageState extends State<InitialPage> {
     return Padding(
       padding: EdgeInsets.only(bottom: 20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
@@ -55,9 +56,49 @@ class _InitialPageState extends State<InitialPage> {
           ),
           SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             child: Text(
-              "Nossos parceiros",
+              "Nossos Time",
+              style: fontTitle(context),
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: 350,
+            child: Center(
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                children: [
+                  CardTeam(
+                    width: 250,
+                    height: 200,
+                    url:
+                        'https://navan-agendamentos.web.app/img/team/cassio.jpg',
+                    title: 'Cássio Meira Silva',
+                    message: 'Desenvolvedor',
+                    facebook: 'https://www.facebook.com/cassiomeira12/',
+                    instagram: 'https://www.instagram.com/cassio.meira12/',
+                    linkedin:
+                        'https://www.linkedin.com/in/c%C3%A1ssio-meira-silva-6177b8192/',
+                  ),
+                  // CardTeam(
+                  //   width: 250,
+                  //   height: 200,
+                  //   url:
+                  //       'https://navan-agendamentos.web.app/img/team/cassio.jpg',
+                  //   title: 'Helivelton Carlos',
+                  //   message: 'Marketing',
+                  // ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Text(
+              "Nossos Parceiros",
               style: fontTitle(context),
             ),
           ),
@@ -85,8 +126,9 @@ class _InitialPageState extends State<InitialPage> {
               ),
             ),
           ),
+          SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             child: Text(
               "Nossos Planos",
               style: fontTitle(context),

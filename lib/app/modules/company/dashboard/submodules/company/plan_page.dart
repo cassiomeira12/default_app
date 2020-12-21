@@ -1,5 +1,4 @@
-import 'package:default_app/app/components/buttons/danger_button.dart';
-import 'package:default_app/app/components/shapes/shape_round.dart';
+import 'package:default_app/app/components/buttons/primary_button.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:flutter/material.dart';
 
@@ -14,80 +13,67 @@ class _PlanPageState extends State<PlanPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          ShapeRound(
+          Card(
+            elevation: 5,
+            margin: EdgeInsets.all(10),
             child: Container(
+              width: 300,
               margin: EdgeInsets.all(10),
               child: Column(
                 children: [
+                  SizedBox(height: 10),
                   Text(
                     'Assinatura - Gratuito',
                     style: fontSubtitle(context),
                   ),
+                  SizedBox(height: 10),
                   Row(
                     children: [
-                      Text(
-                        'Status:',
-                        style: fontMessage(context),
-                      ),
-                      Text(
-                        'Ativo',
-                        style: fontMessage(context),
-                      ),
+                      Text('Status:', style: fontTitle(context, size: 20)),
+                      SizedBox(width: 10),
+                      Text('Ativo', style: fontMessage(context)),
                     ],
                   ),
+                  SizedBox(height: 5),
                   Row(
                     children: [
-                      Text(
-                        'Data inicio:',
-                        style: fontMessage(context),
-                      ),
-                      Text(
-                        '07/06/2020',
-                        style: fontMessage(context),
-                      ),
+                      Text('Data inicio:', style: fontTitle(context, size: 20)),
+                      SizedBox(width: 10),
+                      Text('07/06/2020', style: fontMessage(context)),
                     ],
                   ),
+                  SizedBox(height: 5),
                   Row(
                     children: [
-                      Text(
-                        'Data vencimento:',
-                        style: fontMessage(context),
-                      ),
-                      Text(
-                        '07/06/2020',
-                        style: fontMessage(context),
-                      ),
+                      Text('Data vencimento:',
+                          style: fontTitle(context, size: 20)),
+                      SizedBox(width: 10),
+                      Text('07/06/2020', style: fontMessage(context)),
                     ],
                   ),
+                  SizedBox(height: 5),
                   Row(
                     children: [
-                      Text(
-                        'Disconto:',
-                        style: fontMessage(context),
-                      ),
-                      Text(
-                        '10%',
-                        style: fontMessage(context),
-                      ),
+                      Text('Disconto:', style: fontTitle(context, size: 20)),
+                      SizedBox(width: 10),
+                      Text('10%', style: fontMessage(context)),
                     ],
                   ),
+                  SizedBox(height: 5),
                   Row(
                     children: [
-                      Text(
-                        'Preço R\$:',
-                        style: fontMessage(context),
-                      ),
-                      Text(
-                        '0,00',
-                        style: fontMessage(context),
-                      ),
+                      Text('Preço R\$:', style: fontTitle(context, size: 20)),
+                      SizedBox(width: 10),
+                      Text('0,00', style: fontMessage(context)),
                     ],
                   ),
+                  SizedBox(height: 15),
                   Text(
                     'Descrição do plano',
-                    style: fontMessage(context, size: 17),
+                    style: fontMessage(context, size: 20),
                   ),
-                  DangerButton(
+                  SizedBox(height: 15),
+                  PrimaryButton(
                     text: "Cancelar",
                     onPressed: () {},
                   ),

@@ -56,66 +56,66 @@ class _CompanyPageState extends State<CompanyPage> {
                   ),
                 ),
               ),
-              Card(
-                elevation: 5,
-                child: Container(
-                  margin: EdgeInsets.all(20),
-                  width: 300,
-                  child: CustomFutureBuilder(
-                    future: controller.getCompanyFromAdmin(),
-                    builder: (context, snapshot) {
-                      List<dynamic> list =
-                          List.from(snapshot.data['openHours']);
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Hoje: Fechado ",
-                            style: fontSubtitle(context),
-                          ),
-                          Text(
-                            "Abre hoje às 18:00h",
-                            style: fontSubtitle(context),
-                          ),
-                          SizedBox(height: 10),
-                          Wrap(
-                            spacing: 10,
-                            runSpacing: 10,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: list.map((e) {
-                              return Card(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(Icons.calendar_today),
-                                        Text(
-                                          "Segunda",
-                                          style: fontMessage(context, size: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "Abre às 06:00h",
-                                      style: fontMessage(context, size: 18),
-                                    ),
-                                    Text(
-                                      "Fecha às 23:59h",
-                                      style: fontMessage(context, size: 18),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ),
+              // Card(
+              //   elevation: 5,
+              //   child: Container(
+              //     margin: EdgeInsets.all(20),
+              //     width: 300,
+              //     child: CustomFutureBuilder(
+              //       future: controller.getCompanyFromAdmin(),
+              //       builder: (context, snapshot) {
+              //         List<dynamic> list =
+              //             List.from(snapshot.data['openHours']);
+              //         return Column(
+              //           crossAxisAlignment: CrossAxisAlignment.center,
+              //           children: [
+              //             Text(
+              //               "Hoje: Fechado ",
+              //               style: fontSubtitle(context),
+              //             ),
+              //             Text(
+              //               "Abre hoje às 18:00h",
+              //               style: fontSubtitle(context),
+              //             ),
+              //             SizedBox(height: 10),
+              //             Wrap(
+              //               spacing: 10,
+              //               runSpacing: 10,
+              //               crossAxisAlignment: WrapCrossAlignment.center,
+              //               children: list.map((e) {
+              //                 return Card(
+              //                   child: Column(
+              //                     crossAxisAlignment: CrossAxisAlignment.start,
+              //                     children: [
+              //                       Row(
+              //                         mainAxisSize: MainAxisSize.min,
+              //                         children: [
+              //                           Icon(Icons.calendar_today),
+              //                           Text(
+              //                             "Segunda",
+              //                             style: fontMessage(context, size: 18),
+              //                           ),
+              //                         ],
+              //                       ),
+              //                       Text(
+              //                         "Abre às 06:00h",
+              //                         style: fontMessage(context, size: 18),
+              //                       ),
+              //                       Text(
+              //                         "Fecha às 23:59h",
+              //                         style: fontMessage(context, size: 18),
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 );
+              //               }).toList(),
+              //             ),
+              //           ],
+              //         );
+              //       },
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           // Container(

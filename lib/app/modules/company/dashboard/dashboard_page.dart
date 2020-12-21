@@ -9,14 +9,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dashboard_controller.dart';
 import 'submodules/company/company_page.dart';
-import 'submodules/company/financial_page.dart';
 import 'submodules/company/plan_page.dart';
 import 'submodules/menus/menus_page.dart';
 import 'submodules/notifications/notifications_page.dart';
 import 'submodules/orders/orders_page.dart';
 import 'submodules/report/report_page.dart';
-import 'submodules/settings/opening_hour_page.dart';
-import 'submodules/settings/payment_types_page.dart';
 import 'submodules/settings/settings_page.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -48,12 +45,12 @@ class _DashboardPageState extends State<DashboardPage> {
       {
         'value': 'Meu estabelecimento',
         'icon': Icons.dashboard,
-        'page': CompanyPage(),
+        //'page': CompanyPage(),
         'menus': [
-          {
-            'value': 'Financeiro',
-            'page': FinancialPage(),
-          },
+          // {
+          //   'value': 'Financeiro',
+          //   'page': FinancialPage(),
+          // },
           {
             'value': 'Meu plano',
             'page': PlanPage(),
@@ -84,12 +81,12 @@ class _DashboardPageState extends State<DashboardPage> {
         'value': 'Notificações',
         'icon': Icons.notifications,
         'page': NotificationsPage(),
-        'menus': [
-          {
-            'value': 'Todas notificações',
-            'page': NotificationsPage(),
-          }
-        ],
+        // 'menus': [
+        //   {
+        //     'value': 'Todas notificações',
+        //     'page': NotificationsPage(),
+        //   }
+        // ],
       },
       {
         'value': 'Cardápio',
@@ -135,26 +132,26 @@ class _DashboardPageState extends State<DashboardPage> {
         'icon': Icons.settings,
         'page': SettingsPage(),
         'menus': [
-          {
-            'value': 'Horários de funcionamento',
-            'page': OpeningHourPage(),
-          },
-          {
-            'value': 'Endereço do estabelecimento',
-            'page': NotificationsPage(),
-          },
-          {
-            'value': 'Telefone de contato',
-            'page': PaymentTypesPage(),
-          },
-          {
-            'value': 'Formas de delivery',
-            'page': NotificationsPage(),
-          },
-          {
-            'value': 'Formas de pagamento',
-            'page': PaymentTypesPage(),
-          },
+          // {
+          //   'value': 'Horários de funcionamento',
+          //   'page': OpeningHourPage(),
+          // },
+          // {
+          //   'value': 'Endereço do estabelecimento',
+          //   'page': NotificationsPage(),
+          // },
+          // {
+          //   'value': 'Telefone de contato',
+          //   'page': PaymentTypesPage(),
+          // },
+          // {
+          //   'value': 'Formas de delivery',
+          //   'page': NotificationsPage(),
+          // },
+          // {
+          //   'value': 'Formas de pagamento',
+          //   'page': PaymentTypesPage(),
+          // },
         ],
       },
     ];

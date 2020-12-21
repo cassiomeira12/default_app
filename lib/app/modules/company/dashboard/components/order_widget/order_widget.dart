@@ -32,7 +32,7 @@ class _OrderWidgetState extends State<OrderWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 10),
+      margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
       elevation: 5,
       shadowColor: widget.data.canceled
           ? Colors.red
@@ -76,7 +76,11 @@ class _OrderWidgetState extends State<OrderWidget> {
                               ? "Esse pedido foi cancelado"
                               : '${widget.data.status.current.name}',
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.body2,
+                          style: fontMessage(
+                            context,
+                            size: 16,
+                            color: Colors.black87,
+                          ),
                         ),
                       )
                     : StarsWidget(
@@ -100,7 +104,12 @@ class _OrderWidgetState extends State<OrderWidget> {
         text,
         textAlign: TextAlign.left,
         overflow: TextOverflow.ellipsis,
-        style: fontSubtitle(context, size: 25, bold: true),
+        style: fontSubtitle(
+          context,
+          size: 25,
+          bold: true,
+          color: Colors.black87,
+        ),
       ),
     );
   }
@@ -111,7 +120,11 @@ class _OrderWidgetState extends State<OrderWidget> {
       child: Text(
         text,
         textAlign: TextAlign.right,
-        style: fontSubtitle(context, size: 18),
+        style: fontSubtitle(
+          context,
+          size: 18,
+          color: Colors.black87,
+        ),
       ),
     );
   }
@@ -122,7 +135,12 @@ class _OrderWidgetState extends State<OrderWidget> {
       child: Text(
         text,
         textAlign: TextAlign.right,
-        style: fontSubtitle(context, size: 18, bold: true),
+        style: fontSubtitle(
+          context,
+          size: 18,
+          bold: true,
+          color: Colors.black87,
+        ),
       ),
     );
   }

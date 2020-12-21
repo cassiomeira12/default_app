@@ -6,7 +6,9 @@ import 'package:default_app/app/shared/models/order/cupon.dart';
 import 'package:default_app/app/shared/models/order/order.dart';
 import 'package:default_app/app/shared/models/order/order_item.dart';
 import 'package:default_app/app/shared/models/order/order_status.dart';
+import 'package:default_app/app/style/font_style.dart';
 import 'package:default_app/app/utils/date_util.dart';
+import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -53,9 +55,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: Center(
-        child: nestedScrollView(),
-      ),
+      body: nestedScrollView(),
     );
   }
 
@@ -134,7 +134,20 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       children: <Widget>[
         Container(
           width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(top: 10, bottom: 10),
+          padding: EdgeInsets.only(
+            top: 10,
+            bottom: 10,
+            left: MediaQuery.of(context).size.width < 990
+                ? MediaQuery.of(context).size.width < 600
+                    ? 10
+                    : MediaQuery.of(context).size.width / 9
+                : MediaQuery.of(context).size.width / 5,
+            right: MediaQuery.of(context).size.width < 990
+                ? MediaQuery.of(context).size.width < 600
+                    ? 10
+                    : MediaQuery.of(context).size.width / 9
+                : MediaQuery.of(context).size.width / 5,
+          ),
           child: Stack(
             children: <Widget>[
               Column(
@@ -159,14 +172,11 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
+                          SizedBox(height: 5),
                           Card(
                             color: Colors.grey[200],
-                            margin: EdgeInsets.all(0),
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Column(children: ordersItems),
                             ),
                           ),
@@ -222,20 +232,12 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
           Text(
             "Taxa de entrega",
             textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black45,
-              fontWeight: FontWeight.bold,
-            ),
+            style: fontMessage(context, size: 20, bold: true),
           ),
           Text(
             "R\$ ${order.deliveryCost.toStringAsFixed(2)}",
             textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black45,
-              fontWeight: FontWeight.bold,
-            ),
+            style: fontMessage(context, size: 20, bold: true),
           ),
         ],
       ),
@@ -270,11 +272,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       Text(
                         "Cupom de desconto",
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: fontMessage(context, size: 22, bold: true),
                       ),
                     ],
                   ),
@@ -318,17 +316,16 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 ),
                 Text(
                   "Válido até ${DateUtil.formatDateMouthHour(cupon.dateLimit)}h",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black45,
-                  ),
+                  style: fontMessage(context, size: 18),
                 ),
                 Text(
                   "Desconto: ${cupon.getDiscount()}",
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold),
+                  style: fontMessage(
+                    context,
+                    size: 15,
+                    color: Colors.red,
+                    bold: true,
+                  ),
                 ),
               ],
             ),
@@ -374,11 +371,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   ? "Sem troco"
                   : "Troco: ${order.changeMoney}",
               textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 19,
-                color: Colors.black45,
-                fontWeight: FontWeight.bold,
-              ),
+              style: fontMessage(context, size: 19, bold: true),
             ),
           ],
         ),
@@ -408,10 +401,11 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
   Widget orderCanceled() {
     return Text(
       "Esse pedido foi cancelado",
-      style: TextStyle(
-        fontSize: 22,
+      style: fontMessage(
+        context,
+        size: 22,
         color: Colors.red,
-        fontWeight: FontWeight.bold,
+        bold: true,
       ),
     );
   }
@@ -431,14 +425,16 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black45,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Text(
                 "R\$ ${item.getTotal().toStringAsFixed(2)}",
                 style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black45,
+                  fontSize: 22,
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
@@ -526,108 +522,94 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
   }
 
   Widget timelineItem(Status status, int index) {
-    return TimelineTile(
-      alignment: TimelineAlign.manual,
-      lineXY: 0.1,
-      isFirst: index == 0,
-      isLast: index == (order.status.values.length - 1),
-      indicatorStyle: IndicatorStyle(
-        width: 20,
-        color: currentStatusIndex > index
-            ? Colors.grey
-            : currentStatusIndex == index
-                ? Colors.green
-                : Colors.grey[300],
-        padding: EdgeInsets.all(6),
+    return Container(
+      padding: EdgeInsets.only(
+        left: MediaQuery.of(context).size.width < 990
+            ? MediaQuery.of(context).size.width < 600
+                ? 10
+                : MediaQuery.of(context).size.width / 9
+            : MediaQuery.of(context).size.width / 5,
+        right: MediaQuery.of(context).size.width < 990
+            ? MediaQuery.of(context).size.width < 600
+                ? 10
+                : MediaQuery.of(context).size.width / 9
+            : MediaQuery.of(context).size.width / 5,
       ),
-      endChild: Container(
-        margin: EdgeInsets.only(left: 10, right: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SecondaryButton(
-              child: Text(
-                status.name,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  color: this.currentStatusIndex > index
-                      ? Colors.grey[500]
-                      : this.currentStatusIndex == index
-                          ? Colors.green
-                          : this.currentStatusIndex + 1 == index
-                              ? Colors.black54
-                              : Colors.grey[300],
-                  fontWeight: FontWeight.bold,
+      child: TimelineTile(
+        alignment: TimelineAlign.manual,
+        lineXY: 0.1,
+        isFirst: index == 0,
+        isLast: index == (order.status.values.length - 1),
+        indicatorStyle: IndicatorStyle(
+          width: currentStatusIndex > index
+              ? 15
+              : currentStatusIndex == index
+                  ? 25
+                  : 15,
+          color: currentStatusIndex > index
+              ? Colors.green[200]
+              : currentStatusIndex == index
+                  ? Colors.green
+                  : this.currentStatusIndex + 1 == index
+                      ? Theme.of(context).textTheme.headline6.color
+                      : Colors.grey[500],
+          padding: EdgeInsets.all(6),
+        ),
+        endChild: Container(
+          margin: EdgeInsets.only(left: 10, right: 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SecondaryButton(
+                child: Text(
+                  status.name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: this.currentStatusIndex > index
+                        ? Colors.grey[500]
+                        : this.currentStatusIndex == index
+                            ? Colors.grey[500]
+                            : this.currentStatusIndex + 1 == index
+                                ? null
+                                : Colors.grey[500],
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                onPressed: () {
+                  if (currentStatusIndex + 1 == index) {
+                    setState(() {
+                      currentStatusIndex++;
+                      order.status.values[currentStatusIndex].date =
+                          DateTime.now();
+                      order.status.current =
+                          order.status.values[currentStatusIndex];
+                      //_loading = true;
+                      //presenter.update(order);
+                    });
+                  }
+                },
               ),
-              onPressed: () {
-                if (currentStatusIndex + 1 == index) {
-                  setState(() {
-                    currentStatusIndex++;
-                    order.status.values[currentStatusIndex].date =
-                        DateTime.now();
-                    order.status.current =
-                        order.status.values[currentStatusIndex];
-                    //_loading = true;
-                    //presenter.update(order);
-                  });
-                }
-              },
-            ),
-            // SecondaryButton(
-            //   child: AutoSizeText(
-            //     status.name,
-            //     textAlign: TextAlign.center,
-            //     style: TextStyle(
-            //       fontSize: 25,
-            //       color: this.currentStatusIndex > index
-            //           ? Colors.grey[500]
-            //           : this.currentStatusIndex == index
-            //               ? Colors.green
-            //               : this.currentStatusIndex + 1 == index
-            //                   ? Colors.black54
-            //                   : Colors.grey[300],
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //   ),
-            //   onPressed: () {
-            //     if (currentStatusIndex + 1 == index) {
-            //       setState(() {
-            //         currentStatusIndex++;
-            //         order.status.values[currentStatusIndex].date =
-            //             DateTime.now();
-            //         order.status.current =
-            //             order.status.values[currentStatusIndex];
-            //         _loading = true;
-            //         //presenter.update(order);
-            //       });
-            //     }
-            //   },
-            // ),
-            SizedBox(
-              height: 5,
-            ),
-            status.date != null
-                ? Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: Text(
-                      DateUtil.formatDateMouthHour(status.date),
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black38,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  )
-                : Container(),
-          ],
+              SizedBox(height: 5),
+              status.date != null
+                  ? Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Text(
+                        DateUtil.formatDateMouthHour(status.date),
+                        textAlign: TextAlign.right,
+                        style: fontMessage(
+                          context,
+                          size: 15,
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                    )
+                  : Container(),
+            ],
+          ),
         ),
       ),
-      // topLineStyle: const LineStyle(
-      //   color: Color(0xFFDADADA),
-      // ),
     );
   }
 
@@ -637,11 +619,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       child: Text(
         text,
         textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 25,
-          color: Colors.black45,
-          fontWeight: FontWeight.bold,
-        ),
+        style: fontMessage(context, size: 25, bold: true),
       ),
     );
   }
@@ -652,10 +630,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       child: Text(
         text,
         textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.black45,
-        ),
+        style: fontMessage(context, size: 18),
       ),
     );
   }
@@ -666,11 +641,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       child: Text(
         "Total",
         textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 25,
-          color: Colors.black45,
-          fontWeight: FontWeight.bold,
-        ),
+        style: fontMessage(context, size: 25, bold: true),
       ),
     );
   }
@@ -710,11 +681,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                               ? "Endereço de entrega"
                               : "Endereço de retirada",
                           textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: fontMessage(context, size: 20, bold: true),
                         ),
                       ),
                       Padding(
@@ -725,10 +692,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                   ? ""
                                   : ", ${address.number}"),
                           textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black54,
-                          ),
+                          style: fontMessage(context, size: 20),
                         ),
                       ),
                       address.neighborhood != null
@@ -737,10 +701,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                               child: Text(
                                 address.neighborhood,
                                 textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black54,
-                                ),
+                                style: fontMessage(context, size: 20),
                               ),
                             )
                           : Container(),
@@ -750,10 +711,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                               child: Text(
                                 address.reference,
                                 textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black38,
-                                ),
+                                style: fontMessage(context, size: 20),
                               ),
                             )
                           : Container(),
@@ -762,56 +720,58 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                               padding: EdgeInsets.only(top: 5, right: 10),
                               child: Text(
                                 order.note,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black54,
-                                  //fontWeight: FontWeight.bold,
+                                style: fontMessage(
+                                  context,
+                                  size: 16,
+                                  bold: true,
                                 ),
                               ),
                             )
                           : Container(),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                     ],
                   ),
                 ),
               ],
             ),
-            order.deliveryAddress.location != null
-                ? GestureDetector(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 10, bottom: 10),
-                      width: MediaQuery.of(context).size.width,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColorLight,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                      ),
-                      child: Text(
-                        "OPEN_MAP",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    onTap: () async {
-                      var address = order.deliveryAddress;
-                      if (address != null) {
-                        // MapsLauncher.launchCoordinates(
-                        //     address.location.latitude,
-                        //     address.location.longitude);
-                      } else {
-                        // ScaffoldSnackBar.failure(
-                        //     context, _scaffoldKey, SOME_ERROR);
-                      }
-                    },
-                  )
-                : Container(),
+            InkWell(
+              child: Container(
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                width: MediaQuery.of(context).size.width,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColorLight,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  order.deliveryAddress.location == null
+                      ? NO_LOCATION
+                      : OPEN_MAP,
+                  style: fontMessage(
+                    context,
+                    size: 20,
+                    color: Colors.white,
+                    bold: true,
+                  ),
+                ),
+              ),
+              onTap: () async {
+                if (order.deliveryAddress != null) {
+                  var address = order.deliveryAddress;
+                  if (address != null) {
+                    // MapsLauncher.launchCoordinates(
+                    //     address.location.latitude,
+                    //     address.location.longitude);
+                  } else {
+                    // ScaffoldSnackBar.failure(
+                    //     context, _scaffoldKey, SOME_ERROR);
+                  }
+                }
+              },
+            ),
           ],
         ),
       ),
@@ -824,11 +784,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       child: Text(
         text,
         textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 25,
-          color: Colors.black45,
-          fontWeight: FontWeight.bold,
-        ),
+        style: fontMessage(context, size: 25, bold: true),
       ),
     );
   }
@@ -839,11 +795,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       child: Text(
         "Avaliação",
         textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 25,
-          color: Colors.black45,
-          fontWeight: FontWeight.bold,
-        ),
+        style: fontMessage(context, size: 25, bold: true),
       ),
     );
   }
@@ -854,10 +806,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       child: Text(
         order.evaluation.comment,
         textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 25,
-          color: Colors.black45,
-        ),
+        style: fontMessage(context, size: 25),
       ),
     );
   }

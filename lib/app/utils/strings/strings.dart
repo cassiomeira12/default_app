@@ -22,3 +22,6 @@ const CREATE_ACCOUNT = "Criar conta";
 
 const OK = "Ok";
 const CANCELAR = "Cancelar";
+
+const OPEN_MAP = "Arir mapa";
+const NO_LOCATION = "Sem localização";

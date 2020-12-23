@@ -72,8 +72,7 @@ class CardTeam extends StatelessWidget {
                           child: Text(
                             '${message}',
                             textAlign: TextAlign.center,
-                            //overflow: TextOverflow.ellipsis,
-                            style: fontMessage(context, color: Colors.grey),
+                            style: fontTitle(context, size: 19),
                           ),
                         )
                       : Container(),

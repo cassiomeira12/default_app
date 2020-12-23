@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
         }
       },
       {
-        'value': 'Login',
+        'value': 'Entrar',
         'action': () => Get.toNamed('/company'),
       }
     ];

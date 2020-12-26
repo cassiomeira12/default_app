@@ -322,17 +322,20 @@ class _GenerateFormState extends State<GenerateForm> {
   }
 
   Widget button(data) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-      child: PrimaryButton(
-        text: '${data['title']}',
-        onPressed: () {
-          if (data['validateRequired'] && validateAndSave()) {
-            data['action']?.call(generateDataResult(widget.data));
-          } else {
-            data['action']?.call(generateDataResult(widget.data));
-          }
-        },
+    return Container(
+      alignment: data['alignment'] ?? Alignment.centerRight,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+        child: PrimaryButton(
+          text: '${data['title']}',
+          onPressed: () {
+            if (data['validateRequired'] && validateAndSave()) {
+              data['action']?.call(generateDataResult(widget.data));
+            } else {
+              data['action']?.call(generateDataResult(widget.data));
+            }
+          },
+        ),
       ),
     );
   }

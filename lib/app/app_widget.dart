@@ -32,11 +32,10 @@ class _AppWidgetState extends State<AppWidget> {
       themeMode: ThemeMode.system,
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      locale: Get.deviceLocale,
       initialRoute: kIsWeb ? '/admin' : '/company',
       getPages: Routes.routes,
       enableLog: kDebugMode,
-      defaultTransition: !kIsWeb ? Transition.fade : Transition.cupertino,
+      defaultTransition: kIsWeb ? Transition.fade : Transition.cupertino,
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,
     );

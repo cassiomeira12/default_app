@@ -1,6 +1,7 @@
 import 'package:default_app/app/components/generate_form/generate_form.dart';
 import 'package:default_app/app/modules/company/dashboard/components/card_page/card_page.dart';
 import 'package:default_app/app/style/font_style.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -35,12 +36,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
           "message": "Escolha uma opção",
           "values": [
             {
-              "title": "Meus clientes",
-              "value": "teste",
-            },
-            {
               "title": "Todos clientes",
-              "value": "com.navan.kideliver-android",
+              "value": kIsWeb
+                  ? "com.navan.kideliver-android"
+                  : "com.navan.kideliver-android",
             },
             {
               "title": "Todos usuários",
@@ -51,7 +50,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
         {
           "type": "button",
           "title": "Testar notificação",
-          "validateRequired": false,
+          "validateRequired": true,
+          "alignment": Alignment.center,
           "action": (data) {
             print("Result");
           },
@@ -60,6 +60,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
           "type": "button",
           "title": "Salvar",
           "validateRequired": true,
+          "alignment": Alignment.center,
           "action": (data) {
             print("Result");
             print(data);

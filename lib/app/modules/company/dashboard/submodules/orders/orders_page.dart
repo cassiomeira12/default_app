@@ -1,10 +1,14 @@
 import 'package:default_app/app/components/future_builder/custom_future_builder.dart';
 import 'package:default_app/app/modules/company/dashboard/components/order_widget/order_widget.dart';
 import 'package:default_app/app/modules/company/dashboard/submodules/orders/orders_controller.dart';
+import 'package:default_app/app/shared/models/company/company.dart';
 import 'package:default_app/app/shared/models/order/order.dart';
+import 'package:default_app/app/shared/repositories/admin_company_service.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:default_app/app/utils/date_util.dart';
+import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class OrdersPage extends StatefulWidget {
@@ -18,9 +22,12 @@ class _OrdersPageState extends State<OrdersPage> {
   DateTime dateSelected = DateUtil.todayTime(0, 0);
   double totalToday = 0;
 
+  Company company;
+
   @override
   void initState() {
     super.initState();
+    company = Get.find<AdminCompanyService>().company;
     controller.listCompanyOrders(dateSelected).then((value) {
       calculateTotalToday(value);
     });
@@ -55,17 +62,24 @@ class _OrdersPageState extends State<OrdersPage> {
             children: <Widget>[
               Column(
                 children: [
-                  // search(),
-                  // Text(
-                  //   Singletons.company().id != null
-                  //       ? Singletons.company()
-                  //       .getOpenCloseTime(day: dateNow)
-                  //       : "",
-                  //   style: TextStyle(
-                  //       fontSize: 22,
-                  //       fontWeight: FontWeight.bold,
-                  //       color: Theme.of(context).backgroundColor),
-                  // ),
+                  search(),
+                  Text(
+                    company?.getOpenTime(dateSelected),
+                    style: fontSubtitle(
+                      context,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    company?.getOpenCloseTime(day: dateSelected),
+                    style: fontSubtitle(
+                      context,
+                      size: 25,
+                      bold: true,
+                      color: Colors.white,
+                    ),
+                  ),
                   // filterName != null
                   //     ? Text(
                   //   "Filtro - $filterName",
@@ -86,6 +100,67 @@ class _OrdersPageState extends State<OrdersPage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget search() {
+    return Padding(
+      padding: EdgeInsets.all(12),
+      child: SizedBox(
+        width: double.infinity,
+        height: 60,
+        child: RaisedButton(
+          elevation: 5.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          color: Colors.white,
+          child: Row(
+            children: <Widget>[
+              FaIcon(
+                FontAwesomeIcons.calendarAlt,
+                color: Colors.grey,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Text(
+                  "${DateUtil.getWeekDat(dateSelected)} - ${dateSelected.day} de ${DateUtil.getMounth(dateSelected)}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          onPressed: () {
+            showDatePicker(
+              context: context,
+              initialDate: dateSelected,
+              firstDate: dateSelected.subtract(Duration(days: 365)),
+              lastDate: dateSelected.add(Duration(days: 365)),
+              cancelText: CANCELAR,
+            ).then((value) {
+              if (value != null) {
+                //orderPresenter.unSubscribe();
+                setState(() {
+                  loading = true;
+                  dateSelected = value;
+                });
+                controller.listCompanyOrders(dateSelected).then((value) {
+                  setState(() => loading = false);
+                  calculateTotalToday(value);
+                });
+                //orderPresenter.listDayOrdersSnapshot(dateNow);
+                //orderPresenter.listDayOrders(dateNow);
+              }
+            });
+          },
+        ),
+      ),
     );
   }
 

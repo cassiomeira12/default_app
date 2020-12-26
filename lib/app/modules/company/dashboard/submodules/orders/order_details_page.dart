@@ -12,6 +12,7 @@ import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -762,9 +763,10 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 if (order.deliveryAddress != null) {
                   var address = order.deliveryAddress;
                   if (address != null) {
-                    // MapsLauncher.launchCoordinates(
-                    //     address.location.latitude,
-                    //     address.location.longitude);
+                    MapsLauncher.launchCoordinates(
+                      address.location.latitude,
+                      address.location.longitude,
+                    );
                   } else {
                     // ScaffoldSnackBar.failure(
                     //     context, _scaffoldKey, SOME_ERROR);

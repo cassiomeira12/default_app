@@ -23,4 +23,10 @@ class AuthService extends GetxController {
     }
     return false;
   }
+
+  Future<bool> sendPasswordReset(String email) async {
+    return await ParseUser(null, null, email)
+        .requestPasswordReset()
+        .then((value) => value.success);
+  }
 }

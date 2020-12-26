@@ -209,13 +209,11 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget showForgotPasswordButton() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+      padding: EdgeInsets.symmetric(vertical: 8),
       child: LightButton(
         alignment: Alignment.bottomRight,
         text: RECOVER_PASSWORD,
-        onPressed: () {
-          //PageRouter.push(context, ForgotPasswordPage());
-        },
+        onPressed: () => Get.toNamed('/recover_password'),
       ),
     );
   }

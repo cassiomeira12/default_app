@@ -1,5 +1,6 @@
 import 'package:default_app/app/modules/home/subroutes/privacy/privacy_page.dart';
 import 'package:default_app/app/modules/home/subroutes/terms/terms_page.dart';
+import 'package:default_app/app/pages/recover_password/recover_password_page.dart';
 import 'package:default_app/app/pages/splash/splash_page.dart';
 import 'package:default_app/app/utils/middlewares/admin_middleware.dart';
 import 'package:default_app/app/utils/middlewares/company_middleware.dart';
@@ -35,6 +36,10 @@ class Routes {
     GetPage(
       name: '/splash',
       page: () => SplashPage(),
+    ),
+    GetPage(
+      name: '/recover_password',
+      page: () => RecoverPasswordPage(),
     ),
     GetPage(
       name: '/admin',

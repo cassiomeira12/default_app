@@ -110,78 +110,33 @@ class ParseCompanyService {
     });
   }
 
+  Map<String, dynamic> slipIncludes(List<String> inclues) {
+    Map map = Map<String, dynamic>();
+    inclues.forEach((element) {
+      element.split('.').forEach((element) {
+        map[element] = null;
+      });
+    });
+    return map;
+  }
+
   getCompanyFromAdmin(user) async {
+    var includes = [
+      "company.address",
+      "company.address.city",
+      "company.address.smallTown",
+      "company.address.smallTown.city",
+      "company.deliveryStatus",
+      "company.pickupStatus",
+    ];
+
     var query = QueryBuilder<ParseObject>(ParseObject('AdminCompany'))
       ..whereEqualTo("user", user.toPointer())
       ..keysToReturn(["company"])
-      ..includeObject([
-        "company.address",
-        "company.address.city",
-        "company.address.smallTown",
-        "company.address.smallTown.city",
-        "company.deliveryStatus",
-        "company.pickupStatus"
-      ]);
+      ..includeObject(includes);
 
-    return await query.query().then((value) async {
-      if (value.success) {
-        if (value.result == null) {
-          return null;
-        } else {
-          var obj = value.result[0];
-
-          var companyJson,
-              addressJson,
-              smallTownJson,
-              cityJson,
-              deliveryStatus,
-              pickupStatus;
-
-          companyJson = obj.toJson();
-
-          try {
-            companyJson = obj.get("company").toJson();
-          } catch (error) {}
-          try {
-            addressJson = obj.get("company").get("address").toJson();
-          } catch (error) {}
-          try {
-            cityJson = obj.get("company").get("address").get("city").toJson();
-          } catch (error) {}
-          try {
-            smallTownJson =
-                obj.get("company").get("address").get("smallTown").toJson();
-          } catch (error) {}
-          try {
-            cityJson = obj
-                .get("company")
-                .get("address")
-                .get("smallTown")
-                .get("city")
-                .toJson();
-          } catch (error) {}
-          try {
-            deliveryStatus = obj.get("company").get("deliveryStatus").toJson();
-          } catch (error) {}
-          try {
-            pickupStatus = obj.get("company").get("pickupStatus").toJson();
-          } catch (error) {}
-
-          smallTownJson == null
-              ? addressJson["city"] = cityJson
-              : smallTownJson["city"] = cityJson;
-          addressJson["smallTown"] = smallTownJson;
-          companyJson["address"] = addressJson;
-          companyJson["deliveryStatus"] = deliveryStatus;
-          companyJson["pickupStatus"] = pickupStatus;
-
-          return companyJson;
-        }
-      } else {
-        throw value.error;
-      }
-    }).catchError((error) {
-      throw error;
+    return service.query(query, includes: includes).then((value) {
+      return value[0]['company'];
     });
   }
 

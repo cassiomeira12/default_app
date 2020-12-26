@@ -29,9 +29,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   String userName, avatarURL;
 
-  var controller = DashBoardController();
-
   var auth = Get.find<AuthService>();
+  var controller = Get.put(DashBoardController());
 
   @override
   void initState() {

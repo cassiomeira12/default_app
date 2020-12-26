@@ -1,4 +1,5 @@
 import 'package:default_app/app/shared/models/order/order.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 import 'base_parse_service.dart';
 
@@ -90,7 +91,21 @@ class ParseOrderService {
     return service.list();
   }
 
-  query(query, {includes}) {
+  listCompanyOrders(DateTime day, {int filter, company}) {
+    var includes = ["cupon"];
+
+    QueryBuilder query = QueryBuilder(ParseObject('Order'));
+
+    if (company != null) {
+      query..whereEqualTo("company", company.toPointer());
+    }
+
+    query
+      ..whereGreaterThanOrEqualsTo("createdAt", day)
+      ..whereLessThan("createdAt", day.add(Duration(days: 1)))
+      ..includeObject(includes)
+      ..orderByDescending("createdAt");
+
     return service.query(query, includes: includes).then((value) {
       return value.map<Order>((item) => Order.fromMap(item)).toList();
     });

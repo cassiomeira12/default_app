@@ -1,6 +1,7 @@
 import 'package:default_app/app/components/future_builder/custom_future_builder.dart';
 import 'package:default_app/app/components/image_network/image_network_widget.dart';
 import 'package:default_app/app/modules/company/dashboard/dashboard_controller.dart';
+import 'package:default_app/app/shared/models/company/company.dart';
 import 'package:default_app/app/style/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class CompanyPage extends StatefulWidget {
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-  final controller = Get.put(DashBoardController());
+  final controller = Get.find<DashBoardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +39,16 @@ class _CompanyPageState extends State<CompanyPage> {
                   child: CustomFutureBuilder(
                     future: controller.getCompanyFromAdmin(),
                     builder: (context, snapshot) {
-                      var company = snapshot.data;
+                      var company = snapshot.data as Company;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           ImageNetworkWidget(
-                            url: company['logoURL'],
+                            url: company.logoURL,
                             size: 200,
                           ),
                           Text(
-                            "${company['name']}",
+                            "${company.name}",
                             style: fontTitle(context),
                           ),
                         ],

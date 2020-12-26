@@ -97,27 +97,64 @@ class BaseParseService {
         } else {
           List<ParseObject> listObj = value.result;
 
-          var list = listObj.map<Map<String, dynamic>>((e) {
-            var objectJson = e.toJson();
+          var list = listObj.map<Map<String, dynamic>>((parseObject) {
+            final mainObject = parseObject;
+            Map<String, dynamic> objectJson = parseObject.toJson();
 
             if (includes != null) {
-              for (var include in includes) {
-                if (e.get(include) != null) {
-                  var json = e.get(include).toJson();
-                  objectJson[include] = json;
-                }
+              var mapJson = slipIncludes(includes);
+
+              for (var includeList in includes) {
+                ParseObject temp = mainObject;
+                List<String> includeSplit = includeList.split(('.'));
+                includeSplit.forEach((include) {
+                  if (mapJson[include] == null && temp.get(include) != null) {
+                    mapJson[include] = temp.get(include);
+                    temp = temp.get(include);
+                  } else {
+                    temp = mapJson[include];
+                  }
+                });
               }
+
+              String last;
+              for (var includeList in includes) {
+                List<String> includeSplit = includeList.split(('.'));
+                includeSplit = includeSplit.reversed.toList();
+                includeSplit.forEach((include) {
+                  if (mapJson[include] != null) {
+                    if (mapJson[include].runtimeType == ParseObject) {
+                      mapJson[include] = mapJson[include].toJson();
+                    }
+                    if (last != null) {
+                      mapJson[include][last] = mapJson[last];
+                    }
+                    last = include;
+                  }
+                });
+              }
+
+              objectJson[last] = mapJson[last];
             }
 
             return objectJson;
           }).toList();
 
           return list;
-          //return list.map<Map<String, dynamic>>((e) => e.toJson()).toList();
         }
       } else {
         return throw value.error;
       }
     });
+  }
+
+  Map<String, dynamic> slipIncludes(List<String> inclues) {
+    Map map = Map<String, dynamic>();
+    inclues.forEach((element) {
+      element.split('.').forEach((element) {
+        map[element] = null;
+      });
+    });
+    return map;
   }
 }

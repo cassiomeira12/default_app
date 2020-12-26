@@ -21,7 +21,6 @@ class _OrdersPageState extends State<OrdersPage> {
   @override
   void initState() {
     super.initState();
-    dateSelected = dateSelected.subtract(Duration(days: 1));
     controller.listCompanyOrders(dateSelected).then((value) {
       calculateTotalToday(value);
     });
@@ -110,7 +109,9 @@ class _OrdersPageState extends State<OrdersPage> {
       future: controller.ordersList,
       builder: (context, snapshot) {
         var list = snapshot.data as List<Order>;
-        //calculateTotalToday(list);
+        if (list.isEmpty) {
+          return Center(child: Text("Você ainda não recebeu pedidos hoje!"));
+        }
         return ListView(
           children: list.map((e) {
             return GestureDetector(

@@ -24,7 +24,12 @@ const FORGOT_PASSWORD_TEXT =
 const EMAIL_SEND_SUCCESSFUL = "Email enviado com sucesso!";
 
 const OK = "Ok";
-const CANCELAR = "Cancelar";
+const CANCEL = "Cancelar";
+const SAVE = "Salvar";
 
 const OPEN_MAP = "Arir mapa";
 const NO_LOCATION = "Sem localização";
+
+const ADD = "Adicionar";
+const EDIT = "Editar";
+const REMOVE = "Remover";

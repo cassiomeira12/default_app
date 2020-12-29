@@ -142,7 +142,7 @@ class _OrdersPageState extends State<OrdersPage> {
               initialDate: dateSelected,
               firstDate: dateSelected.subtract(Duration(days: 365)),
               lastDate: dateSelected.add(Duration(days: 365)),
-              cancelText: CANCELAR,
+              cancelText: CANCEL,
             ).then((value) {
               if (value != null) {
                 //orderPresenter.unSubscribe();

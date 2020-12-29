@@ -332,7 +332,9 @@ class _GenerateFormState extends State<GenerateForm> {
             if (data['validateRequired'] && validateAndSave()) {
               data['action']?.call(generateDataResult(widget.data));
             } else {
-              data['action']?.call(generateDataResult(widget.data));
+              data['action']?.call(
+                generateDataResult(widget.data),
+              );
             }
           },
         ),

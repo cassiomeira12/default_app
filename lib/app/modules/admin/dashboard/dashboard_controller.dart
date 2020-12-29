@@ -17,7 +17,7 @@ class DashBoardController extends GetxController {
       context: context,
       title: CLOSE,
       okLabel: CLOSE,
-      cancelLabel: CANCELAR,
+      cancelLabel: CANCEL,
       message: "Deseja sair do $APP_NAME ?",
     );
     switch (result) {

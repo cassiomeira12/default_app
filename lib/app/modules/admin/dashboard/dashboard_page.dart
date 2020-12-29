@@ -11,6 +11,10 @@ import 'dashboard_controller.dart';
 import 'submodules/companies/companies_page.dart';
 import 'submodules/companies/new_company_page.dart';
 import 'submodules/notifications/notifications_page.dart';
+import 'submodules/registrations/city_page.dart';
+import 'submodules/registrations/country_page.dart';
+import 'submodules/registrations/state_page.dart';
+import 'submodules/registrations/town_page.dart';
 import 'submodules/report/report_page.dart';
 import 'submodules/settings/payment_types_page.dart';
 import 'submodules/settings/settings_page.dart';
@@ -96,19 +100,19 @@ class _DashboardPageState extends State<DashboardPage> {
         'menus': [
           {
             'value': 'Pais',
-            'page': NotificationsPage(),
+            'page': CountryPage(),
           },
           {
             'value': 'Estados',
-            'page': NotificationsPage(),
+            'page': StatePage(),
           },
           {
             'value': 'Cidades',
-            'page': NotificationsPage(),
+            'page': CityPage(),
           },
           {
             'value': 'Distritos',
-            'page': NotificationsPage(),
+            'page': TownPage(),
           },
         ],
       },

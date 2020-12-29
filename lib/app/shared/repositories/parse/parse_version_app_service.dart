@@ -3,7 +3,6 @@ import 'base_parse_service.dart';
 class ParseVersionAppService {
   var service = BaseParseService("VersionApp");
 
-  @override
   Future<dynamic> create(dynamic item) async {
     // return service.create(item).then((response) {
     //   Cupon temp = Cupon();
@@ -23,7 +22,6 @@ class ParseVersionAppService {
     // });
   }
 
-  @override
   Future<dynamic> read(dynamic item) {
     // return service.read(item).then((response) {
     //   return response == null ? null : Cupon.fromMap(response);
@@ -38,7 +36,6 @@ class ParseVersionAppService {
     // });
   }
 
-  @override
   Future<dynamic> update(dynamic item) {
     return service.update(item);
     // return service.update(item).then((response) {
@@ -51,7 +48,6 @@ class ParseVersionAppService {
     // });
   }
 
-  @override
   Future<dynamic> delete(dynamic item) {
     // return service.delete(item).then((response) {
     //   return response == null ? null : Cupon.fromMap(response);
@@ -66,7 +62,6 @@ class ParseVersionAppService {
     // });
   }
 
-  @override
   Future<List<dynamic>> findBy(String field, value) async {
     // return service.findBy(field, value).then((response) {
     //   return response.isEmpty

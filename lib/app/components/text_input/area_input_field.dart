@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/font_style.dart';
+
 class AreaInputField extends StatefulWidget {
   final String labelText;
   final TextInputType keyboardType;
@@ -38,7 +40,7 @@ class _AreaInputFieldState extends State<AreaInputField> {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: widget.keyboardType,
-      style: Theme.of(context).textTheme.body2,
+      style: fontField(context),
       textAlign: TextAlign.left,
       textCapitalization: widget.textCapitalization,
       maxLength: 25 * widget.maxLines,
@@ -49,7 +51,7 @@ class _AreaInputFieldState extends State<AreaInputField> {
       decoration: InputDecoration(
         labelText: widget.labelText,
         alignLabelWithHint: true,
-        labelStyle: Theme.of(context).textTheme.body2,
+        labelStyle: fontField(context),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: Theme.of(context).errorColor),
@@ -60,11 +62,15 @@ class _AreaInputFieldState extends State<AreaInputField> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Theme.of(context).hintColor),
+          borderSide: BorderSide(color: Theme.of(context).primaryColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: Theme.of(context).primaryColor),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: Theme.of(context).hintColor),
         ),
       ),
       controller: widget.controller,

@@ -31,11 +31,8 @@ class _DashboardPageState extends State<DashboardPage> {
   List<dynamic> drawerItems;
   List<dynamic> pages = List();
 
-  String userName, avatarURL;
-
-  var controller = DashBoardController();
-
   var auth = Get.find<AuthService>();
+  var controller = DashBoardController();
 
   @override
   void initState() {
@@ -196,15 +193,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       },
     ];
-    userData();
-  }
-
-  userData() async {
-    var user = await auth.currentUser();
-    setState(() {
-      userName = user['name'];
-      avatarURL = user['avatarURL'];
-    });
   }
 
   @override
@@ -268,8 +256,8 @@ class _DashboardPageState extends State<DashboardPage> {
       hasHeader: true,
       pages: pages,
       drawerItems: drawerItems,
-      avatarName: userName,
-      avatarURL: avatarURL,
+      avatarName: auth.getUser().name,
+      avatarURL: auth.getUser().avatarURL,
       onChanged: (data) {
         setState(() {
           selectedPage = data['page'];

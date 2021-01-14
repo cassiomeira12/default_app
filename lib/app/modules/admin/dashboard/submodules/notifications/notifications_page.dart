@@ -1,6 +1,6 @@
 import 'package:default_app/app/components/generate_form/generate_form.dart';
 import 'package:default_app/app/modules/company/dashboard/components/card_page/card_page.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

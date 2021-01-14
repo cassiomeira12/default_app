@@ -14,4 +14,17 @@ class LoginController {
     }
     return result;
   }
+
+  signInWithGoogle() async {
+    var result = await loginService.signInWithGoogle();
+    await admin.currentAdminUser();
+    if (!admin.isAdmin()) {
+      throw Exception("Estabelecimento não encontrado");
+    }
+    return result;
+  }
+
+  signAnonymous() {
+    var result = loginService.signAnonymous();
+  }
 }

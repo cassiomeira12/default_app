@@ -1,54 +1,29 @@
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'base_parse_service.dart';
 
 class ParseUserService {
-  currentUser() async {
-    ParseUser currentUser = await ParseUser.currentUser();
-    print("CURRENT USER -> $currentUser");
-    if (currentUser == null) {
-      return null;
-    } else {
-      return currentUser.toJson();
-//      var userData = await PreferencesUtil.getUserData();
-//      var user = BaseUser.fromMap(userData);
-//      if (!user.isAnonymous() &&
-//          (!user.emailVerified ||
-//              user.notificationToken == null ||
-//              user.phoneNumber == null)) {
-//        return read(BaseUser(id: currentUser.objectId)).then((value) {
-//          return value;
-//        }).catchError((error) async {
-//          return user;
-//        });
-//      } else {
-//        return user;
-//      }
-    }
+  var service = BaseParseService('_User');
+
+  Future create(item) async {
+    return service.create(item);
   }
 
-  signOut() async {
-    //PreferencesUtil.setUserData(null);
-    var currentUser = await ParseUser.currentUser();
-    await currentUser.logout();
+  read(item) async {
+    return service.read(item);
   }
 
-  isEmailVerified() async {
-    ParseUser currentUser = await ParseUser.currentUser();
-    return currentUser.emailVerified;
+  update(item) async {
+    return service.update(item);
   }
 
-  sendEmailVerification() async {
-    ParseUser currentUser = await ParseUser.currentUser();
-    return await currentUser.verificationEmailRequest().then((response) {
-      return response.success ? null : throw Exception(response.error.message);
-    }).catchError((error) {
-      throw error;
-//      switch (error.code) {
-//        case -1:
-//          throw Exception(ERROR_NETWORK);
-//          break;
-//        default:
-//          throw Exception(error.message);
-//      }
-    });
+  delete(item) async {
+    return service.delete(item);
+  }
+
+  findBy(String field, value) async {
+    return service.findBy(field, value);
+  }
+
+  list() {
+    return service.list();
   }
 }

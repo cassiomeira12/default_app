@@ -1,10 +1,10 @@
-import '../../models/base_user.dart';
+import '../../models/user.dart';
 import '../base_model.dart';
 import 'company.dart';
 
 class AdminCompany extends BaseModel<AdminCompany> {
   NotificationToken notificationToken;
-  BaseUser user;
+  User user;
   Company company;
 
   AdminCompany({String id}) : super('AdminCompany') {
@@ -12,17 +12,20 @@ class AdminCompany extends BaseModel<AdminCompany> {
     objectId = id;
   }
 
-  AdminCompany.fromMap(Map<dynamic, dynamic>  map) : super('_User') {
+  AdminCompany.fromMap(Map<dynamic, dynamic> map) : super('_User') {
     baseFromMap(map);
-    notificationToken = map["notificationToken"] == null ? null : NotificationToken.fromMap(map["notificationToken"]);
-    user = BaseUser.fromMap(map["user"]);
+    notificationToken = map["notificationToken"] == null
+        ? null
+        : NotificationToken.fromMap(map["notificationToken"]);
+    user = User.fromMap(map["user"]);
     company = Company.fromMap(map["company"]);
   }
 
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map["notificationToken"] = notificationToken == null ? null : notificationToken.toMap();
+    map["notificationToken"] =
+        notificationToken == null ? null : notificationToken.toMap();
     map["user"] = user.toPointer();
     map["company"] = company.toPointer();
     return map;
@@ -39,5 +42,4 @@ class AdminCompany extends BaseModel<AdminCompany> {
     user = item.user;
     company = item.company;
   }
-
 }

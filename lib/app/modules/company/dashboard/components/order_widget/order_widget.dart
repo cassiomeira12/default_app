@@ -1,6 +1,6 @@
 import 'package:default_app/app/components/stars_widget/stars_widget.dart';
 import 'package:default_app/app/shared/models/order/order.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:default_app/app/utils/date_util.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +39,7 @@ class _OrderWidgetState extends State<OrderWidget> {
           : widget.data.status.isLast()
               ? widget.data.evaluation == null
                   ? Colors.amber
-                  : Colors.white
+                  : Colors.grey
               : widget.data.status.isFirst()
                   ? Colors.green
                   : Colors.lightBlue,
@@ -137,9 +137,9 @@ class _OrderWidgetState extends State<OrderWidget> {
         textAlign: TextAlign.right,
         style: fontSubtitle(
           context,
-          size: 18,
+          size: 20,
           bold: true,
-          color: Colors.black87,
+          color: Colors.green,
         ),
       ),
     );

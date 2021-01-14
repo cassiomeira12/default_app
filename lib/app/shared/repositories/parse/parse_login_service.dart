@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class ParseLoginService {
@@ -6,8 +8,7 @@ class ParseLoginService {
     var user = ParseUser(email, password, email);
     return user.login().then((value) async {
       if (value.success) {
-        var json = value.result.toJson();
-        return json;
+        return value.result.toJson();
       } else {
         throw value.error;
       }
@@ -18,52 +19,49 @@ class ParseLoginService {
 
   @override
   signInWithGoogle() async {
-//    GoogleSignIn googleSignIn = GoogleSignIn();
-//    GoogleSignInAccount googleSignInAccount;
-//    GoogleSignInAuthentication googleSignInAuthentication;
-//    AuthCredential credential;
-//    try {
-//      googleSignInAccount = await googleSignIn.signIn();
-//      googleSignInAuthentication = await googleSignInAccount.authentication;
-//      credential = GoogleAuthProvider.getCredential(
-//        idToken: googleSignInAuthentication.idToken,
-//        accessToken: googleSignInAuthentication.accessToken,
-//      );
-//    } catch (exception) {
-//      Log.e(exception);
-//      googleSignIn.signOut();
-//      presenter.onFailure(SOME_ERROR);
-//      return;
-//    }
-//
-//    googleSignIn.signOut();
-//
-//    String email = googleSignInAccount.email;
-//    String token = credential.toString();
-//    String name = googleSignInAccount.displayName;
-//    String avatarURL = googleSignInAccount.photoUrl;
-//
-//    var user = ParseUser(email, token, email);
-//
-//    user.login().then((value) {
-//      if (value.success) {
-//        var json = value.result.toJson();
-//        BaseUser user = BaseUser.fromMap(json);
-//        PreferencesUtil.setUserData(user.toMap());
-//        presenter.onSuccess(user);
-//      } else {
-//        switch (value.error.code) {
-//          case -1:
-//            presenter.onFailure(ERROR_NETWORK);
-//            break;
-//          case 101:
-//            createNewUser(user, name, avatarURL);
-//            break;
-//          default:
-//            presenter.onFailure(value.error.message);
-//        }
-//      }
-//    });
+    String clientIDGoogle =
+        "604408739135-8f0o4br2ebvs1uju3h7oq02ofnmbh1c3.apps.googleusercontent.com";
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      clientId: clientIDGoogle,
+      //scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
+    );
+    GoogleSignInAccount googleSignInAccount;
+    GoogleSignInAuthentication authentication;
+    AuthCredential credential;
+    try {
+      googleSignInAccount = await googleSignIn.signIn();
+      authentication = await googleSignInAccount.authentication;
+      credential = GoogleAuthProvider.getCredential(
+        idToken: authentication.idToken,
+        accessToken: authentication.accessToken,
+      );
+    } catch (error) {
+      print(error);
+      throw error;
+    } finally {
+      googleSignIn.signOut();
+    }
+
+    String token = authentication.idToken;
+    String id = googleSignIn.currentUser.id;
+    String idToken = authentication.idToken;
+
+    String email = googleSignInAccount.email;
+    String name = googleSignInAccount.displayName;
+    String avatarURL = googleSignInAccount.photoUrl;
+
+    var authData = google(token, id, idToken);
+
+    return ParseUser.loginWith('google', authData).then((value) async {
+      if (value.success && value.statusCode == 201) {
+        var user = value.result as ParseUser;
+        user.username = email;
+        user.set('name', name);
+        user.set('avatarURL', avatarURL);
+        return user.update().then((value) => value.result.toJson());
+      }
+      return value.result.toJson();
+    }).whenComplete(() => googleSignIn.signOut());
   }
 
   void createNewUser(ParseUser item, String name, String avatarURL) {

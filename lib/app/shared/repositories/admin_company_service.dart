@@ -1,16 +1,16 @@
-import 'package:default_app/app/shared/models/company/company.dart';
-import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
-import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:get/get.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../utils/strings/errors.dart';
+import '../models/company/company.dart';
+import '../models/user.dart';
+import '../repositories/parse/parse_init.dart';
 import 'auth_service.dart';
 import 'parse/parse_company_service.dart';
 
 class AdminCompanyService extends GetxController {
   final admin = false.obs;
-  ParseUser user;
+  User user;
   Company company;
 
   var auth = Get.put(AuthService());
@@ -30,7 +30,7 @@ class AdminCompanyService extends GetxController {
       var pref = await SharedPreferences.getInstance();
       pref.setBool("hasCompany", hasCompany);
       if (!hasCompany) {
-        await user.logout();
+        await auth.logout();
       }
     }
     return user;

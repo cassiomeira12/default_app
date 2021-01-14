@@ -27,3 +27,21 @@ TextStyle fontMessage(context, {double size, Color color, bool bold = false}) {
     fontWeight: bold ? FontWeight.bold : FontWeight.normal,
   );
 }
+
+TextStyle fontButton(context, {double size, Color color, bool bold = false}) {
+  return GoogleFonts.lato(
+    textStyle: Theme.of(context).textTheme.headline6,
+    fontSize: size ?? 18,
+    color: color ?? null,
+    fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+  );
+}
+
+TextStyle fontField(context, {double size, Color color, bool bold = false}) {
+  return GoogleFonts.lato(
+    textStyle: Theme.of(context).textTheme.headline6,
+    fontSize: size ?? 18,
+    color: color ?? null,
+    fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+  );
+}

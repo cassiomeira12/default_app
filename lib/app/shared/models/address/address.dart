@@ -1,11 +1,12 @@
 import 'package:parse_server_sdk/parse_server_sdk.dart';
-import '../../models/base_user.dart';
+
 import '../../models/address/small_town.dart';
+import '../../models/user.dart';
 import '../base_model.dart';
 import 'city.dart';
 
 class Address extends BaseModel<Address> {
-  BaseUser user;
+  User user;
   String zipCode;
   String neighborhood;
   String street;
@@ -17,9 +18,9 @@ class Address extends BaseModel<Address> {
 
   Address() : super('Address');
 
-  Address.fromMap(Map<dynamic, dynamic>  map) : super('Address') {
+  Address.fromMap(Map<dynamic, dynamic> map) : super('Address') {
     baseFromMap(map);
-    user = map["user"] == null ? null : BaseUser.fromMap(map["user"]);
+    user = map["user"] == null ? null : User.fromMap(map["user"]);
     zipCode = map["zipCode"];
     neighborhood = map["neighborhood"];
     street = map["street"];
@@ -27,7 +28,8 @@ class Address extends BaseModel<Address> {
     reference = map["reference"];
     city = map["city"] == null ? null : City.fromMap(map["city"]);
     location = map["location"];
-    smallTown = map["smallTown"] == null ? null : SmallTown.fromMap(map["smallTown"]);
+    smallTown =
+        map["smallTown"] == null ? null : SmallTown.fromMap(map["smallTown"]);
   }
 
   @override
@@ -77,5 +79,4 @@ class Address extends BaseModel<Address> {
     location = item.location;
     smallTown = item.smallTown;
   }
-
 }

@@ -6,7 +6,7 @@ import 'package:default_app/app/shared/models/order/cupon.dart';
 import 'package:default_app/app/shared/models/order/order.dart';
 import 'package:default_app/app/shared/models/order/order_item.dart';
 import 'package:default_app/app/shared/models/order/order_status.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:default_app/app/utils/date_util.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';

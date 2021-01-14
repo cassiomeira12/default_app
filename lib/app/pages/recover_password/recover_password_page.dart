@@ -3,7 +3,7 @@ import 'package:default_app/app/components/shapes/background_card.dart';
 import 'package:default_app/app/components/shapes/shape_round.dart';
 import 'package:default_app/app/components/text_input/text_input_field.dart';
 import 'package:default_app/app/shared/repositories/auth_service.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';

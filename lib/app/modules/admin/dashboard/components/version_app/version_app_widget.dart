@@ -1,4 +1,4 @@
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:default_app/app/utils/date_util.dart';
 import 'package:flutter/material.dart';
 

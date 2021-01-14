@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/font_style.dart';
+
 class LightButton extends StatelessWidget {
   final Alignment alignment;
   final String text;
@@ -18,7 +20,7 @@ class LightButton extends StatelessWidget {
       child: FlatButton(
           child: Text(
             text,
-            style: Theme.of(context).textTheme.button,
+            style: fontButton(context),
           ),
           onPressed: onPressed),
     );

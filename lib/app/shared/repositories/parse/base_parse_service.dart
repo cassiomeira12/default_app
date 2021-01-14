@@ -1,5 +1,6 @@
-import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
+import 'parse_init.dart';
 
 class BaseParseService {
   String className;
@@ -38,7 +39,8 @@ class BaseParseService {
       object.set(key, value);
     });
     return await object.update().then((value) {
-      return value.success ? value.result.toJson() : throw value.error;
+      return value.result?.toJson();
+      //return value.success ? value.result.toJson() : throw value.error;
     });
   }
 
@@ -79,18 +81,6 @@ class BaseParseService {
     var queryBuilder = QueryBuilder(object);
     queryBuilder.orderByDescending("createdAt");
     return await queryBuilder.query().then((value) {
-      if (value.success) {
-        if (value.result == null) {
-          return List();
-        } else {
-          List<ParseObject> list = value.result;
-          return list.map<Map<String, dynamic>>((e) => e.toJson()).toList();
-        }
-      } else {
-        return throw value.error;
-      }
-    });
-    return await object.getAll().then((value) {
       if (value.success) {
         if (value.result == null) {
           return List();

@@ -1,5 +1,5 @@
 import 'package:default_app/app/components/buttons/primary_button.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {

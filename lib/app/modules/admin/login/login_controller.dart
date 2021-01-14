@@ -15,4 +15,17 @@ class LoginController {
     }
     return result;
   }
+
+  signInWithGoogle() async {
+    var result = await loginService.signInWithGoogle();
+    await admin.currentAdminUser();
+    if (!admin.isAdmin()) {
+      throw Exception(ERROR_LOGIN_PASSWORD);
+    }
+    return result;
+  }
+
+  signAnonymous() async {
+    //return loginService.signAnonymous();
+  }
 }

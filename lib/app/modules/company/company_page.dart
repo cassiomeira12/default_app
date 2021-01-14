@@ -1,6 +1,8 @@
-import 'package:default_app/app/shared/repositories/admin_company_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../shared/notifications/push_notification.dart';
+import '../../shared/repositories/admin_company_service.dart';
 
 class CompanyPage extends StatefulWidget {
   @override
@@ -9,10 +11,12 @@ class CompanyPage extends StatefulWidget {
 
 class _CompanyPageState extends State<CompanyPage> {
   var admin = Get.put(AdminCompanyService());
+  var pushNotification = PushNotification();
 
   @override
   void initState() {
     super.initState();
+    pushNotification.updateNotificationToken();
     checkCurrentUser();
   }
 

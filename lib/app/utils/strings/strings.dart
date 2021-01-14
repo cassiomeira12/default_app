@@ -15,6 +15,7 @@ const UPDATE = "Atualizar";
 
 const EMAIL = "Email";
 const PASSWORD = "Senha";
+const NAME = "Nome";
 
 const RECOVER_PASSWORD = "Recuperar senha";
 const LOGIN = "Entrar";
@@ -22,6 +23,8 @@ const CREATE_ACCOUNT = "Criar conta";
 const FORGOT_PASSWORD_TEXT =
     "Será enviado um e-mail para recuperar a sua senha, verifique sua caixa de entrada e spam.";
 const EMAIL_SEND_SUCCESSFUL = "Email enviado com sucesso!";
+const SHORT_PASSWORD = "Senha muito curta";
+const PASSWORD_NOT_EQUAL = "Senhas não são iguais";
 
 const OK = "Ok";
 const CANCEL = "Cancelar";

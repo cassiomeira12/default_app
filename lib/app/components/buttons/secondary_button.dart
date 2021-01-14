@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/font_style.dart';
+
 class SecondaryButton extends StatelessWidget {
   final String text;
   final Widget child;
@@ -33,7 +35,7 @@ class SecondaryButton extends StatelessWidget {
         child: child == null
             ? Text(
                 text,
-                style: Theme.of(context).textTheme.body2,
+                style: fontButton(context),
               )
             : child,
         onPressed: onPressed,

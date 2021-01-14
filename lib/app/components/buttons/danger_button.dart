@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/font_style.dart';
+
 class DangerButton extends StatelessWidget {
   final String text;
   final Widget child;
@@ -26,12 +28,14 @@ class DangerButton extends StatelessWidget {
           ),
           color: Theme.of(context).errorColor,
           child: child == null
-              ? Text(text,
-                  style: TextStyle(
-                    fontSize: 18.0,
+              ? Text(
+                  text,
+                  style: fontButton(
+                    context,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ))
+                    bold: true,
+                  ),
+                )
               : child,
           onPressed: onPressed),
     );

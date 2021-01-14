@@ -1,7 +1,7 @@
 import 'package:default_app/app/components/card/custom_card.dart';
 import 'package:default_app/app/components/future_builder/custom_future_builder.dart';
 import 'package:default_app/app/modules/home/components/copyrigth.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

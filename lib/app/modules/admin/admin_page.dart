@@ -1,6 +1,8 @@
-import 'package:default_app/app/shared/repositories/admin_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../shared/notifications/push_notification.dart';
+import '../../shared/repositories/admin_service.dart';
 
 class AdminPage extends StatefulWidget {
   @override
@@ -9,10 +11,12 @@ class AdminPage extends StatefulWidget {
 
 class _AdminPageState extends State<AdminPage> {
   var admin = Get.put(AdminService());
+  var pushNotification = PushNotification();
 
   @override
   void initState() {
     super.initState();
+    pushNotification.updateNotificationToken();
     checkCurrentUser();
   }
 
@@ -21,6 +25,7 @@ class _AdminPageState extends State<AdminPage> {
       await admin.currentAdminUser();
       Get.offNamed(admin.isAdmin() ? '/admin/dashboard' : '/admin/login');
     } catch (error) {
+      print(error);
       Get.offNamed('/admin/login');
     }
   }

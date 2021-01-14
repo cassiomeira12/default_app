@@ -1,5 +1,5 @@
 import 'package:default_app/app/modules/home/components/copyrigth.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 

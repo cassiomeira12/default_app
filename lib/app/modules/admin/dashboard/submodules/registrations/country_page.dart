@@ -3,7 +3,7 @@ import 'package:default_app/app/components/buttons/light_button.dart';
 import 'package:default_app/app/components/generate_form/generate_form.dart';
 import 'package:default_app/app/modules/admin/dashboard/components/card_page/card_page.dart';
 import 'package:default_app/app/shared/repositories/parse/parse_country_service.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

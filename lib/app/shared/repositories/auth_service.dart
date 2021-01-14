@@ -1,25 +1,33 @@
-import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
+import '../models/user.dart';
+import '../repositories/parse/parse_init.dart';
+
 class AuthService extends GetxController {
   final authed = false.obs;
-  ParseUser _user;
+  User _user;
 
-  currentUser() async {
+  Future<User> currentUser() async {
     await ParseInit.init();
-    _user = await ParseUser.currentUser();
-    authed.value = _user != null;
+    ParseUser parseUser = await ParseUser.currentUser();
+    authed.value = parseUser != null;
+    _user = parseUser == null ? null : User.fromMap(parseUser.toJson());
     return _user;
   }
 
-  isAuth() {
+  User getUser() {
+    return _user;
+  }
+
+  bool isAuth() {
     return authed.value;
   }
 
   Future<bool> logout() async {
     if (isAuth()) {
-      return _user.logout().then((value) => value.success);
+      ParseUser parseUser = await ParseUser.currentUser();
+      return parseUser.logout().then((value) => value.success);
     }
     return false;
   }

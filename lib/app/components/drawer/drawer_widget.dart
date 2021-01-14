@@ -1,5 +1,5 @@
 import 'package:default_app/app/components/image_network/image_network_widget.dart';
-import 'package:default_app/app/style/themes/dark_theme.dart';
+import 'package:default_app/app/styles/themes/dark_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

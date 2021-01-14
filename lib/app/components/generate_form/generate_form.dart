@@ -1,9 +1,9 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:default_app/app/components/buttons/primary_button.dart';
-import 'package:default_app/app/components/text_input/area_input_field.dart';
-import 'package:default_app/app/components/text_input/text_input_field.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../buttons/primary_button.dart';
+import '../text_input/area_input_field.dart';
+import '../text_input/text_input_field.dart';
 
 class GenerateForm extends StatefulWidget {
   dynamic data;
@@ -117,9 +117,13 @@ class _GenerateFormState extends State<GenerateForm> {
 
   Widget textField(data) {
     if (!controllers.containsKey(data['field'])) {
-      controllers[data['field']] = data['initial'] != null
-          ? TextEditingController(text: data['initial'].toString())
-          : TextEditingController();
+      if (data['controller'] == null) {
+        controllers[data['field']] = data['initial'] != null
+            ? TextEditingController(text: data['initial'].toString())
+            : TextEditingController();
+      } else {
+        controllers[data['field']] = data['controller'];
+      }
       data['result'] = data['initial'].toString();
     }
     return Padding(
@@ -129,19 +133,27 @@ class _GenerateFormState extends State<GenerateForm> {
         enable: data['enable'] ?? true,
         obscureText: data['obscureText'] ?? false,
         controller: controllers[data['field']],
-        textCapitalization: TextCapitalization.sentences,
+        textCapitalization: data['textInputType'] != null &&
+                data['textInputType'] == TextInputType.emailAddress
+            ? TextCapitalization.none
+            : data['textCapitalization'] ?? TextCapitalization.sentences,
         keyboardType: data['textInputType'],
         onChanged: (value) => data['result'] = value.trim(),
         onSaved: (value) => data['result'] = value.trim(),
+        validator: data['validator'],
       ),
     );
   }
 
   Widget textArea(data) {
     if (!controllers.containsKey(data['field'])) {
-      controllers[data['field']] = data['initial'] != null
-          ? TextEditingController(text: data['initial'].toString())
-          : TextEditingController();
+      if (data['controller'] == null) {
+        controllers[data['field']] = data['initial'] != null
+            ? TextEditingController(text: data['initial'].toString())
+            : TextEditingController();
+      } else {
+        controllers[data['field']] = data['controller'];
+      }
       data['result'] = data['initial'].toString();
     }
     return Padding(
@@ -155,6 +167,7 @@ class _GenerateFormState extends State<GenerateForm> {
           keyboardType: data['textInputType'],
           onChanged: (value) => data['result'] = value.trim(),
           onSaved: (value) => data['result'] = value.trim(),
+          validator: data['validator'],
         ),
       ),
     );
@@ -169,10 +182,11 @@ class _GenerateFormState extends State<GenerateForm> {
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
       child: FlatButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-          side: BorderSide(color: Theme.of(context).hintColor),
-        ),
+        padding: EdgeInsets.all(0),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(10),
+        //   side: BorderSide(color: Theme.of(context).hintColor),
+        // ),
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -186,9 +200,11 @@ class _GenerateFormState extends State<GenerateForm> {
                 });
               },
             ),
-            Text(
-              '${data['title']}',
-              style: TextStyle(fontSize: 15),
+            Flexible(
+              child: Text(
+                '${data['title']}',
+                style: TextStyle(fontSize: 15),
+              ),
             ),
           ],
         ),
@@ -246,7 +262,8 @@ class _GenerateFormState extends State<GenerateForm> {
                   ],
                 ),
               ),
-              FaIcon(FontAwesomeIcons.caretDown),
+              Icon(Icons.arrow_drop_down_outlined),
+              //FaIcon(FontAwesomeIcons.caretDown),
             ],
           ),
           onPressed: () {
@@ -329,8 +346,10 @@ class _GenerateFormState extends State<GenerateForm> {
         child: PrimaryButton(
           text: '${data['title']}',
           onPressed: () {
-            if (data['validateRequired'] && validateAndSave()) {
-              data['action']?.call(generateDataResult(widget.data));
+            if (data['validateRequired']) {
+              if (validateAndSave()) {
+                data['action']?.call(generateDataResult(widget.data));
+              }
             } else {
               data['action']?.call(
                 generateDataResult(widget.data),

@@ -2,7 +2,7 @@ import '../models/status.dart';
 import 'base_model.dart';
 import 'phone_number.dart';
 
-class BaseUser extends BaseModel<BaseUser> {
+class User extends BaseModel<User> {
   NotificationToken notificationToken;
   String avatarURL;
   Status status;
@@ -14,12 +14,12 @@ class BaseUser extends BaseModel<BaseUser> {
   PhoneNumber phoneNumber;
   bool socialProvider;
 
-  BaseUser({String id}) : super('_User') {
+  User({String id}) : super('_User') {
     this.id = id;
     objectId = id;
   }
 
-  BaseUser.fromMap(Map<dynamic, dynamic> map) : super('_User') {
+  User.fromMap(Map<dynamic, dynamic> map) : super('_User') {
     baseFromMap(map);
     notificationToken = map["notificationToken"] == null
         ? null
@@ -51,7 +51,7 @@ class BaseUser extends BaseModel<BaseUser> {
     map["avatarURL"] = avatarURL;
     map["username"] = username;
     map["name"] = name;
-    map["email"] = email;
+    //map["email"] = email;
     //map["emailVerified"] = emailVerified;
     map["password"] = password;
     map["createdAt"] = createdAt == null ? null : createdAt.toString();
@@ -61,7 +61,7 @@ class BaseUser extends BaseModel<BaseUser> {
     return map;
   }
 
-  updateData(BaseUser item) {
+  updateData(User item) {
     id = item.id;
     objectId = item.objectId;
     createdAt = item.createdAt;

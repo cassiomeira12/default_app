@@ -1,11 +1,11 @@
-import '../../models/base_user.dart';
 import '../../models/company/company.dart';
+import '../../models/user.dart';
 import '../base_model.dart';
 
 class Cupon extends BaseModel<Cupon> {
   String code, description;
   Company companyProvider;
-  BaseUser userProvider;
+  User userProvider;
   List<String> companiesRequired;
   List<String> usersRequired;
   double companyMoneyDiscount, appMoneyDiscount;
@@ -39,9 +39,8 @@ class Cupon extends BaseModel<Cupon> {
     companyProvider = map["companyProvider"] == null
         ? null
         : Company.fromMap(map["companyProvider"]);
-    userProvider = map["userProvider"] == null
-        ? null
-        : BaseUser.fromMap(map["userProvider"]);
+    userProvider =
+        map["userProvider"] == null ? null : User.fromMap(map["userProvider"]);
     companiesRequired = map["companiesRequired"] == null
         ? List()
         : List.from(map["companiesRequired"]);

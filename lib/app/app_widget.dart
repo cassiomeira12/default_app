@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 
 import 'modules/routes.dart';
 import 'shared/repositories/parse/parse_init.dart';
-import 'style/themes/dark_theme.dart';
-import 'style/themes/light_theme.dart';
-import 'style/themes/theme.dart';
+import 'styles/themes/dark_theme.dart';
+import 'styles/themes/light_theme.dart';
+import 'styles/themes/theme.dart';
 import 'utils/strings/strings.dart';
 
 class AppWidget extends StatefulWidget {

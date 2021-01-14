@@ -2,7 +2,7 @@ import 'package:default_app/app/components/future_builder/custom_future_builder.
 import 'package:default_app/app/components/image_network/image_network_widget.dart';
 import 'package:default_app/app/modules/company/dashboard/dashboard_controller.dart';
 import 'package:default_app/app/shared/models/company/company.dart';
-import 'package:default_app/app/style/font_style.dart';
+import 'package:default_app/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

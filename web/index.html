@@ -18,9 +18,31 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCJ46x5j5Y1uxbJb218vbDh3W_5Unh0d_M",
+      authDomain: "delivery-1175b.firebaseapp.com",
+      databaseURL: "https://delivery-1175b.firebaseio.com",
+      projectId: "delivery-1175b",
+      storageBucket: "delivery-1175b.appspot.com",
+      messagingSenderId: "604408739135",
+      appId: "1:604408739135:web:117006333be0ee909acf8a",
+      measurementId: "G-3KD21JPENF"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+<!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {

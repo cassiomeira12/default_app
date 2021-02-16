@@ -1,6 +1,7 @@
-import 'package:default_app/app/shared/repositories/admin_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../shared/repositories/admin_service.dart';
 
 class AdminMiddleware extends GetMiddleware {
   final _auth = Get.put(AdminService());

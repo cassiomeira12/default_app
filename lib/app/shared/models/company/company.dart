@@ -1,5 +1,4 @@
-import 'package:default_app/app/utils/date_util.dart';
-
+import '../../../utils/date_util.dart';
 import '../../models/address/address.dart';
 import '../../models/company/opening_hour.dart';
 import '../../models/company/type_payment.dart';

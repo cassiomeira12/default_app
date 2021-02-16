@@ -1,7 +1,7 @@
-import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
-import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:get/get.dart';
 
+import '../../shared/repositories/parse/parse_init.dart';
+import '../../utils/strings/errors.dart';
 import 'auth_service.dart';
 import 'parse/parse_super_admin_service.dart';
 

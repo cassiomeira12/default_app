@@ -1,5 +1,6 @@
-import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
 import 'package:dio/native_imp.dart';
+
+import '../../shared/repositories/parse/parse_init.dart';
 
 class CustomDio extends DioForNative {
   CustomDio() {

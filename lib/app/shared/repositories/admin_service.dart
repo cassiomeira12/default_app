@@ -1,4 +1,3 @@
-import 'package:default_app/app/shared/repositories/parse/parse_init.dart';
 import 'package:default_app/app/utils/strings/errors.dart';
 import 'package:get/get.dart';
 
@@ -9,11 +8,10 @@ class AdminService extends GetxController {
   final admin = false.obs;
   var user;
 
-  var auth = Get.put(AuthService());
+  var auth = Get.find<AuthService>();
   var superAdminService = ParseSuperAdminService();
 
   currentAdminUser() async {
-    await ParseInit.init();
     user = await auth.currentUser();
     if (user == null) {
       admin.value = false;

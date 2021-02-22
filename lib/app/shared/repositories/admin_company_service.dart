@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/strings/errors.dart';
 import '../models/company/company.dart';
 import '../models/user.dart';
-import '../repositories/parse/parse_init.dart';
 import 'auth_service.dart';
 import 'parse/parse_company_service.dart';
 
@@ -13,11 +12,10 @@ class AdminCompanyService extends GetxController {
   User user;
   Company company;
 
-  var auth = Get.put(AuthService());
+  var auth = Get.find<AuthService>();
   var companyService = ParseCompanyService();
 
   currentAdminUser() async {
-    await ParseInit.init();
     user = await auth.currentUser();
     if (user == null) {
       admin.value = false;

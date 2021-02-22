@@ -4,16 +4,13 @@ import 'package:get/get.dart';
 import '../../shared/repositories/auth_service.dart';
 
 class AuthMiddleware extends GetMiddleware {
-  final _auth = Get.put(AuthService());
-
   String redirectPath;
 
-  AuthMiddleware({this.redirectPath}) {
-    _auth.currentUser();
-  }
+  AuthMiddleware({this.redirectPath});
 
   @override
   RouteSettings redirect(String route) {
+    final _auth = Get.find<AuthService>();
     return _auth.isAuth() ? null : RouteSettings(name: redirectPath ?? '/');
   }
 }

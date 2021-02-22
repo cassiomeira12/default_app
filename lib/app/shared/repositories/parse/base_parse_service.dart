@@ -1,7 +1,5 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
-import 'parse_init.dart';
-
 class BaseParseService {
   String className;
 
@@ -14,7 +12,6 @@ class BaseParseService {
   }
 
   Future<Map<String, dynamic>> create(Map<String, dynamic> data) async {
-    await ParseInit.init();
     var object = ParseObject(className);
     data.forEach((key, value) {
       object.set(key, value);
@@ -25,27 +22,23 @@ class BaseParseService {
   }
 
   Future<Map<String, dynamic>> read(Map<String, dynamic> data) async {
-    await ParseInit.init();
     var object = ParseObject(className);
-    return await object.getObject(data['id']).then((value) {
+    return await object.getObject(data['objectId']).then((value) {
       return value.success ? value.result.toJson() : throw value.error;
     });
   }
 
   Future<Map<String, dynamic>> update(Map<String, dynamic> data) async {
-    await ParseInit.init();
     var object = ParseObject(className);
     data.forEach((key, value) {
       object.set(key, value);
     });
     return await object.update().then((value) {
-      return value.result?.toJson();
-      //return value.success ? value.result.toJson() : throw value.error;
+      return value.success ? value.result.toJson() : throw value.error;
     });
   }
 
   Future<Map<String, dynamic>> delete(Map<String, dynamic> data) async {
-    await ParseInit.init();
     var object = ParseObject(className);
     data.forEach((key, value) {
       object.set(key, value);
@@ -56,7 +49,6 @@ class BaseParseService {
   }
 
   Future<List<Map<String, dynamic>>> findBy(String field, value) async {
-    await ParseInit.init();
     var object = ParseObject(className);
     var queryBuilder = QueryBuilder(object);
     queryBuilder.whereEqualTo(field, value);
@@ -76,11 +68,22 @@ class BaseParseService {
   }
 
   Future<List<Map<String, dynamic>>> list() async {
-    await ParseInit.init();
     var object = ParseObject(className);
     var queryBuilder = QueryBuilder(object);
     queryBuilder.orderByDescending("createdAt");
-    return await queryBuilder.query().then((value) {
+    return await object.getAll().then((value) {
+      if (value.success) {
+        if (value.result == null) {
+          return List();
+        } else {
+          List<ParseObject> list = value.result;
+          return list.map<Map<String, dynamic>>((e) => e.toJson()).toList();
+        }
+      } else {
+        return throw value.error;
+      }
+    });
+    return await object.getAll().then((value) {
       if (value.success) {
         if (value.result == null) {
           return List();
@@ -95,7 +98,6 @@ class BaseParseService {
   }
 
   Future<List<Map<String, dynamic>>> query(query, {includes}) async {
-    await ParseInit.init();
     return await query.query().then((value) {
       if (value.success) {
         if (value.result == null) {

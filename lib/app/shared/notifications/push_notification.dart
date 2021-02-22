@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/utils.dart';
+import 'package:platform_info/platform_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../firebase/firebase_push_notification.dart';
@@ -14,9 +15,12 @@ class PushNotification {
   FirebasePushNotifications pushNotifications;
 
   PushNotification() {
-    if (GetPlatform.isMobile || GetPlatform.isMacOS) {
-      pushNotifications = FirebasePushNotifications();
+    if (Platform.I.isIO) {
+      if (Platform.I.isAndroid || Platform.I.isIOS || Platform.I.isMacOS) {
+        pushNotifications = FirebasePushNotifications();
+      }
     }
+    updateNotificationToken();
   }
 
   updateNotificationToken() async {

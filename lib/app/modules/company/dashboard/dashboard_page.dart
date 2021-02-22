@@ -25,10 +25,10 @@ class _DashboardPageState extends State<DashboardPage> {
   int selectedPage = 0, categoryIndex = 0, menuIndex = 0;
 
   List<dynamic> drawerItems;
-  List<dynamic> pages = List();
+  List<dynamic> pages = [];
 
   var auth = Get.find<AuthService>();
-  var controller = Get.put(DashBoardController());
+  var controller = Get.find<DashBoardController>();
 
   @override
   void initState() {

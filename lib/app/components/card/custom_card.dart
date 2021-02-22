@@ -1,6 +1,7 @@
-import 'package:default_app/app/components/buttons/primary_button.dart';
-import 'package:default_app/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
+
+import '../../styles/font_style.dart';
+import '../buttons/primary_button.dart';
 
 class CustomCard extends StatelessWidget {
   final String title, message, url, button;

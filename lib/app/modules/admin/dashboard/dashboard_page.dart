@@ -1,6 +1,8 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:default_app/app/components/drawer/drawer_widget.dart';
 import 'package:default_app/app/components/responsive/responsive.dart';
+import 'package:default_app/app/modules/admin/dashboard/submodules/dashboard/dashboard_page.dart'
+    as Dashboard;
 import 'package:default_app/app/shared/repositories/auth_service.dart';
 import 'package:default_app/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +43,7 @@ class _DashboardPageState extends State<DashboardPage> {
       {
         'value': 'Dashboard',
         'icon': Icons.dashboard,
-        'page': NotificationsPage(),
+        'page': Dashboard.DashboardPage(),
       },
       {
         'value': 'Estabelecimentos',
